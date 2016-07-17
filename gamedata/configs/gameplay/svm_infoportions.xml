@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding="windows-1251"?>
+
+<game_information_portions>
+	<info_portion id="deth_news_on"></info_portion>
+	<info_portion id="spawn_news_on"></info_portion>
+	<info_portion id="spawn_news_on_2"></info_portion>
+        <info_portion id="spawn_news_on_3"></info_portion>
+
+
+</game_information_portions>

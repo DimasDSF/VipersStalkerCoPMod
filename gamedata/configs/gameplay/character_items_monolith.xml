@@ -1,0 +1,3 @@
+wpn_binoc = 1, prob=1 \n
+device_torch = 1, prob=1 \n
+grenade_gd-05 = 1, prob=0.1 \n

@@ -1,0 +1,113 @@
+--Lotions from Vergas----------------------------
+-- уборщик трупов мутантов
+-- уборщик лишнего оружия
+-----------------------------------------------------
+local monster_tb = {} 	--таблица мертвых монстров
+local weapons_tb ={}	--таблица валяющегося оружия
+local corpse_tb = {}	--таблица трупов
+local dust_ini = ini_file("verg\\dust_manager.ltx")
+
+function registrar()
+-- собираю мертвых монстров, трупы и валяющееся оружие
+	for i = 1,65535 do
+		local obj = alife():object(i)
+		if (obj) then
+			--считаю трупы монстров
+			if IsMonster(obj) then
+				--это монстр 
+				if not obj:alive() then
+					--и он мертвый
+					table.insert(monster_tb, obj)
+				end
+			elseif obj.parent_id and obj.parent_id == 65535 then
+				--Это валяется
+				if string.find(obj:name(),"wpn_") or string.find(obj:name(),"grenade_") then
+					--и оно оружие
+					table.insert(weapons_tb, obj)
+				end
+			elseif IsStalker(obj) and not obj:alive() then
+				--это человек и он неживой
+				table.insert(corpse_tb, obj)
+			end
+		end
+	end
+end
+
+function start_dust()
+	registrar()
+	cleaning_dead_monster()
+	cleaning_dead_weapons()
+end
+
+function cleaning_dead_monster()
+	
+	if table.getn(monster_tb) == 0 then
+		return
+	end
+	
+	--считаю сколько трупиков зверюшек убрать
+	local n = 0
+	if table.getn(monster_tb) > 0 then
+		local dead_m = math.floor(table.getn(monster_tb)/100*(100 - dust_ini:r_s32("list_parameters","remained_monsters")))
+		--  убираю трупики
+		for i =1,table.getn(monster_tb) do
+			if n <= dead_m then
+				alife():release(monster_tb[i],true)
+				n = n + 1
+			end
+		end
+	end
+------------------------------
+a=table.getn(monster_tb)
+get_console():execute("ВСЕГО_ТРУПИКОВ_МОНСТРОВ="..a)
+get_console():execute("УБРАНО_ТРУПИКОВ_МОНСТРОВ="..n)
+------------------------------	
+end
+
+function cleaning_dead_weapons()
+	if table.getn(weapons_tb) == 0 then
+		return
+	end
+	
+	local n = 0
+	local condition
+	for i =1,table.getn(weapons_tb) do
+		local obj_l = level.object_by_id(weapons_tb[i].id)
+		if obj_l ~= nil then 
+			condition = obj_l:condition()
+			--а не квестовая ли пушечка
+			local d = weapons_no_dust(obj_l:section())
+			if d == false then
+				if condition < 1 then
+					if condition < dust_ini:r_float("list_parameters","remained_weapons_condition") then
+						--можно удалять пушечку
+						alife():release(weapons_tb[i],true)
+						n = n + 1
+					else
+						--пушечку не удаляем а только коцаем
+						condition = condition - dust_ini:r_float("list_parameters","remove_condition")
+						obj_l:set_condition(condition)
+					end
+				end
+			end
+		end
+	end
+------------------------------
+a=table.getn(weapons_tb)
+get_console():execute("ВСЕГО_ВАЛЯЕТСЯ_ПУШЕК="..a)
+get_console():execute("УБРАНО_ПУШЕК="..n)
+------------------------------	
+	
+end
+
+function weapons_no_dust(param)
+	local flag = false
+	local n = dust_ini:line_count("list_weapons_no_dust")
+	for i=0,n-1 do
+		result, id, value = dust_ini:r_line("list_weapons_no_dust",i,"","")
+		if id == param then
+			flag =  value
+		end
+	end
+	return flag
+end

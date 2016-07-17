@@ -1,0 +1,29 @@
+[smart_terrain]
+squad_id = 19
+max_population = 2
+arrive_dist = 150
+respawn_params = respawn@pri_b301   
+respawn_time     =  200 
+respawn_radius   =  90
+
+
+[respawn@pri_b301]
+spawn_snork
+sim_mod
+
+[spawn_snork]
+spawn_squads =  simulation_snork
+spawn_num = {+pri_b301_zulus_dead} 2, {+pri_b301_save_zulus_complete} 2, 0
+
+[sim_mod]
+spawn_squads = simulation_freedom, simulation_zombied_1, simulation_controller
+spawn_num = 2
+
+
+[exclusive]
+zulus = pripyat\pri_b301_zulus.ltx
+snork_normal_1 = pripyat\pri_b301_monsters.ltx
+snork_normal_2 = pripyat\pri_b301_monsters.ltx
+snork_normal_3 = pripyat\pri_b301_monsters.ltx
+snork_normal_4 = pripyat\pri_b301_monsters.ltx
+snork_normal_5 = pripyat\pri_b301_monsters.ltx

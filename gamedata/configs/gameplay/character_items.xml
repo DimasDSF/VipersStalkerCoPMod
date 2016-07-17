@@ -1,0 +1,6 @@
+guitar_a = 1, prob=1 \n
+harmonica_a = 1, prob=1 \n
+wpn_binoc = 1, prob=1 \n
+detector_simple = 1, prob=0.15 \n
+device_torch = 1, prob=1 \n
+grenade_gd-05 = 1, prob=0.1 \n

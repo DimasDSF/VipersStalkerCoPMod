@@ -1,0 +1,1286 @@
+--[[
+Dinamic News COP 1.02 для SGM 2.2 + lasted Fix
+Автор: VanoSanturi (Vano_Santuri)  17.03.12 
+]]
+-----------------------------------------------\\\\\\\\\\\Настройка каналов для группировок\\\\\\\\\\\-----------------------------------------------
+--В этой табличке задаются открытость\закрытость канала. (true/nil)
+--Табличка на каналы группировок. 1-ое значение - исход.канал, 2-ое значение - разрешены ли новости о них.
+
+local CommunityChenalStatusTbl = {
+	["msges"]		= {true,true},--общий канал
+	["actor"]  		= {nil,nil},
+	["stalker"]  	= {true,true},
+	["monolith"] 	= {nil,nil},
+	["army"] 		= {true,true},
+	["killer"]   	= {true,true},
+	["ecolog"]   	= {true,true},
+	["dolg"]    	= {true,true},
+	["freedom"]  	= {true,true},
+	["bandit"]   	= {true,true},
+	["zombied"]		= {nil,nil}
+}
+
+--Возвращаем статус канала
+function CommunityChenalStatus(ObjCom,index)
+local Status = CommunityChenalStatusTbl[ObjCom][index]
+if (Status) then 
+return Status
+end
+end
+
+-----------------------------------------------\\\\\\\\\\\Новости связанные со смертью сталкеров (нужен труп)\\\\\\\\\\\-----------------------------------------------
+local spammers = {} -- табличка со памерами.
+local sCount = 0 -- Для счетчика спамеров.
+
+--Работа стаблицами....... За архитектуру спасибо Shoker'у------------------
+local TblMsges = {
+     msges = {},
+	 stalker = {},
+	 monolith = {},
+	 army = {},
+	 killer = {},
+	 ecolog = {},
+	 dolg = {},
+	 freedom = {},
+	 bandit = {},
+	 zombied = {}
+					}
+--Получаем таблицу
+function GetFromTbl(NameSubTbl)
+ if TblMsges[NameSubTbl] == nil then
+    return nil --\\ вернёт nil если ничего нету
+ end
+	 return TblMsges[NameSubTbl]
+
+end
+--Добавлем в таблицу...
+function AddToTbl(NameSubTbl,t)
+ if TblMsges[NameSubTbl] == nil then
+    TblMsges[NameSubTbl] = {}
+ end
+	 table.insert(TblMsges[NameSubTbl], t)
+end
+--Удаляем из таблицы
+function DelFromTbl(NameSubTbl, Inx)
+if TblMsges[NameSubTbl] == nil then
+    return nil --\\ вернёт nil если ничего нету
+ end
+	table.remove(TblMsges[NameSubTbl], Inx)
+end
+
+
+
+-----------------------------------------------\\\\\\\\\\\Распределяем по потокам\\\\\\\\\\\-----------------------------------------------
+--// Вот таким примитивным образом убираем нагрузку ...
+function DethNews(victim,who)
+local actor = db.actor
+if (actor) then
+if (who) and (victim) then
+local oKilled  = victim:character_name()
+local ComKilled = victim:character_community()
+local victim_position=get_object_position(victim)
+local VicPos=get_point_description(get_object_levelname(victim),victim_position)
+
+	if IsStalker(who) then
+	local i  = math.random(1,4)
+		if i == 1 then
+		NpcKiller(oKilled,ComKilled,VicPos,who)
+		elseif i == 2 then
+		SeeShootNews(victim,who)
+		elseif i == 3 then
+		StsFindDeth(victim,who)
+		elseif i == 4 then
+		StsFindDethNeitr(victim, who)
+		end
+	end
+	
+	if (IsMonster(who)) then
+	local k = math.random(1,3)
+		if k == 1 then
+		MutKiller(oKilled,ComKilled,VicPos,who)
+		elseif k == 2 then 
+		SawMutKiller(victim,who)
+		elseif k == 3 then 
+		StsFindDethMutatnts(victim,who)
+		end
+	end
+	
+	if (surge_manager.is_killing_all()) then
+		SurKiller(oKilled,ComKilled,VicPos)
+		end
+		
+
+end
+end
+end
+--Распределяем при смерти мутантов. Для избежания нагрузки.
+function MutDeths(victim,who)
+		local l = math.random(1,2)
+		if l == 1 then
+		SeeShootNewsMut(victim,who)
+		elseif l == 2 then 
+		StsFindDethMut(victim, who)
+		end
+end
+--Отсюда вызываем новость(если она конечно есть в табличке)
+--Проверка локации.
+function oNews()
+local levels_on_off = level.name()
+if surge_manager.is_started() then -- Во время выброса - свзь не пашет.
+else
+if (levels_on_off ~= "labx8") and (levels_on_off ~= "jupiter_underground") and (roffline == false) then
+SndNews() -- События в Alife
+end
+end
+end
+local Tbls = {"msges","stalker","monolith","army","killer","ecolog","dolg","freedom","bandit","zombied"}-- Сюда записываются имена табличек(группировок) чьи каналы хотим слышать.
+local FullTables={}--табличка с именами заполненных табличек.
+--Эта функция перебирает таблички, и проверяет на заполненность,затем заносит имена в таблицу
+function GetFullTable()
+for a = 1, 10 do --проверка на заполненность таблиц
+local TblF=Tbls[a]
+local Tbl = GetFromTbl(TblF)
+if next(Tbl)  then
+table.insert(FullTables, TblF)--добавляем полную табличку
+end
+end
+end
+
+--Чистим все таблицы.
+function CleanFullTbl()
+for a = 1, 10 do --проверка на заполненность таблиц
+local TblF=Tbls[a]
+TblMsges[TblF] = {}
+end
+FullTables={}--табличка с именами таблиц -пуста.
+end
+
+--Вызов новости из полной таблички.
+function SndNews()
+GetFullTable()
+if next(FullTables) then
+local NameSubTbl = FullTables[math.random(#FullTables)] 
+local Tbl = GetFromTbl(NameSubTbl)
+local Inx=math.random(#Tbl)
+local Msg = Tbl[Inx].Mg
+local Icon = Tbl[Inx].Ic
+local Sound = Tbl[Inx].Snd
+local SnDer = Tbl[Inx].Se
+local IconType = Tbl[Inx].It
+send_tip(Msg,SnDer, nil, nil,Icon,Sound,IconType)
+CleanFullTbl()
+end
+end
+
+
+-----------------------------------------------\\\\\\\\\\\Новости о смерти в общий канал\\\\\\\\\\\-----------------------------------------------
+--Убийца - нпс
+function NpcKiller(oKilled,ComKilled,VicPos,who)
+local DethWpn = GetWpnName(GetWpnCls(who),1)
+local WpnNum = GetWpnCls(who)
+local Msg = "%c[255,228,137,143]Погиб сталкер:".."\\n%c[255,160,160,160]"..oKilled..": "..game.translate_string(ComKilled)..".\\n%c[default]"..VicPos..". "..DethWpn.."."
+local Icon = "deth"
+local Sound = "news"
+local SnDer = "Общий канал:"
+local IconType = "gr"
+if CommunityChenalStatus(ComKilled,2) then  --Делаем проверку на разрешение новостей об этой группировке:
+if WpnNum ~= 0 then
+local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+local NameSubTbl = "msges"
+AddToTbl(NameSubTbl,t)
+end
+end
+end
+--Убица  - мутант
+function MutKiller(oKilled,ComKilled,VicPos,who)
+local MutName = get_monster_name(who, 2)
+local Msg = "%c[255,228,137,143]Погиб сталкер:".."\\n%c[255,160,160,160]"..oKilled..": "..game.translate_string(ComKilled)..".\\n%c[default]"..VicPos..". "..MutName.."."
+local Icon = "deth"
+local Sound = "news"
+local SnDer = "Общий канал:"
+local IconType = "gr"
+if CommunityChenalStatus(ComKilled,2) then --Делаем проверку на разрешение новостей об этой группировке:
+local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+local NameSubTbl = "msges"
+AddToTbl(NameSubTbl,t)
+end
+end
+--Убица  - выброс
+function SurKiller(oKilled,ComKilled,VicPos)
+local Msg = "%c[255,228,137,143]Погиб сталкер:".."\\n%c[255,160,160,160]"..oKilled..": "..game.translate_string(ComKilled)..".%c[default]"..VicPos..". ".."Выброс."
+local Icon = "deth"
+local Sound = "news"
+local SnDer = "Общий канал:"
+local IconType = "gr"
+if CommunityChenalStatus(ComKilled,2) then --Делаем проверку на разрешение новостей об этой группировке:
+local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+local NameSubTbl = "msges"
+AddToTbl(NameSubTbl,t)
+end
+end
+
+--Новости о Смерти Семецкого.
+local RDead={
+"Трамплин.",
+"Жарка.",
+"Воронка.",
+"Плешь.",
+"Электра.",
+"Осколочное ранение.",
+"Кабан.",
+"Собака.",
+"Пвевдособака.",
+"Кровосос.",
+"Тушканы.",
+"Химера.",
+"Бюрер.",
+"Пулевое ранение.",
+"Карусель.",
+"Выброс."
+}
+local LDead={
+"Затон",
+"Окрестности Юпитера",
+"Припять"
+}
+
+--Random Offline
+function PDAROffline()
+roffline = true
+save_variable(roffline, true)
+if not surge_manager.is_started() then
+PDAStatus()
+end
+end
+
+function PDAROfflineOnline()
+roffline = false
+save_variable(roffline, false)
+if not surge_manager.is_started() then
+PDAStatus()
+end
+end
+
+--Surge check for random offline
+function SurgePDAStatusDisconnect()
+if (roffline == false) then
+PDAStatus()
+end
+end
+
+function SurgePDAStatusReconnect()
+if (roffline == false) then
+PDAStatus()
+end
+end
+
+function GetROffline()
+roffline = load_variable(roffline, false)
+--del_variable("x_first_run")
+PDAStatus()
+end
+
+--Проверка Радиосвязи.Отключаем сигналы в подземках .
+function PDAStatus()
+local levels_on_off = level.name()
+local Icon = "signal"
+local Sound = "news"
+local SnDer = "Status:"
+local IconType = "gr"
+if surge_manager.is_started() then
+send_tip("#355:Connection Timed Out.",SnDer, 7, nil,Icon,Sound,IconType)
+elseif (levels_on_off ~= "labx8") and (levels_on_off ~= "jupiter_underground") and (roffline == false) then
+send_tip("Successfully Connected.",SnDer, 7, nil,Icon,Sound,IconType)
+elseif (levels_on_off ~= "labx8") and (levels_on_off ~= "jupiter_underground") and (roffline == true) then
+send_tip("#355:Connection Timed Out.",SnDer, 7, nil,Icon,Sound,IconType)
+elseif (levels_on_off == "labx8") or (levels_on_off == "jupiter_underground") then
+send_tip("#126:No Connection.",SnDer, 7, nil,Icon,Sound,IconType)
+--elseif (roffline == nil) then
+elseif (roffline ~= true) and (roffline ~= false) then
+--send_tip("#404:Offline System Variable Missing",SnDer, 7, nil,Icon,Sound,IconType)
+GetROffline()
+else send_tip("Debug: Error #342.",SnDer, 7, nil,Icon,Sound,IconType)
+end
+end
+-----------------------------------------------\\\\\\\\\\\Новости о выстрелах\\\\\\\\\\\-----------------------------------------------
+
+--Новости о выстрелах (Сделать условие, что  ГГ  тут и близко не было..., чтоб не  было слежки...)
+--Только выстрелы
+local TblTime = {"Недавно","Несколько минут назад","Минут десять назад","Минут пять назад","Только что"}
+local TblSaw = {"услышал","послышались","донеслись"}
+
+function SeeShootNews(victim,who)
+	if (GetWpnCls(who) ~= 0) and (GetWpnCls(who) ~= 6 ) and (GetWpnCls(who) ~= 7 ) and (GetWpnCls(who) ~= 8 ) and (GetWpnCls(who) ~= 9 ) then -- Проверка на оружие, от которого есть звук.
+		local SenderRadMin= 30 --Минимальный радиус Того, кто слышал.
+		local SenderRadMax= 100 --Максимальный радиус Того, кто услышал.
+		local Sender = GiveStalker(victim,SenderRadMin,SenderRadMax,who) -- есть ли очевидец, кроме ГГ на этом расстоянии  и убийцы.
+		if Sender then
+				local Time = TblTime[math.random(#TblTime)]
+				local Saw = TblSaw[math.random(#TblSaw)]
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local WpnShoot = GetWpnName(GetWpnCls(who),2)
+				local SndName = Sender:character_name()
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..Time.." "..Saw.." "..WpnShoot..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "news"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+		end
+	end
+end
+
+--Новости о выстрелах при убийстве мутанта.
+function SeeShootNewsMut(victim,who)
+if IsStalker(who) then
+	if (GetWpnCls(who) ~= 0) and (GetWpnCls(who) ~= 6 ) and (GetWpnCls(who) ~= 7 ) and (GetWpnCls(who) ~= 8 ) and (GetWpnCls(who) ~= 9 ) then -- Проверка на оружие, от которого есть звук.
+		local SenderRadMin= 30 --Минимальный радиус Того, кто слышал.
+		local SenderRadMax= 100 --Максимальный радиус Того, кто услышал.
+		local Sender = GiveStalker(victim,SenderRadMin,SenderRadMax,who) -- есть ли очевидец, кроме ГГ на этом расстоянии  и убийцы.
+		if Sender then
+				local Time = TblTime[math.random(#TblTime)]
+				local Saw = TblSaw[math.random(#TblSaw)]
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local WpnShoot = GetWpnName(GetWpnCls(who),2)
+				local SndName = Sender:character_name()
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..Time.." "..Saw.." "..WpnShoot..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "news"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+		end
+	end
+end
+end
+-----------------------------------------------\\\\\\\\\\\Новости о криках (убийца Мутант)\\\\\\\\\\\-----------------------------------------------
+
+---Новости об ужасных криках - ... убийца мутант
+local TblTimeMut = {"Недавно","Несколько минут назад","Минут десять назад","Минут пять назад","Только что"}
+local TblSawMut = {"услышал","послышались","донеслись"}
+local TblStsSaw = {"ужасные крики","крики о помощи","невыносимые стоны","страшные крики"}
+local TblAlarmMut = {"Будьте на чеку","Похоже мутанты напали","Остерегайтесь","Обходите то место стороной","Твари напали"}
+
+function SawMutKiller(victim,who)
+local SenderRadMin= 30 --Минимальный радиус Того, кто слышал.
+local SenderRadMax= 100 --Максимальный радиус Того, кто услышал.
+		local Sender = GiveStalker(victim,SenderRadMin,SenderRadMax,who) -- есть ли очевидец, кроме ГГ на этом расстоянии  и убийцы.
+		if Sender then
+			local SendCom = Sender:character_community() -- Проверка на открытость канала для этого чувака...
+				local TimeMut = TblTimeMut[math.random(#TblTimeMut)]
+				local SawMut = TblSawMut[math.random(#TblSawMut)]
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local StsZv = TblStsSaw[math.random(#TblStsSaw)]
+				local AlarmMut = TblAlarmMut[math.random(#TblAlarmMut)]
+				local SndName = Sender:character_name()
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..TimeMut.." "..SawMut.." "..StsZv..". "..Place..". \\n"..AlarmMut.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "danger"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+			end
+end
+-----------------------------------------------\\\\\\\\\\\Настройка новостей от свидетелей (нейтральные сталкеры) \\\\\\\\\\\-----------------------------------------------
+--Внимание. Данную фишку видят только те, кто не сосстоит в группировках киллера\убитого\\\\\\\\\\\\\\\\\\\\\\\\\\------------------------------------------
+local TblTimeKillerSaw = {"Недавно","Несколько минут назад","Минут десять назад","Минут пять назад","Только что"}
+local TblSawKillerSaw = {"увидел","видел","смотрел","наблюдал"}
+local TblSouz = {"как","что"}
+function StsFindDethNeitr(victim, who)
+if (GetWpnCls(who) ~= 0)  then -- Проверка на оружие, и скрипты - не катят.
+	local SenderRadMin= 5 --Минимальный радиус Того, кто спалил.
+	local SenderRadMax= 80 --Максимальный радиус Того, кто спалил.
+		local Sender = GiveStalkerNetr(victim,SenderRadMin,SenderRadMax,who) -- есть ли очевидец, кроме ГГ на этом расстоянии . Нужен нейтральный сталкер...
+		if Sender then
+			local WhoCom = who:character_community() -- допольная проверка на то, чтобы сокланы не орали про своих же...
+			local VictimCom = victim:character_community() 
+				local Time = TblTimeKillerSaw[math.random(#TblTimeKillerSaw)]
+				local Saw = TblSawKillerSaw[math.random(#TblSawKillerSaw)]
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local WpnShoot = GetWpnName(GetWpnCls(who),3)
+				local SndName = Sender:character_name()
+				local GetKiller = GetComName((who:character_community()),math.random(1,2))
+				local GetVictim = GetComName((victim:character_community()),math.random(3,4))
+				local Souz = TblSouz[math.random(#TblSouz)]
+				local Shootting = GetWpnName(GetWpnCls(who),math.random(4,8)) -- 10.3.12 Правочка на выбор из таблички.
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..Time.." "..Saw..", "..Souz.." "..GetKiller.." "..Shootting.." "..WpnShoot.." "..GetVictim..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "danger"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+		end
+	end
+end
+--Убили мутанта
+function StsFindDethMut(victim, who)
+if IsStalker(who) then
+if (GetWpnCls(who) ~= 0) then -- Проверка на оружие, скрипты - не катят.
+	local SenderRadMin= 5 --Минимальный радиус Того, кто спалил.
+	local SenderRadMax= 80 --Максимальный радиус Того, кто спалил.
+		local Sender = GiveStalker(victim,SenderRadMin,SenderRadMax,who)
+		if Sender then
+			local WhoCom = who:character_community() -- допольная проверка на то, чтобы сокланы не орали про своих же...
+			local VictimCom = victim:character_community() 
+				local Time = TblTimeKillerSaw[math.random(#TblTimeKillerSaw)]
+				local Saw = TblSawKillerSaw[math.random(#TblSawKillerSaw)]
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local WpnShoot = GetWpnName(GetWpnCls(who),3)
+				local SndName = Sender:character_name()
+				local GetKiller = GetComName((who:character_community()),math.random(1,2))
+				local GetVictim = get_monster_name(victim,4)
+				local Souz = TblSouz[math.random(#TblSouz)]
+				local Shootting = GetWpnName(GetWpnCls(who),math.random(4,8)) -- 10.3.12 Правочка на выбор из таблички.
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..Time.." "..Saw..", "..Souz.." "..GetKiller.." "..Shootting.." "..WpnShoot.." "..GetVictim..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "danger"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+				end
+		end
+end
+end
+
+--Ищем нейтрала
+function GiveStalkerNetr(ThisObj,RadMin,RadMax,who)
+	for k, v in pairs(db.storage) do
+    local obj = level.object_by_id(k)
+	if (obj) then
+		local Pos = ThisObj:position()
+		local Dist = Pos:distance_to(obj:position())
+		if (Dist < RadMax) and (Dist > RadMin) then
+		if (IsStalker(obj)) and (obj:alive()) then -- 7,12,11 убрана лишняя проверка
+		local ComThisObj = ThisObj:character_community()
+		local ComWho = who:character_community()
+		local ComSender = obj:character_community()
+		if CommunityChenalStatus(ComSender,1) then
+			if (ComThisObj ~= ComSender) and (ComWho ~= ComSender) then --Данным методом ищем нейтрального сталкера.
+			if ValNpc(obj)~=true then --Отсекаем квестовых нпс
+
+            local objId = obj:id()
+            if  (give_spamm(objId) ~= "spammer") then
+             sCount = sCount + 1
+             spammers[objId] = "spammer" -- Добавляем спамера.
+            return obj -- нашли не спамера - отлично.
+            end
+			end
+			end
+			end
+			end
+		end
+	end
+end
+end
+
+-------------------------------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\-----------------------
+
+
+-----------------------------------------------\\\\\\\\\\\SOS! Напал враг\\\\\\\\\\\-----------------------------------------------
+function StsFindDeth(victim,who)
+if (GetWpnCls(who) ~= 0)  then -- Проверка на оружие, ножи и скрипты - не катят.
+		local SenderRadMin= 0 --Минимальный радиус Того, кто рядом. т.е ищем в одном кваде...
+		local SenderRadMax= 25 --Максимальный радиус Того, кто рядом.
+		local Sender = GiveStalkerFrr(victim,SenderRadMin,SenderRadMax,who) -- есть ли очевидец, кроме ГГ на этом расстоянии . Рядом должны быть сталкер из той же группировки...
+		if Sender then
+			local SendCom = Sender:character_community() -- Проверка на открытость канала для этого чувака...
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local SndName = Sender:character_name()
+				local RadMinEn = 0 -- Минимальный радиус для врага
+				local RadMaxEn = 30 -- Максимальный  радиус для врага
+				local WordEnemy,EnemyWord = GiveStalkerEnemy(victim,RadMinEn,RadMaxEn,who)--"one" --
+				local Sos = GetComName(SendCom, math.random(11,13)) --Фразы для разных группировок
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..Sos.." "..WordEnemy.." "..EnemyWord..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "danger"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+		end
+	end
+end
+
+--Нужно количество сталкеров , которые напали
+function GiveStalkerEnemy(ThisObj,RadMin,RadMax,who)
+local t = 0
+local WhoCom = who:character_community()
+	for k, v in pairs(db.storage) do
+    local obj = level.object_by_id(k)
+		if (obj) then
+		local Pos = ThisObj:position()
+		local Dist = Pos:distance_to(obj:position())
+		if (Dist < RadMax) and (Dist > RadMin) then
+		if (IsStalker(obj)) then -- Убрал привязку на то, живой объект или нет - хер  с ним, тут не нужно.
+			local ComObj = obj:character_community()
+			if (ComObj == WhoCom) then
+				t=t+1
+			end
+			end
+		end
+	end
+ end
+		if t<2 then
+			local EnemyWord = GetComName(WhoCom,math.random(7,8))
+			local WordEnemy = GetWordEnemy("one",math.random(1,3))
+			return WordEnemy,EnemyWord -- на случай если все сдохли.
+		else
+			local WordEnemy = GetWordEnemy("more",math.random(1,3))
+			local EnemyWord = GetComName(WhoCom,math.random(9,10))
+			return WordEnemy,EnemyWord
+		end
+t = 0 -- Обнуляем счетчик		
+end
+
+--Таблички фразы в зависимости от количества врагом....
+local EnemyWord = {
+	["one"]  	= {"На нас напал","Нас обстрелял","На нас напоролся"}, 
+	["more"]  	= {"На нас напали","Нас прижали","Нас окружили"}
+}
+--Берем имя из таблички.
+function GetWordEnemy(Number,index)
+if (EnemyWord[Number][index]) then 
+local ComName =EnemyWord[Number][index] 
+return ComName
+end
+end
+
+
+-----------------------------------------------\\\\\\\\\\\SOS!Напали мутанты\\\\\\\\\\\-----------------------------------------------
+
+
+function StsFindDethMutatnts(victim,who)
+local SenderRadMin= 0 --Минимальный радиус Того, кто рядом. т.е ищем в одном кваде...
+local SenderRadMax= 25 --Максимальный радиус Того, кто рядом.
+		local Sender = GiveStalkerFrr(victim,SenderRadMin,SenderRadMax,who) -- есть ли очевидец, кроме ГГ на этом расстоянии . Рядом должны быть сталкер из той же группировки...
+		if Sender then
+			local SendCom = Sender:character_community() -- Проверка на открытость канала для этого чувака...
+				local victim_position=get_object_position(victim)
+				local Place =get_point_description(get_object_levelname(victim),victim_position)
+				local SndName = Sender:character_name()
+				local RadMinMut = 0 -- Минимальный радиус для Мутанта
+				local RadMaxMut = 30 -- Максимальный  радиус для Мутанта
+				local Index,Index2 = GiveMutantEnemy(victim,RadMinMut,RadMaxMut,who)
+				local Sos = GetComName(SendCom, math.random(11,13)) --Фразы для разных группировок
+				local MsgSos = get_monster_name(who,Index)
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..Sos.." "..MsgSos..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "danger"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)					
+					end
+		end
+end
+
+
+-----------------------------------------------\\\\\\\\\\\Засекли мутанта\\\\\\\\\\\-----------------------------------------------
+function SeeMonstersNews(obj)
+local SenderRadMin= 2 --Минимальный радиус Того, кто рядом. т.е ищем в одном кваде...
+local SenderRadMax= 80 --Максимальный радиус Того, кто рядом.
+		local Sender = GiveStalker(obj,SenderRadMin,SenderRadMax,obj) -- есть ли очевидец, кроме ГГ на этом расстоянии . Нужен нейтральный сталкер...
+		if Sender then
+			local SendCom = Sender:character_community()
+				local victim_position=get_object_position(obj)
+				local Place =get_point_description(get_object_levelname(obj),victim_position)
+				local SndName = Sender:character_name()
+				local RadMinMut = 0 -- Минимальный радиус для Мутанта того же класса.
+				local RadMaxMut = 25 -- Максимальный  радиус для Мутанта того же класса.
+				local Index,Index2 = GiveMutantEnemy(obj,RadMinMut,RadMaxMut,obj)
+				local ColTime = {"Недавно","Несколько минут назад","Минут пять назад","Только что"}
+				local ColDo = {"заметил","увидел","засек"}
+				local When = ColTime[math.random(#ColTime)]
+				local What = ColDo[math.random(#ColDo)]
+				local MsgMut = get_monster_name(obj,Index2)
+					if (SndName) then -- проверка на конкатенацию.
+						local Msg = "%c[255,160,160,160]"..SndName.." :".."\\n%c[default]"..When.." "..What.." "..MsgMut..". "..Place.."."
+						local Icon = Sender:character_icon()
+						local SnDer = GetComName((Sender:character_community()),6)
+						local Sound = "danger"
+						local IconType = "npc"
+						local t = {Mg=Msg,Ic=Icon,Snd=Sound,Se=SnDer,It=IconType}
+						local NameSubTbl = Sender:character_community()
+						AddToTbl(NameSubTbl,t)
+					end
+		end
+end
+
+-----------------------------------------------\\\\\\\\\\\Вспомогательные функции\\\\\\\\\\\-----------------------------------------------
+
+
+--Ищем сталкеров в отряде....
+function GiveStalkerFrr(ThisObj,RadMin,RadMax,who)
+	for k, v in pairs(db.storage) do
+    local obj = level.object_by_id(k)
+	if (obj) then
+	local Pos = ThisObj:position()
+	local Dist = Pos:distance_to(obj:position())
+	if (Dist < RadMax) and (Dist > RadMin) then
+		if (IsStalker(obj)) and (obj:alive()) then
+		local ComThisObj = ThisObj:character_community()
+		local ComSender = obj:character_community()
+		local ComWho = who:character_community()
+		if ComWho ~= ComSender then -- На случай если свои попадают под обстрел.
+		if CommunityChenalStatus(ComSender,1) then
+			if (ComThisObj == ComSender)  then --Данным методом ищем сталкера,который находился в отряде....
+			if ValNpc(obj)~=true then --Отсекаем квестовых нпс
+            local objId = obj:id()
+            if  (give_spamm(objId) ~= "spammer") then
+             sCount = sCount + 1
+             spammers[objId] = "spammer" -- Добавляем спамера.
+            return obj -- нашли не спамера - отлично.
+            end
+			end
+			end
+			end
+			end
+			end
+		end
+	end
+end
+end
+--Использованы наработки Kolmogora(удалятор аномалий)...(немного архитектурки) , но сделал рандомный выбор из таблички...
+function GiveStalker(ThisObj,RadMin,RadMax,who)
+	for k, v in pairs(db.storage) do
+    local obj = level.object_by_id(k)
+		if (obj) then
+		local Pos = ThisObj:position()
+		local Dist = Pos:distance_to(obj:position())
+		if (Dist < RadMax) and (Dist > RadMin) then
+		if (IsStalker(obj)) and (obj:alive()) and (obj:id() ~= who:id()) then
+		local ComThisObj = ThisObj:character_community()
+		local ComSender = obj:character_community()
+		if CommunityChenalStatus(ComSender,1) then
+			if (ComThisObj ~= ComSender)  then --Данным методом ищем  сталкера.
+			if ValNpc(obj)~=true then --Отсекаем квестовых нпс
+            local objId = obj:id()
+            if  (give_spamm(objId) ~= "spammer") then
+             sCount = sCount + 1
+             spammers[objId] = "spammer" -- Добавляем спамера.
+            return obj -- нашли не спамера - отлично.
+            end
+				end
+				end
+				end
+				end
+		end
+end
+end
+end
+--Определяем число мутантов - один или стая.... Дляу бийства
+function GiveMutantEnemy(ThisObj,RadMin,RadMax,who)
+local t = 0
+	for k, v in pairs(db.storage) do
+    local obj = level.object_by_id(k)
+		if (obj) then
+	local Pos = ThisObj:position()
+	local Dist = Pos:distance_to(obj:position())
+	if (Dist < RadMax) and (Dist > RadMin) then	
+		if (IsMonster(obj))  then
+			local MClassIdObj=get_clsid(obj) 
+			local MClassIdMut=get_clsid(who) 
+			if (MClassIdObj == MClassIdMut) then   
+				t=t+1
+			
+			end
+			end
+		end
+	end
+end
+	if t<2 then --на всякий пожарный
+		local index = math.random(5,6)
+		local index2 = 4
+			return index,index2
+	else
+		local index = math.random(7,8)
+		local index2 = math.random(9,10)
+			return index,index2
+	end
+t = 0
+end
+--Поиск сталкеров для новостей о выбросе.
+function GiveStalkerSurge()
+	for k, v in pairs(db.storage) do
+    local obj = level.object_by_id(k)
+		if (obj) and (IsStalker(obj)) and (obj:alive()) and (obj:id() ~= db.actor:id()) then
+		local ComObj = obj:character_community()
+		if VS_send_news.CommunityChenalStatus(ComObj,1) then	--Проверка на открытость канала
+			if ValNpc(obj)~=true then --Отсекаем квестовых нпс
+            local objId = obj:id()
+            if  (give_spamm(objId) ~= "spammer") then
+             sCount = sCount + 1
+             spammers[objId] = "spammer" -- Добавляем спамера.
+            return obj -- нашли не спамера - отлично.
+            end
+			end
+		end
+	end
+	end
+end
+
+--Проверка на спамера . вдобавок убирает лишнюю таблицу и обрубает кусок перебора.
+function give_spamm(objId)
+if sCount > 7 then
+spammers = {} -- Чиcтим таблицу спамеров.
+sCount = 0
+end
+if spammers[objId] then
+return spammers[objId]
+else
+return "not_spammer"
+end
+end
+--Табличка на группировку. + иконки для каждой группировки.
+local Community = {
+	["actor"]  	= {"сталкер","одиночка","сталкера","одиночку","stalker","Общий канал:","сталкер","одиночка","сталкеры","одиночки","SOS! Ребята - выручайте!","SOS!","Требуется помощь,выручайте.","Спасите..."}, -- надо все группировки шмалять
+	["stalker"]  	= {"сталкер","одиночка","сталкера","одиночку","stalker","Общий канал:","сталкер","одиночка","сталкеры","одиночки","SOS! Ребята - выручайте!","SOS!","Требуется помощь,выручайте.","Спасите..."},
+	["monolith"] 	= {"монолитовец", "фанатик", "монолитовца","фанатика","default","Монолит:","монолитовец", "фанатик", "монолитовцы","фанатики","SOS! Ребята - выручайте!","SOS!","Требуется помощь,выручайте.","Спасите..."},
+	["army"] 		= {"военный","солдат","военного","солдата","army","Военные:","военный","солдат","военные","солдаты","SOS! Командир требуется поддержка!","SOS!","Это спецотряд - срочно требуется поддержка.","SOS! Нам нужно подкрепление!"},
+	["killer"]   	= {"наёмник","мерк","наёмника","мерка","killer","Намники:","наёмник","мерк","наёмники","мерки","SOS! Ребята - выручайте!","SOS!","Требуется помощь,выручайте.","Требуется подкрепление!"},
+	["ecolog"]   	= {"учёный","яйцеголовый","учёного","яйцеголового","default","Ученые:","учёный","яйцеголовый","учёные","экологи","SOS!Необходима помощь","SOS!","Требуется помощь,выручайте.","Спасите..."},
+	["dolg"]    	= {"долговец","долгарь","долговца","долгоря","dolg","Долг:","долговец","долгарь","долговцы","долгори","SOS! Ребята - выручайте!","SOS!","Требуется подмога, срочно!","Нужна помощь, вышлите квад!"},
+	["freedom"]  	= {"свободовец","анарxист","свободовца","анархиста","freedom","Свобода:","свободовец","анарxист","свободовцы","анархисты","SOS! Ребята - выручайте!","SOS!","Требуется помощь,выручайте.","Спасите..."},
+	["bandit"]   	= {"бандит","гопник","бандита","гопника","bandit","Бандиты:","бандит","гопник","бандиты","гопники","SOS!Мля, пацаны выручайте","Аларм бля .SOS!","Пацаны выручайте, пришлите кого-нить!","Пацаны! SOS..."},
+	["zombied"]		= {"зомбированный","зомби","зомбированного","зомби","default","Зомбированные:","зомбированный","зомби","зомбированные","зомби","Сос! Ребята - выручайте!","Сос!","Требуется помощь,выручайте.","Спасите..."} --Пасхалка для прикола...
+}
+
+--Берем имя из таблички.
+function GetComName(ObjCom,index)
+if (Community[ObjCom][index]) then 
+local ComName =Community[ObjCom][index] 
+return ComName
+end
+end
+
+--10.3.12 -дополнил табличку для новостей вида "видел" - есть вероятность увидеть новость "зарезал, завалил гранатой".
+--Таблица для оружия(можно впихнуть что угодно) . 
+local WpnClss ={
+[0]={"Неизвестно","какие-то выстрелы","из автомата","пристрелил","убил","застрелил","замочил","грохнул"},
+[1]={"Пулевое ранение","выстрелы из винтовки","из винтовки","пристрелил","убил","застрелил","замочил","грохнул"},
+[2]={"Пулевое ранение","автоматные очереди","из автомата","пристрелил","убил","застрелил","замочил","грохнул"},
+[3]={"Пулевое ранение","одиночные выстрелы","из пистолета","пристрелил","убил","застрелил","замочил","грохнул"},
+[4]={"Пулевое ранение","выстрелы из дробовика","из дробовика","пристрелил","убил","застрелил","замочил","грохнул"},
+[5]={"Осколочное ранение","взрыв снаряда","из гранатомета","пристрелил","убил","застрелил","замочил","грохнул"},
+[6]={"Ножевое ранение","ножевое ранение","зарезали","зарезал","убил","прирезал","замочил","грохнул"},
+[7]={"Пулевое ранение","выстрелы из винтовки","из винтовки","пристрелил","убил","застрелил","замочил","грохнул"}, -- Винтовки с глушителем
+[8]={"Пулевое ранение","автоматные очереди","из автомата","пристрелил","убил","застрелил","замочил","грохнул"}, -- Автоматы с глушителем
+[9]={"Пулевое ранение","одиночные выстрелы","из пистолета","пристрелил","убил","застрелил","замочил","грохнул"}, -- Пистолеты с глушителем
+[10]={"Осколочное ранение","взрывы гранаты","гранатой","завалил гранатой","убил","завалил лионкой","замочил","грохнул"} -- Убили гранатой
+}
+--Берем имя из таблички.
+function GetWpnName(WpnCls,index)
+if (WpnClss[WpnCls][index]) then 
+local WpnName =WpnClss[WpnCls][index] 
+return WpnName
+end
+end
+
+--Возвращаем номер по классу.
+function GetWpnCls(oNpc)
+	local oWpn = oNpc:active_item()
+	if oWpn then
+		return GetWeaponClass(oWpn)
+		else 
+		return 0 -- затык на скрипт...
+	end
+
+end
+--Определяем классы Взято из АМК 2.0 DEV автор Refresh.
+--14.12.11 Добавлена проверка на то, что на оружии напялен глушак. Тобишь 0, так как не слышно.
+--Самое интересное, что для Винтореза то же значение, что и для автоматики - не порядок, надо делать подбор под секции,да еще на глушители.
+--wpn:weapon_is_silencer()
+--16.12.11 немного освежил алгоритм. Разбор по грантам и гранатометом а так же подстволам.
+--10.3.12 убрал новость от убийства подствольником - работала неправильно, а из-за задержки времени сысла в ней нет.
+function GetWeaponClass(oWeapon)
+	--Поперек ставим проверку на "тихие секции" - ибо винтарь на clsid. автоматики .... По образцу заносить все стволы с глушителями.
+	local s = oWeapon:section() 
+	local iID = get_clsid(oWeapon)
+	
+	if string.find(s, "wpn_vintorez") or string.find(s, "wpn_vintorez_nimble") then -- Для винтореза, у него clsid. автоматики.
+		return 7
+	elseif (iID == clsid.wpn_ak74_s or iID == clsid.wpn_lr300_s or iID == clsid.wpn_groza_s   or  iID == clsid.wpn_val_s ) and  oWeapon:weapon_is_silencer() then
+		return 8 	-- На автомат одет глушитель
+	elseif (iID == clsid.wpn_svd_s or iID == clsid.wpn_svu_s  or iID == clsid.wpn_vintorez_s) and oWeapon:weapon_is_silencer() then
+		return 7	-- На винтовку одет глушитель.	
+	elseif (iID == clsid.wpn_hpsa_s or iID == clsid.wpn_walther_s or iID == clsid.wpn_usp45_s or iID == clsid.wpn_pm_s) and oWeapon:weapon_is_silencer() then
+		return 9	-- На пистолет одет глушитель пистолет.	
+	elseif iID == clsid.wpn_svd_s or iID == clsid.wpn_svu_s  or iID == clsid.wpn_vintorez_s then
+		return 1	-- снайперские винтовки
+	elseif iID == clsid.wpn_ak74_s or iID == clsid.wpn_lr300_s or iID == clsid.wpn_groza_s or  iID == clsid.wpn_val_s  then
+		return 2	-- штурмовые винтовки
+	elseif iID == clsid.wpn_hpsa_s or iID == clsid.wpn_walther_s or iID == clsid.wpn_usp45_s or iID == clsid.wpn_pm_s then
+		return 3	-- пистолеты
+	elseif iID == clsid.wpn_bm16_s or iID == clsid.wpn_shotgun_s then
+		return 4	-- дробовики, ружья
+	elseif iID == clsid.wpn_rpg7_s  or iID == clsid.wpn_rg6_s then
+		return 5	-- гранатометы.
+	elseif iID == clsid.wpn_knife_s then
+		return 6	-- нож
+	elseif  iID == clsid.wpn_grenade_f1 or iID == clsid.wpn_grenade_rgd5 then
+		return 10
+		else
+		return 0
+	end
+	
+end
+
+
+--Таблица имена по индексу и классу взято из ARS 0.5.2 by XMK and Skunk .
+local monster_classes={
+ [clsid.boar_s]={"boar","Кабан","кабаны","кабана","На нас напал кабан","Нарвались на кабана","На нас напала стая кабанов","Нарвались на стаю кабанов","стаю кабанов","кабанов"},
+ [clsid.dog_s]={"dog","Пёс","псы","пса","На нас напал слепой пёс","Нарвались на пса","На нас напала стая собак","Нарвались на стаю собак","стаю собак","собак"},
+ [clsid.flesh_s]={"flesh","Плоть","плоти","плоть","На нас напала плоть","Нарвались на плоть","На нас напала стая плотей","Нарвались на стаю плотей","стаю плотей","плотей"},
+ [clsid.pseudodog_s]={"pseudodog","Псевдособака","псевдособаки","псевдособаку","На нас напала псевдособака","Нарвались на псевдособаку","На нас напала стая псевдособак","нарвались на стаю псевдособак","стаю псевдособак","плотей"},
+ [clsid.snork_s]={"snork","Снорк","снорки","снорка","На нас напал снорк","Нарвались на снорка","На нас напала стая снорков","Нарвались на стаю снорков","стаю снорков","снорков"},
+ [clsid.bloodsucker_s]={"bloodsucker","Кровосос","кровососы","кровососа","На нас напал кровосос","Нарвались на кровососа","На нас напала стая кровососов","Нарвались на стаю кровососов","кровососов"},
+ [clsid.burer_s]={"burer","Бюрер","бюреры","бюрера","На нас напал бюрер","Нарвались на бюрера","На нас напали бюреры","Нарвались на бюреров","группу бюреров","бюреров"},
+ [clsid.chimera_s]={"chimera","Химера","химеры","химеру","На нас напала химера","Нарвались на химеру","На нас напали химеры","Нарвались на химер","стаю химер","химер"},
+ [clsid.controller_s]={"controller","Контролёр","контролеры","контролера","На нас напал контролел","Нарвались на контролера","На нас напала группа контролеров","Нарвались на контролеров","группу контролеров","контролеров"},
+ [clsid.poltergeist_s]={"poltergeist","Полтергейст","полтергейсты","полтергейста","На нас напал полтергейст","Нарвались на полтергейста","На нас напали полтергейстыы","Нарвались на полтергейстов","стаю полтергейстов","полтергейстов"},
+ [clsid.gigant_s]={"pseudo_gigant","Псевдогигант","псевдогиганты","псевдогиганта","На нас напал псевдогигант","Нарвались на псевдогиганта","На нас напали псевдогиганты","Нарвались на псевдогигантов","группу псевдогигантов","псевдогигантов"},
+ [clsid.tushkano_s]={"tushkano","Тушкан","тушканы","тушкана","На нас напал тушкан","Нарвались на тушкана","На нас напала стая тушканов","Нарвались на стаю тушканов","стаю тушканов","тушканов"},
+ [clsid.psy_dog_s]={"psy_dog","Пси-собака","пси-собаки","пси-собаку","На нас напала пси-собака","Нарвались на пси-собаку","На нас напала стая пси-собак","Нарвались на стаю пси-собак","стаю пси-собак","пси-собак"},
+ [clsid.psy_dog_phantom_s]={"phantom","Фантом","фантомы","фантома","На нас напала пси-собака","Нарвались на пси-собаку","На нас напала стая пси-собак","Нарвались на стаю пси-собак","стаю пси-собак","пси-собак"},
+ [clsid.script_stalker]={"zombied","Зомбированный","зомбированные","зомбированного","На нас напал зомби","Нарвались на зомбированного","На нас напали зомби","Нарвались на зомбированных","группу зомби","зомби"}
+}
+--Имя монстра по классу.
+function get_monster_name(obj,index) 
+local m_comm="" 
+local m_n="" 
+if index==nil then 
+index=1 
+end 
+if(IsMonster(obj)) then 
+local m_clsid=get_clsid(obj) 
+if m_clsid then 
+m_comm=monster_classes[m_clsid] 
+if m_comm==nil then 
+m_n="" 
+else 
+if(monster_classes[m_clsid][index]~=nil)then 
+m_n=monster_classes[m_clsid][index] 
+end 
+end 
+end 
+end 
+return m_n 
+end
+function isGameObject(obj) 
+local bResult=false 
+if(obj and obj.fov)then 
+bResult=true end 
+return bResult 
+end
+
+--Игровые Уровни.
+local level_name={
+ ["zaton"]={"На Затоне,"},
+ ["jupiter"]={"В окресностях Юпитера,"},
+ ["pripyat"]={"В Припяти,"},
+ ["jupiter_underground"]={"В тоннелях под Припятью"},
+ ["labx8"]={"В Лаборатории X-8,"}
+}
+--Точки мест (использовал координаты смартов)
+local all_points={
+ ["zaton"]={
+  [1]={p_daleko="аномалии Коготь",p_blizko="у аномалии Коготь",p={-33.0228,0.4555,-200.7156}}, 
+  [2]={p_daleko="аномалии Железный лес",p_blizko="у аномалии Железный лес",p={-355.6813,40.0176,-325.4126}},
+  [3]={p_daleko="лесопилки",p_blizko="на лесопилке",p={-349.0496,18.3864,345.0177}},
+  [4]={p_daleko="ВНЗ Круг",p_blizko="на ВНЗ Круг",p={-400.3414,6.4376,-9.3092}},
+  [5]={p_daleko="станции переработки отходов",p_blizko="на станции переработки отходов",p={321.9968,33.2427,-403.7212}},
+  [6]={p_daleko="аномалии Цирк",p_blizko="у аномалии Цирк",p={0.5964,20.9242,-332.0877}},
+  [7]={p_daleko="лесничества",p_blizko="на лесничестве",p={420.0504,36.2633,-17.5632}},
+  [8]={p_daleko="Скадовска",p_blizko="на Скадовске",p={132.5715,-7.3392,185.0458}},
+  [9]={p_daleko="сгоревшего хутора",p_blizko="на сгоревшем хуторе",p={-48.5605,24.1285,303.5849}},
+  [10]={p_daleko="аномалии Котёл",p_blizko="у аномалии Котёл",p={421.4176,-4.357,413.4552}},
+  [11]={p_daleko="топи",p_blizko="на топи",p={-355.5159,7.6103,250.3168}},
+  [12]={p_daleko="Изумрудного",p_blizko="на Изумрудном",p={-173.2566,7.7176,99.8053}},
+  [13]={p_daleko="Шевченко",p_blizko="на Шевченко",p={11.8022,-5.1532,35.2991}},
+  [14]={p_daleko="земснаряда",p_blizko="на земснаряде",p={394.4182,-5.8341,228.9845}},
+  [15]={p_daleko="портовых кранов",p_blizko="на портовых кранах",p={212.8967,6.8029,14.0857}},
+  [16]={p_daleko="аномалии Соснодуб",p_blizko="на аномалии Соснодуб",p={-283.9678,21.0929,-136.5675}},
+  [17]={p_daleko="заправки",p_blizko="на заправке",p={-103.5785,-5.4548,-220.5178}},
+  [18]={p_daleko="старой баржи",p_blizko="на старой барже",p={152.5881,-6.8237,-139.0262}},
+  [19]={p_daleko="аномалии Рубец",p_blizko="у аномалии Рубец",p={323.3748,-5.2372,-219.5806}},
+  [20]={p_daleko="моста им. Преображенского",p_blizko="на мосту им. Преображенского",p={429.9237,20.2642,-182.6681}},
+  [21]={p_daleko="южного плато",p_blizko="на южном плато",p={77.0241,39.0102,-478.4914}},
+  [22]={p_daleko="цехов подстанции",p_blizko="в цехах подстанции",p={-135.3534,24.5687,-412.9718}} 
+ },
+ ["jupiter"]={
+  [1]={p_daleko="аномалии Пепелище",p_blizko="у аномалии Пепелище",p={-349.75,3.9878,407.8909}},
+  [2]={p_daleko="градирни",p_blizko="на градирне",p={-161.104,3.594,390.616}},
+  [3]={p_daleko="полустанка",p_blizko="на полустанке",p={73.6377,4.6632,324.0991}},
+  [4]={p_daleko="аномалии Плавни",p_blizko="у аномалии Плавни",p={228.0958,-4.8275,404.7565}},
+  [5]={p_daleko="цементного завода",p_blizko="на цементном заводе",p={356.3688,33.4261,335.5996}},
+  [6]={p_daleko="Копачей",p_blizko="в Копачах",p={-341.2063,-3.9061,235.3816}},
+  [7]={p_daleko="Янова",p_blizko="на Янове",p={-51.0059,3.4884,199.2509}},
+  [8]={p_daleko="карьера",p_blizko="на карьере",p={276.5087,-29.4639,163.2693}},
+  [9]={p_daleko="бункера учёных",p_blizko="в бункере учёных",p={-196.3071,-3.748,72.5475}},
+  [10]={p_daleko="ЗРК Волхов",p_blizko="на ЗРК Волхов",p={-360.9959,11.2529,-6.6707}},
+  [11]={p_daleko="аномальной рощи",p_blizko="в аномальной роще",p={55.7362,10.5284,-18.2494}},
+  [12]={p_daleko="стоянки",p_blizko="на стоянке",p={-108.4109,-0.3887,-145.4128}},
+  [13]={p_daleko="КПП",p_blizko="на КПП",p={43.5119,23.9638,-190.6825}},
+  [14]={p_daleko="аномалии Битум",p_blizko="у аномалии Битум",p={213.3307,0.5969,-70.0109}},
+  [15]={p_daleko="восточного туннеля",p_blizko="в восточном туннеле",p={399.7508,4.505,-103.8042}},
+  [16]={p_daleko="склада контейнеров",p_blizko="на складе контейнеров",p={-412.9768,-0.0092,-343.6718}},
+  [17]={p_daleko="вентиляционного комплекса",p_blizko="в вентиляционном комплексе",p={-65.5894,23.7972,-322.6659}},
+  [18]={p_daleko="вертолётных площадок",p_blizko="на вертолётных площадках",p={-128.901,26.8013,-470.7353}},
+  [19]={p_daleko="аномалии Бетонная ванна",p_blizko="у аномалии Бетонная ванна",p={234.1494,15.171,-316.6919}},
+  [20]={p_daleko="завода Юпитер",p_blizko="на заводе Юпитер",p={277.403,27.6236,-231.8324}}
+ },
+ ["pripyat"]={
+  [1]={p_daleko="кинотеатра Прометей",p_blizko="у кинотеатра Прометей",p={81.8565,-16.6709,-1054.051}},
+  [2]={p_daleko="речного порта",p_blizko="у речного порта",p={293.7553,0.6782,231.0446}},
+  [3]={p_daleko="старого КБО",p_blizko="у старого КБО",p={11.1927,4.4952,277.1345}},
+  [4]={p_daleko="школы",p_blizko="у школы",p={56.3268,1.6092,127.6943}},
+  [5]={p_daleko="госпиталя",p_blizko="у госпиталя",p={222.1708,-0.2035,32.2432}},
+  [6]={p_daleko="КБО Юбилейный",p_blizko="у КБО Юбилейный",p={-59.2026,8.6021,94.3039}},
+  [7]={p_daleko="прачечной",p_blizko="в прачечной",p={154.753,-0.0955,-185.3917}},
+  [8]={p_daleko="детского сада",p_blizko="в детском саду",p={-109.6032,4.1258,-105.4647}},
+  [9]={p_daleko="общежития",p_blizko="в общежитии",p={46.9189,16.5275,-139.9859}},
+  [10]={p_daleko="гастронома",p_blizko="у гастронома",p={-198.7285,-0.1768,-199.4987}},
+  [11]={p_daleko="универмага",p_blizko="в универмаге",p={-101.6807,0.5108,-257.1676}},
+  [12]={p_daleko="магазина Книги",p_blizko="у магазина Книги",p={-181.141,0.5491,-347.6817}},
+  [13]={p_daleko="аномалии Вулкан",p_blizko="у Аномалии Вулкан",p={-177.9315,-0.5841,-30.081}},
+  [14]={p_daleko="аномалии Лоза",p_blizko="у аномалии Лоза",p={154.266,0.0355,216.7533}}
+ },
+ ["jupiter_underground"]={
+  [1]={p_daleko="в тоннеле",p_blizko="в тонеле",p={0,0,0}}
+ },
+ ["labx8"]={
+  [1]={p_daleko="в лаборатории",p_blizko="в лаборатории",p={0,0,0}}
+ }
+}
+--Дескриптор места по радиану.
+function get_point_description(level,point)
+ local m_s=""
+ local dist=10000
+ local angle=0
+ local m_tmp_str=""
+ if(level and level_name[level]~=nil)then
+  if(level_name[level][1]~=nil)then
+   m_tmp_str=level_name[level][1]..""
+  end
+ end
+ if(level and all_points[level] and point) then
+  local m_str=""
+  local m_str0=""
+  local m_point=nil
+  local m_dist=0
+  local m_points=all_points[level]
+  local dx=0
+  local dy=0
+  local radians=0
+  for key0,value in pairs(m_points) do
+   m_point=vector():set(value["p"][1],value["p"][2],value["p"][3])
+   if(m_point)then
+    m_dist=m_point:distance_to(point)
+    if m_dist<dist then
+     dist=m_dist
+     m_str=value["p_daleko"]
+     m_str0=value["p_blizko"]
+     dx=point.x-m_point.x
+     dy=point.z-m_point.z
+     radians=math.atan2(dy,dx)
+     if(radians)then
+      angle=radians*57
+      if(angle<0)then angle=angle+360 end
+      if(angle>360)then angle=angle-360 end
+     end
+    end
+   end
+  end
+  if dist<=20 then
+   m_s=m_tmp_str.." "..m_str0
+  elseif dist<50 then
+   m_s=m_tmp_str.." возле "..m_str
+  elseif dist<100 then
+   m_s=m_tmp_str.." около "..m_str
+  else --Говорим, куда (север, юг...)
+   if(angle>=330 or angle<=30)then -- на востоке
+    m_s=m_tmp_str.." к востоку от "..m_str
+   elseif(angle>30 and angle<=60)then --северо-восток
+    m_s=m_tmp_str.." к северо-востоку от "..m_str
+   elseif(angle>60 and angle<=120)then --север
+    m_s=m_tmp_str.." к северу от "..m_str
+   elseif(angle>120 and angle<=150)then --северо-запад
+    m_s=m_tmp_str.." к северо-западу от "..m_str
+   elseif(angle>150 and angle<=210)then --запад
+    m_s=m_tmp_str.." к западу от "..m_str
+   elseif(angle>210 and angle<=240)then --юго-запад
+    m_s=m_tmp_str.." к юго-западу от "..m_str
+   elseif(angle>240 and angle<= 300)then --юг
+    m_s=m_tmp_str.." к югу от "..m_str
+   elseif(angle>300 and angle<=330)then --юго-восток
+    m_s=m_tmp_str.." к юго-востоку от "..m_str
+   else
+    m_s=m_tmp_str.." недалеко от "..m_str
+   end
+  end
+ else
+  m_s=m_tmp_str
+ end
+ return m_s
+end
+--Расстояние.
+function get_object_position(obj)
+ local pos=nil
+ if(obj)then
+  if(isGameObject(obj) and obj.position)then
+   pos=obj:position()
+  else
+   pos=obj.position
+  end
+ end
+ return pos
+end
+--Уровень.
+function get_object_levelname(obj)
+ local mlevel="null"
+ if(obj)then
+  local m_game_vertex
+  local nm="nil"
+  if(obj.name)then
+   nm=obj:name()
+  end
+  if(isGameObject(obj))then
+   m_game_vertex=obj:game_vertex_id()
+  else
+   m_game_vertex=obj.m_game_vertex_id
+  end
+  if(m_game_vertex)then
+   local lvert=game_graph():vertex(m_game_vertex)
+   if(lvert~=nil and lvert.level_id)then
+    local lid=lvert:level_id()
+	if(lid~=nil)then
+	 mlevel=alife():level_name(lid)
+    end
+   end
+   if mlevel==nil then
+    mlevel="nil"
+   end
+  end
+ end
+ return mlevel
+end
+
+
+--Шлём сообщение...
+local tips_icons = {
+	dolg     	= "ui_icon_news_news_dolg",
+	freedom  	= "ui_icon_news_news_svoboda",
+	army     	= "ui_icon_news_news_voen_stalk",
+	stalker  	= "ui_iconsTotal_grouping",
+    killer   	= "ui_icon_news_news_naim",
+    bandit   	= "ui_icon_news_news_bandos",
+	deth	 	= "ui_icon_news_deth",
+	all		 	= "ui_icon_news_all",
+	signal		="ui_inGame2_Istoriya_dolga",
+	surge 		= "ui_inGame2_Vibros",
+	default		="ui_iconsTotal_grouping"
+}
+function send_tip(Msg, header, timeout, showtime, sender, sound,icon_by)
+  if Msg==nil then return end
+  if header==nil then header=game.translate_string("st_tip") end
+  if timeout == nil then timeout = 0 end
+  if showtime == nil then showtime = 7 end
+  if sound =="news" then
+  player=sound_object([[device\pda\pda_tip]])
+  elseif sound == "danger" then
+  player=sound_object([[device\pda\pda_alarm]])
+  elseif sound == nil then
+  player=sound_object([[device\pda\pda_tip]])
+  end
+  player:play(db.actor,timeout,sound_object.s2d)
+  
+  if icon_by=="gr" then
+  ui_sender = tips_icons[sender]  --если иконка из таблицы
+  elseif  icon_by=="npc" then
+  ui_sender = sender  -- иконка Npc
+  elseif icon_by==nil then
+  ui_sender = tips_icons[sender]  --если иконка из таблицы
+  end
+  
+ if sender == nil then
+  sender = "default"
+ end
+
+  local text = "%c[default]"..Msg
+  if db.actor and ui_sender then
+	db.actor:give_game_news(header, game.translate_string(text), ui_sender, timeout*1000, showtime*1000)
+  end
+  return true
+end
+
+--Табличка для отсечения нпс по story_id Большое спасибо Charsi за очень ценный совет!
+local StoryId = {
+--Затон
+		zat_b30_owl_stalker_trader_id 	= true,
+		zat_b7_duty_illicit_dealer 		= true,
+		zat_b7_bandit_boss_sultan 		= true,
+		zat_a2_stalker_barmen 			= true,
+		zat_a2_stalker_mechanic 		= true,
+		zat_b22_stalker_medic 			= true,
+		zat_b106_stalker_gonta 			= true,
+		zat_b33_stalker_snag 			= true,
+		zat_b18_noah 					= true,
+		zat_b106_stalker_crab 			= true,
+		zat_b106_stalker_garmata 		= true,
+		zat_cop_id 						= true,
+		zat_b5_dealer_assistant_1 		= true,
+		zat_b5_dealer_assistant_2 		= true,
+		zat_b5_talk_to_sultan_id 		= true,
+		zat_b20_noah_teleport 			= true,
+		zat_b20_actor 					= true,
+		zat_b215_stalker_guide_zaton 	= true,
+		zat_b100_actor 					= true,
+		zat_b5_actor_with_bandits 		= true,
+		zat_b5_actor_with_dealer 		= true,
+		zat_a2_stalker_nimble_id		= true,
+		zat_b5_talk_to_sultan_id		= true,
+--Юпитер
+		jup_a12_stalker_assaulter  						= true,
+		jup_a12_stalker_diplomat 						= true,
+		jup_a12_stalker_prisoner 						= true,
+		jup_a10_stalker_vano 							= true,
+		jup_b6_scientist_biochemist 					= true,
+		jup_b6_scientist_nuclear_physicist 				= true,
+		jup_b217_stalker_tech 							= true,
+		jup_b220_trapper 								= true,
+		jup_b4_monolith_squad_leader_monolith_skin 		= true,
+		jup_b4_monolith_squad_leader_duty_skin 			= true,
+		jup_b4_monolith_squad_leader_freedom_skin 		= true,
+		jup_b6_scientist_tech 							= true,
+		jup_b25_stalker_senya 							= true,
+		jup_b25_freedom_flint 							= true,
+		jup_b25_stalker_senya 							= true,
+		jup_b10_stalker_drunk 							= true,
+		jup_a6_stalker_medik 							= true,
+		jup_b15_zulus 									= true,
+		jup_b202_stalker_snag 							= true,
+		jup_a6_stalker_barmen 							= true,
+		jup_b19_freedom_yar 							= true,
+		jup_b43_stalker_assistant 						= true,
+		jup_b43_stalker_assistant_pri 					= true,
+		jup_a6_freedom_leader 							= true,
+		jup_a6_duty_leader 								= true,
+		jup_b218_vano_in_suit 							= true,
+		jup_b219_actor 									= true,
+		jup_b219_stalker_tech_id 						= true,
+		jup_b219_monolith_squad_leader_freedom_skin_id 	= true,
+		jup_b219_vano_id 								= true,
+		jup_b219_soldier_id 							= true,
+		jup_b219_zulus_id 								= true,
+		jup_a9_actor 									= true, 
+		jup_b4_monolith_squad_leader_freedom_mon_skin 	= true,
+		jup_b4_monolith_squad_leader_duty_mon_skin 		= true,
+		zat_b215_stalker_guide_jupiter 					= true,
+-- Подземка
+			pas_b400_vano 		= true,
+			pas_b400_sokolov 	= true,
+			pas_b400_zulus 		= true,
+			pas_b400_wanderer 	= true,
+			
+--Приптять
+		pri_a17_military_colonel_kovalski 		= true,
+		pri_a17_military_captain_tarasov 		= true,
+		pri_a17_military_prapor_valentyr 		= true,
+		pri_a17_military_sergeant_morozov 		= true,
+		pri_a17_military_lieutenant_podorojniy 	= true,
+		pri_a20_cutscene_actor_squad 			= true,
+		pri_a18_cutscene_actor 					= true,
+		pri_a21_chasovoi_target 				= true,
+		pri_a21_cutscene_actor 					= true,
+		pri_a22_military_yarmoshuk 				= true,
+		pri_a22_military_skelja 				= true,
+		pri_a22_military_merkulov 				= true,
+		pri_a22_cutscene_actor_give_task 		= true,
+		pri_a22_cutscene_actor_find_squad 		= true,
+		pri_a25_base_medic 						= true,
+		pri_a25_cutscene_actor 					= true,
+		pri_b306_envoy 							= true,
+		pri_a15_actor 							= true,
+		pri_a22_army_signaller 					= true,
+		pri_b305_actor_visual 					= true,
+		pri_b305_actor_visual_2 				= true,
+		pri_b305_actor_visual_3 				= true,
+		pri_b305_actor_visual_4 				= true,
+		pri_b305_actor_visual_5 				= true,
+		pri_b305_strelok 						= true,
+		pri_b305_signal_man 					= true,
+		pri_a28_evac_com 						= true,
+		pri_a28_cutscene_commander 				= true,
+		pri_a28_cutscene_strelok 				= true,
+		pri_a28_cutscene_actor 					= true,
+		pri_a28_cutscene_actor_base 			= true
+}
+--Проверка по story_id
+function ValNpc(obj)
+local obj_id = obj:id()
+local ObjStoryId = get_object_story_id(obj_id)
+if StoryId[ObjStoryId] then
+return StoryId[ObjStoryId]
+end
+end
+
+--записываем переменную
+function save_variable(variable_name, value)
+  if value==nil then
+    del_variable(variable_name)
+  else
+    local vn=compress_name(variable_name)
+ xr_logic.pstor_store(db.actor, vn, value)
+  end
+end
+--загружаем переменную
+function load_variable(variable_name, value_if_not_found)
+  local vn=compress_name(variable_name)
+return xr_logic.pstor_retrieve(db.actor, vn, value_if_not_found)
+end
+--удаляем переменную
+function del_variable(variable_name)
+  local vn=compress_name(variable_name)
+  if db.storage[db.actor:id()].pstor[vn] then
+    db.storage[db.actor:id()].pstor[vn] = nil
+  end
+end
+-- Преобразует имя переменной в короткое
+function compress_name(name)
+  return name
+end
+--[[
+Dinamic News COP 1.02 для SGM 2.2 + lasted Fix
+Автор: VanoSanturi (Vano_Santuri)  17.03.12 
+]]

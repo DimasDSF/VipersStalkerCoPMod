@@ -1,0 +1,203 @@
+--Библиотека функций
+
+--Первый запуск мода, потом все таймеры будут из п_стора актора.
+function FirstRun() 
+	if load_variable("x_first_run",true) then
+	g_start_timer("show_status_news_offline",math.random(0,1),math.random(1,11),0) --math.random(0,1)
+	g_start_timer("show_surge_news",0,math.random(3,4),0)
+	save_variable("x_first_run",false)
+	end
+	g_start_timer("show_deth_news",0,0,math.random(10,15))
+	VS_send_news.PDAStatus() --Статус сигнала.
+end 
+
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ТАЙМЕР\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--старт таймера в реальном времени
+function start_timer(name,delay,action)
+  if not delay then
+    return false
+  end
+  
+  if not action then
+    action = ""
+  end
+
+    local time = game.time() --time in seconds since 1970
+  local a=1
+  while db.storage[db.actor:id()].pstor["xt"..a] do
+    a=a+1
+    if a>100 then 
+      return false 
+    end
+  end
+  save_variable("xt"..a, name)
+  save_variable("xd"..a, time+delay*1000*system_ini():r_float("alife","time_factor"))
+  save_variable("xp"..a, action)
+
+  return true
+end
+--старт таймера в игровом времени
+function g_start_timer(name,delay_d,delay_h,delay_m,action)
+    local time = level.get_time_days()*60*24+level.get_time_hours()*60+level.get_time_minutes()  --time in game minutes
+  if delay_d==nil or delay_h==nil or delay_m==nil then
+    return false
+  end
+  
+  if action==nil then
+    action = ""
+  end
+
+  local a=1
+  while db.storage[db.actor:id()].pstor["gt"..a] do
+    a=a+1
+    if a>100 then 
+      return false 
+    end
+  end
+
+  save_variable("gt"..a, name)
+  save_variable("gd"..a, time+delay_d*60*24+delay_h*60+delay_m)
+  save_variable("gp"..a, action)
+
+  return true
+end
+function has_timer(name)
+  for a=1,100,1 do
+    tmp=load_variable("xt"..a,nil)
+    if tmp and tmp==name then
+      return true
+    end
+  end  
+  return false
+end
+function has_g_timer(name)
+  for a=1,100,1 do
+    tmp=load_variable("gt"..a,nil)
+    if tmp and tmp==name then
+      return true
+    end
+  end  
+  return false
+end
+function convert_timers()
+  if load_variable("tmcv",true) then
+    for a=1,100,1 do
+      tmp=load_variable("x_timer_"..a,nil)
+      if tmp~=nil then
+        local name,delay,params=tmp,load_variable("x_timer_"..a.."_delay",0),load_variable("x_timer_"..a.."_params","")
+        del_variable("x_timer_"..a)
+        del_variable("x_timer_"..a.."_delay")
+        del_variable("x_timer_"..a.."_params")
+        save_variable("xt"..a,name)
+        save_variable("xd"..a,delay)
+        save_variable("xp"..a,params)
+      end
+    end
+    for a=1,100,1 do
+      tmp=load_variable("x_gtimer_"..a,nil)
+      if tmp~=nil then
+        local name,delay,params=tmp,load_variable("x_gtimer_"..a.."_delay",0),load_variable("x_gtimer_"..a.."_params","")
+        del_variable("x_gtimer_"..a)
+        del_variable("x_gtimer_"..a.."_delay")
+        del_variable("x_gtimer_"..a.."_params")
+        save_variable("gt"..a,name)
+        save_variable("gd"..a,delay)
+        save_variable("gp"..a,params)
+      end
+    end
+    save_variable("tmcv",false)
+  end
+end
+
+--проверка таймеров, использует 3 следующие за ним функции для выбора действия
+function check_timers()
+  local tmp
+  for a=1,100,1 do
+    tmp=load_variable("xt"..a,nil)
+    if tmp~=nil then
+      __timer_found(a)  
+    end
+  end  
+  for a=1,100,1 do
+    tmp=load_variable("gt"..a,nil)
+    if tmp~=nil then
+      __g_timer_found(a)  
+    end
+  end
+end
+function __timer_found(idx)
+    local time = game.time() 
+  local name,params
+  if load_variable("xd"..idx, nil)<=time then
+    name=load_variable("xt"..idx, nil)
+    params=load_variable("xp"..idx, nil)
+    del_variable("xt"..idx)
+    del_variable("xd"..idx)
+    del_variable("xp"..idx)
+		oau_reason=name.." "..params
+    __do_timer_action(name,params)
+    return true
+  end
+  return false
+end
+function __g_timer_found(idx)
+    local gtime = level.get_time_days()*60*24+level.get_time_hours()*60+level.get_time_minutes()  --time in game minutes
+  local name,params
+  if load_variable("gd"..idx, nil)<=gtime then
+    name=load_variable("gt"..idx, nil)
+    params=load_variable("gp"..idx, nil)
+    del_variable("gt"..idx)
+    del_variable("gd"..idx)
+    del_variable("gp"..idx)
+		oau_reason=name.." "..params
+    __do_timer_action(name,params)
+    return true
+  end
+  return false
+end
+function __do_timer_action(select_string,params_string)
+if select_string=="show_deth_news" then
+VS_send_news.oNews() -- Вызываем новость.(Alfe)
+g_start_timer("show_deth_news",0,0,math.random(10,15))
+end
+if select_string=="show_status_news_offline" then
+VS_send_news.PDAROffline() -- Вызываем новость.(ROffline)
+g_start_timer("random_offline_timer",0,math.random(1,3),0)
+end
+if select_string=="random_offline_timer" then
+VS_send_news.PDAROfflineOnline() -- Вызываем новость.(ROfflineOnline)
+g_start_timer("show_status_news_offline",math.random(0,1),math.random(1,11),0) --math.random(0,1)
+end
+if select_string=="show_surge_news" then
+VS_surge_news.SendSurgeNews() -- Вызываем новость.(Surge)
+g_start_timer("show_surge_news",0,math.random(3,4),0)
+end
+end
+
+
+--\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ПЕРЕМЕННЫЕ в ХРАНИЛИЩЕ\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+--записываем переменную
+function save_variable(variable_name, value)
+  if value==nil then
+    del_variable(variable_name)
+  else
+    local vn=compress_name(variable_name)
+ xr_logic.pstor_store(db.actor, vn, value)
+  end
+end
+--загружаем переменную
+function load_variable(variable_name, value_if_not_found)
+  local vn=compress_name(variable_name)
+return xr_logic.pstor_retrieve(db.actor, vn, value_if_not_found)
+end
+--удаляем переменную
+function del_variable(variable_name)
+  local vn=compress_name(variable_name)
+  if db.storage[db.actor:id()].pstor[vn] then
+    db.storage[db.actor:id()].pstor[vn] = nil
+  end
+end
+-- Преобразует имя переменной в короткое
+function compress_name(name)
+  return name
+end

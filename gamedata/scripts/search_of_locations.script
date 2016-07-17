@@ -1,0 +1,143 @@
+--Lotions from Vergas----------------------------
+-- разведка объектов на локации
+-----------------------------------------------------
+local primary_objects_tbl
+local value_if_not_found
+local time_find
+local delta_time = 6
+local zone_radius = 50	--100
+
+function fill_primary_objects()
+	local find_tmp = {}
+	primary_objects_tbl =
+	{
+	{target="zat_b55_spot",		hint="st_zat_b55_name",		find=0},
+	{target="zat_b100_spot",	hint="st_zat_b100_name",	find=0},
+	{target="zat_b104_spot",	hint="st_zat_b104_name",	find=0},
+	{target="zat_b38_spot",		hint="st_zat_b38_name",		find=0},
+	{target="zat_b40_spot",		hint="st_zat_b40_name",		find=0},
+	{target="zat_b56_spot",		hint="st_zat_b56_name",		find=0},
+	{target="zat_b5_spot",		hint="st_zat_b5_name",		find=0},
+	{target="zat_a2_spot",		hint="st_zat_a2_name",		find=0},
+	{target="zat_b20_spot",		hint="st_zat_b20_name",		find=0},
+	{target="zat_b53_spot",		hint="st_zat_b53_name",		find=0},
+	{target="zat_b101_spot",	hint="st_zat_b101_name",	find=0},
+	{target="zat_b106_spot",	hint="st_zat_b106_name",	find=0},
+	{target="zat_b7_spot",		hint="st_zat_b7_name",		find=0},
+	{target="zat_b14_spot",		hint="st_zat_b14_name",		find=0},
+	{target="zat_b52_spot",		hint="st_zat_b52_name",		find=0},
+	{target="zat_b39_spot",		hint="st_zat_b39_name",		find=0},
+	{target="zat_b33_spot",		hint="st_zat_b33_name",		find=0},
+	{target="zat_b18_spot",		hint="st_zat_b18_name",		find=0},
+	{target="zat_b54_spot",		hint="st_zat_b54_name",		find=0},
+	{target="zat_b12_spot",		hint="st_zat_b12_name",		find=0},
+	{target="zat_b28_spot",		hint="st_zat_b28_name",		find=0},
+	{target="zat_b103_spot",	hint="st_zat_b103_name",	find=0},
+
+	{target="jup_b1_spot",		hint="st_jup_b1_name",		find=0},
+	{target="jup_b46_spot",		hint="st_jup_b46_name",		find=0},
+	{target="jup_b202_spot",	hint="st_jup_b202_name",	find=0},
+	{target="jup_b211_spot",	hint="st_jup_b211_name",	find=0},
+	{target="jup_b200_spot",	hint="st_jup_b200_name",	find=0},
+	{target="jup_b19_spot",		hint="st_jup_b19_name",		find=0},
+	{target="jup_a6_spot",		hint="st_jup_a6_name",		find=0},
+	{target="jup_b25_spot",		hint="st_jup_b25_name",		find=0},
+	{target="jup_b6_spot",		hint="st_jup_b6_name",		find=0},
+	{target="jup_b205_spot",	hint="st_jup_b205_name",	find=0},
+	{target="jup_b206_spot",	hint="st_jup_b206_name",	find=0},
+	{target="jup_b32_spot",		hint="st_jup_b32_name",		find=0},
+	{target="jup_a10_spot",		hint="st_jup_a10_name",		find=0},
+	{target="jup_b209_spot",	hint="st_jup_b209_name",	find=0},
+	{target="jup_b208_spot",	hint="st_jup_b208_name",	find=0},
+	{target="jup_a12_spot",		hint="st_jup_a12_name",		find=0},
+	{target="jup_b212_spot",	hint="st_jup_b212_name",	find=0},
+	{target="jup_b9_spot",		hint="st_jup_b9_name",		find=0},
+	{target="jup_b201_spot",	hint="st_jup_b201_name",	find=0},
+	{target="jup_a9_spot",		hint="st_jup_a9_name",		find=0},
+
+	{target="pri_a28_spot",		hint="st_pri_a28_name",		find=0},
+	{target="pri_b36_spot",		hint="st_pri_b36_name",		find=0},
+	{target="pri_b303_spot",	hint="st_pri_b303_name",	find=0},
+	{target="pri_b301_spot",	hint="st_pri_b301_name",	find=0},
+	{target="pri_a17_spot",		hint="st_pri_a17_name",		find=0},
+	{target="pri_b306_spot",	hint="st_pri_b306_name",	find=0},
+	{target="pri_a16_spot",		hint="st_pri_a16_name",		find=0},
+	{target="pri_a25_spot",		hint="st_pri_a25_name",		find=0},
+	{target="pri_b35_spot",		hint="st_pri_b35_name",		find=0},
+	{target="pri_a21_spot",		hint="st_pri_a21_name",		find=0},
+	{target="pri_b304_spot",	hint="st_pri_b304_name",	find=0},
+	{target="pri_a18_spot",		hint="st_pri_a18_name",		find=0}
+	}
+	
+	--заполн€ю переменную value_if_not_found
+	value_if_not_found = ""
+	for i = 1,54 do
+		if i<54 then
+			value_if_not_found = value_if_not_found.."0|"
+		else
+			value_if_not_found = value_if_not_found.."0"
+		end
+	end
+	
+	find_tmp = vergas_lib.str_explode("|",vergas_lib.load_variable("find_locations", value_if_not_found),true)
+	vergas_lib.del_variable("find_locations")
+	--дополн€ю таблицу объектов
+	for i = 1,table.getn(primary_objects_tbl) do
+		primary_objects_tbl[i].find = tonumber(find_tmp[i])
+	end
+	
+	--ставлю метки на карте
+	for k,v in pairs(primary_objects_tbl) do
+		local obj_id = get_story_object_id(v.target)
+		if(obj_id) then
+			if(obj_id and db.storage[obj_id] and db.storage[obj_id].object) then
+				if v.find == 1 and level.map_has_object_spot(obj_id, v.hint)==0 then
+					level.map_add_object_spot(obj_id, "primary_object", v.hint)
+				end
+			end
+		end
+	end
+	time_find = time_global()/1000
+end
+
+function find_primary_objects()
+	local current_time = time_global()/1000
+	if current_time - time_find < delta_time then
+		return
+	end
+	time_find = current_time
+	for k,v in pairs(primary_objects_tbl) do
+		if v.find == 0 then 
+			local obj_id = get_story_object_id(v.target)
+			if(obj_id) then
+				if(obj_id and db.storage[obj_id] and db.storage[obj_id].object) then
+					if (db.storage[obj_id].object:position():distance_to(db.actor:position())<=zone_radius and level.map_has_object_spot(obj_id, v.hint)==0) then
+						level.map_add_object_spot(obj_id, "primary_object", v.hint)
+						v.find = 1
+						send_new_object(game.translate_string(v.hint))
+					end
+				end
+			end	
+		end
+	end
+end
+
+function send_new_object(news_content)
+	local news_caption
+	news_caption = game.translate_string("st_mr_Dektyarev")
+	news_content = "Ќайден новый объект района: "..news_content
+	xr_sound.set_sound_play(db.actor:id(), "pda_tips")
+	db.actor:give_game_news(news_caption, news_content, "ui_inGame2_PD_Svoy_paren", 0, 5000)
+end
+
+function save_primary_objects()
+	local str = ""
+	for i = 1,table.getn(primary_objects_tbl) do
+		if i<54 then
+			str = str..tostring(primary_objects_tbl[i].find).."|"
+		else
+			str = str..tostring(primary_objects_tbl[i].find)
+		end
+	end
+	vergas_lib.save_variable("find_locations", str)
+end

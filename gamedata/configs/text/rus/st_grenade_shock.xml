@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<string_table>
+	<string id="st_grenade_shock">
+		<text>Электрошоковая граната</text>
+	</string>
+	<string id="st_grenade_shock_descr">
+		<text>Электрошоковая граната. Радиус поражения 6 метров.</text>
+	</string>
+</string_table>

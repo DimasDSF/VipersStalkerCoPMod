@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<string_table>
+
+   <string id="sleep_not_time_skad">
+		<text>Необходимо арендовать кровать у Бороды, для того чтобы поспать.</text>
+	</string>
+    <string id="sleep_not_time_jan">
+		<text>Необходимо арендовать кровать у Гавайца, для того чтобы поспать.</text>
+	</string>
+
+</string_table>

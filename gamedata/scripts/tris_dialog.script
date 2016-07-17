@@ -1,0 +1,10 @@
+
+--\\ Проверка на наличие денег:
+function proverka_na_money_450(actor,npc)
+   return db.actor:money()>=450
+end
+
+--\\ Функция удаления денег:
+function del_money_450(actor,npc)
+   dialogs.relocate_money(npc,450,"out")
+end

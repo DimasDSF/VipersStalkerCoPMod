@@ -1,0 +1,76 @@
+[rx_list_script_sound]
+gl_fire
+knife_attack
+npc_death
+npc_hit
+friendly_fire
+friendly_grenade
+kill_wounded
+
+[gl_fire]
+type = npc
+npc_prefix = true
+path = fight\fire\fire_
+avail_communities = stalker, dolg, freedom, army, monolith ;, csky
+shuffle = rnd
+idle = 0,0,100
+is_combat_sound = true
+dont_save = true
+
+[knife_attack]
+type = npc
+npc_prefix = true
+path = fight\threat\threat_close_
+avail_communities = stalker, dolg, freedom, army, monolith ;, csky
+shuffle = rnd
+idle = 4,12,100
+is_combat_sound = true
+dont_save = true
+
+[npc_death]
+type = npc
+npc_prefix = true
+path = fight\death\death_
+shuffle = rnd
+idle = 0,0,100
+is_combat_sound = true
+dont_save = true
+
+[npc_hit]
+type = npc
+npc_prefix = true
+path = fight\hit\hit_
+shuffle = rnd
+idle = 0,0,100
+is_combat_sound = true
+dont_save = true
+
+[friendly_fire]
+type = npc
+npc_prefix = true
+path = fight\friendly_fire\friendly_fire_
+shuffle = rnd
+idle = 0,0,100
+is_combat_sound = true
+dont_save = true
+
+[friendly_grenade]
+type = npc
+npc_prefix = true
+path = fight\friendly_grenade\friendly_grenade_
+avail_communities = stalker, bandit, dolg, freedom, army, killer ;, csky
+shuffle = rnd
+idle = 0,0,100
+is_combat_sound = true
+dont_save = true
+
+[kill_wounded]
+type = npc
+;actor_stereo = false
+npc_prefix = true
+path = help\wounded\kill_wounded_
+shuffle = rnd
+idle = 0,0,100
+;is_combat_sound = true
+dont_save = true
+

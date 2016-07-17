@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<string_table>
+	<string id="mutant_boar_leg">
+		<text>Копыто кабана</text>
+	</string>
+	<string id="mutant_boar_leg_description">
+		<text>Копыто кабана используется учеными для изготовления ряда лекарств, самым распространенным из которых является противорадиационная сыворотка.</text>
+	</string>
+	<string id="mutant_dog_tail">
+		<text>Хвост собаки</text>
+	</string>
+	<string id="mutant_dog_tail_description">
+		<text>Устойчивость кожи мутировавших собак к химическому и электрическому воздействую давно обратила на себя внимание ученых. Из-за отсутствия жировых отложений хвосты собак наиболее подходят для лабораторных исследований.</text>
+	</string>
+	<string id="mutant_flesh_eye">
+		<text>Глаз плоти</text>
+	</string>
+	<string id="mutant_flesh_eye_description">
+		<text>После мутации увеличенный глаз плоти приобрел ряд свойств, самым полезным из которых является способность к регенерации хрусталика. Детали этого механизма точно неизвестны, но это открытие обещает революцию в медицине. Вы можете внести свой вклад в науку, продав глаз плоти ученым для исследований.</text>
+	</string>
+	<string id="mutant_krovosos_jaw">
+		<text>Щупальца кровососа</text>
+	</string>
+	<string id="mutant_krovosos_jaw_description">
+		<text>Щупальца кровососа содержат особую железу: она выделяет фермент, растворяющий кожу жертвы, и одновременно препятствующий сворачиванию крови. Если ученым удастся определить структуру фермента, это поможет осуществить прорыв в медицине.</text>
+	</string>
+	<string id="mutant_psevdodog_tail">
+		<text>Хвост псевдособаки</text>
+	</string>
+	<string id="mutant_psevdodog_tail_description">
+		<text>Устойчивость кожи мутировавших собак к химическому и электрическому воздействую давно обратила на себя внимание ученых. Из-за отсутствия жировых отложений хвосты собак наиболее подходят для лабораторных исследований.</text>
+	</string>
+	<string id="mutant_snork_leg">
+		<text>Стопа снорка</text>
+	</string>
+	<string id="mutant_snork_leg_description">
+		<text>Стопа снорка в отличие от человеческой содержит большее количество сухожилий, обладающих потрясающей эластичностью. Этим объясняется способность снорков совершать невероятные прыжки.</text>
+	</string>
+	
+	<string id="boar_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать копыта кабана.</text>
+	</string>
+	<string id="krovosos_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать щупальца кровососа.</text>
+	</string>
+	<string id="dog_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать хвост собаки.</text>
+	</string>
+	<string id="psevdodog_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать хвост псевдособаки.</text>
+	</string>
+	<string id="flesh_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать глаз плоти.</text>
+	</string>
+	<string id="snork_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать стопы снорка.</text>
+	</string>
+	<string id="monstr_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать часть монстра.</text>
+	</string>
+		<string id="tre_ruck">
+		<text>Пустой рюкзак</text>
+	</string>
+	<string id="tre_ruck_s">
+		<text>Пустой рюкзак</text>
+	</string>
+	<string id="enc_tre_ruck">
+		<text>Походный рюкзак из прорезиненной камуфляжной ткани, не промокает и слабозаметен, поэтому идеально подходит для закладки своего тайника в каком-нибудь в укромном месте.</text>
+	</string>	
+	
+</string_table>

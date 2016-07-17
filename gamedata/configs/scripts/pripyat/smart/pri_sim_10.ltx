@@ -1,0 +1,14 @@
+[smart_terrain]
+squad_id = 32
+max_population = 1
+;respawn_only_smart = true
+respawn_params = respawn@pri_sim_10
+respawn_time     =  200 
+respawn_radius   =  90
+
+[respawn@pri_sim_10]
+sim_bloodsucker
+
+[sim_bloodsucker]
+spawn_squads = simulation_duty, simulation_freedom, simulation_zombied_1, simulation_gigant
+spawn_num = 1

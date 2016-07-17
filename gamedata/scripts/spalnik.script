@@ -1,0 +1,36 @@
+--[[
+File:  spalnik.script
+rev: 12/10/09.01
+Обработчик для спальника
+]]
+
+-- функции АМК
+function spawn_item_in_inv(spawn_item, npc)
+  if npc==nil then 
+    npc=db.actor 
+  end
+  return alife():create(spawn_item, 
+      npc:position(),
+      npc:level_vertex_id(),  
+      npc:game_vertex_id(),
+      npc:id())
+end
+
+-- функции спальника
+function use(s_obj)
+	if not s_obj then return end
+	if (surge_manager.actor_in_cover()) then
+		ui_sleep_dialog.sleep()
+		give_info("sleep_active")
+	else
+		news_manager.send_tip(db.actor, game.translate_string("st_spalnik_nosleep"))
+	end
+	
+	spawn_item_in_inv("spalnik")
+end
+
+function use_inventory_item(s_obj)
+	if s_obj and s_obj.section_name and s_obj:section_name()=="spalnik" then 
+		use(s_obj)
+	end
+end

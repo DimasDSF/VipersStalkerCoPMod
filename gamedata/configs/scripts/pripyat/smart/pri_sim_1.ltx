@@ -1,0 +1,20 @@
+[smart_terrain]
+squad_id = 10
+max_population = 1
+respawn_params = respawn@pri_sim_1
+arrive_dist = 100
+respawn_time     =  200 
+respawn_radius   =  90
+
+[respawn@pri_sim_1]
+spawn_monolith
+sm_spawn_sim
+
+[spawn_monolith]
+spawn_squads =  monolith_sim_squad_advanced, monolith_sim_squad_advanced, monolith_sim_squad_veteran
+spawn_num = 1
+
+
+[sm_spawn_sim]
+spawn_squads = simulation_duty, simulation_zombied_1, simulation_monolith_squad, simulation_bloodsucker, simulation_chimera
+spawn_num = 1
