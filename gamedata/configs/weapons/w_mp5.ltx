@@ -123,7 +123,7 @@ hit_probability_gd_veteran = 0.80
 hit_probability_gd_master  = 0.80
 
 ;-------------------------------------------------------------------------------
-slot              = 1                ; // secondary
+slot              = 2                ; // secondary
 animation_slot    = 8                ; type of the animation that will be used
 inv_name          = st_wpn_mp5               ; name in inventory
 inv_name_short    = st_wpn_mp5
@@ -199,17 +199,13 @@ grenade_launcher_y      = 24
 
 ;------------------------------ S.T.A.L.K.E.R`s sound remake ------------------------------
 ;звуки
-snd_draw			= weapons\mp5\mp5_draw
-snd_holster		= weapons\pistol_holster
-snd_shoot			= weapons\mp5\mp5_shoot 
-snd_shoot1			= weapons\mp5\mp5_shoot1
-snd_shoot2			= weapons\mp5\mp5_shoot2
-snd_shoot3			= weapons\mp5\mp5_shoot3      
-snd_empty			= weapons\mp5\mp5_empty
-snd_reload			= weapons\mp5\mp5_reload
-snd_silncer_shot	= weapons\mp5\mp5_shot_sil
-snd_bore			= weapons\draw_silent
-snd_bore1			= weapons\mp5_bore
+snd_draw					= weapons\mp5\mp5_draw
+snd_holster				= weapons\pistol_holster
+snd_shoot				= weapons\mp5\mp5_shoot 
+snd_empty				= weapons\mp5\mp5_empty
+snd_reload				= weapons\mp5\mp5_reload
+snd_silncer_shot				= weapons\mp5\mp5_shot_sil
+snd_bore 					= $no_sound
 ;------------------------------------------------------------------------------------------
 
 ;silencer_flame_particles  = weapons\generic_weapon01
@@ -228,32 +224,35 @@ zoom_hide_crosshair     = true
 attach_place_idx        = 0
 item_visual             = dynamics\weapons\wpn_mp5\wpn_mp5_hud.ogf
 
-hands_position				= -0.106500,-0.162000,0.113001
-hands_orientation			= -6.700007,-0.800001,-5.400002
-hands_position_16x9				= -0.100500,-0.191500,0.135500
-hands_orientation_16x9			= -3.999999,3.199998,-6.000006
+hands_position				= 0.01,-0.03,0.22
+hands_orientation				= 2,2,0
 
-item_position				= 0.014173,-0.001619,-0.004513
-item_orientation			= 4.899572,0.078592,366.138245
+hands_position_16x9			= 0.01,-0.03,0.22
+hands_orientation_16x9			= 2,2,0
 
-shell_point             = 0.021,0.099,0.286
-shell_dir               = 0.0, 1.0, 0.0
-shell_bone              = wpn_body
+item_position				= 0,0,0
+item_orientation				= 0,0,0
 
-fire_point				= 0,0.068,0.439
-fire_bone               = wpn_body
-fire_point2			= -0.030000,0.074500,-0.037000
-fire_bone2                = wpn_body
+shell_point				= 0,0,0
+shell_dir       				= 0,1,0
+shell_bone				= gilza
 
-anm_show                     = mp5_draw
-anm_hide                     = mp5_holster
-anm_idle                     = mp5_idle
-anm_idle_sprint         = mp5_idle_sprint
-anm_idle_moving         = mp5_idle_moving
-anm_shots               = mp5_shoot
-anm_reload              = mp5_reload
-anm_idle_aim            = mp5_idle_aim
-anm_bore                = mp5_idle_bore
+fire_point				= 0,0,0
+fire_bone      				= muzzle
+fire_point2				= 0,0,0
+fire_bone2				= wpn_body
+
+anm_show              	  		= mp5_draw
+anm_hide                			= mp5_holster
+anm_idle                				= mp5_idle
+anm_idle_sprint         			= mp5_idle_sprint
+anm_idle_moving         			= mp5_idle_moving
+anm_idle_moving_crouch			= mp5_idle_crouch
+anm_shots               			= mp5_shoot, shoot
+anm_reload              			= mp5_reload_empty, reload_empty ;mp5_reload, reload
+anm_reload_empty			= mp5_reload_empty, reload_empty
+anm_idle_aim            			= mp5_idle_aim
+anm_bore                			= mp5_idle_aim
 
 ;anm_switch              = mp5_switch_off ;mp5_switch_off
 ;anm_switch_g            = mp5_switch_on ;mp5_switch_on
@@ -280,11 +279,11 @@ anm_bore                = mp5_idle_bore
 ;anm_bore_g                                        = mp5_idle_bore_grenade
 
 
-aim_hud_offset_pos				= -0.080500,0.002500,-0.018000
-aim_hud_offset_rot				= -0.035000,-0.032500,0.010000
+aim_hud_offset_pos			= -0.0854,0.05575,-0.02
+aim_hud_offset_rot			= 0.0351,0.0348,0
 
-aim_hud_offset_pos_16x9				= -0.088000,0.037500,0.029000
-aim_hud_offset_rot_16x9				= 0.035000,0.015000,-0.017500
+aim_hud_offset_pos_16x9 			= -0.0854,0.05575,-0.02
+aim_hud_offset_rot_16x9 			= 0.0351,0.0348,0
 
 gl_hud_offset_pos       	= 0,0,0;-0.053000,-0.059000,0.000000
 gl_hud_offset_rot       	= 0,0,0;-0.145000,0.000000,0.000000

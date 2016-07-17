@@ -190,7 +190,7 @@ end
 
 function actor_binder:use_inventory_item(obj)
 	if(obj) then
-		local s_obj = alife():object(obj:id())
+	  local s_obj = alife():object(obj:id())
 		if(s_obj) and (s_obj:section_name()=="drug_anabiotic") then
 			xr_effects.disable_ui_only(db.actor, nil)
 			level.add_cam_effector("camera_effects\\surge_02.anm", 10, false, "bind_stalker.anabiotic_callback")

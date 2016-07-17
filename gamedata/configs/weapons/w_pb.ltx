@@ -172,13 +172,11 @@ scope_zoom_factor	    		= 85
 ;звуки
 snd_draw					= weapons\pm\pm_draw
 snd_holster				= weapons\pistol_holster
-snd_shoot					= weapons\pb\pb_shoot
-snd_shoot1					= weapons\pb\pb_shoot1
-snd_shoot2					= weapons\pb\pb_shoot2
-snd_shoot3					= weapons\pb\pb_shoot3
-snd_empty					= weapons\pm\pm_empty
-snd_reload					= weapons\pm\pm_reload
+snd_shoot				= weapons\pm\pm_shoot   
+snd_empty				= weapons\pm\pm_empty
+snd_reload				= weapons\pm\pm_reload
 snd_close					= weapons\pm\pm_close
+snd_silncer_shot				= weapons\pb\pb_shoot
 ;------------------------------------------------------------------------------------------
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -194,7 +192,6 @@ silencer_y 						= -18
 
 ;silencer_flame_particles 	= weapons\generic_weapon01
 silencer_smoke_particles 	= weapons\generic_shoot_00
-snd_silncer_shot				= weapons\pb\pb_shoot
 silencer_light_color			= 0.6,0.5,0.3
 silencer_light_range			= 0.01
 silencer_light_var_color	= 0.05
@@ -205,10 +202,11 @@ silencer_light_time 			= 0.2
 zoom_hide_crosshair			= true
 
 
-hands_position				= -0.021000,-0.160000,0.002500
-hands_orientation			= -0.500000,1.000000,1.149999
-hands_position_16x9				= 0.033000,-0.189500,0.039000
-hands_orientation_16x9			= 2.349998,2.749999,2.849998
+hands_position				= -0.031,-0.17,0
+hands_orientation				= -0.5,1.,1.15
+
+hands_position_16x9			= -0.031,-0.17,0
+hands_orientation_16x9			= -0.5,1.,1.15
 
 
 ;hands_position				= -0.082500,-0.130500,0.002500
@@ -216,47 +214,42 @@ hands_orientation_16x9			= 2.349998,2.749999,2.849998
 ;hands_position_16x9				= -0.006500,-0.161000,0.039000
 ;hands_orientation_16x9			= -1.350000,0.600000,1.599999
 
-item_position					= 0.000746,-0.000321,0.003479
+item_position				= 0.000746,-0.000321,0.003479
 item_orientation				= 1.239378,-0.134046,-2.052052
 
 item_visual             	= dynamics\weapons\wpn_pb\wpn_pb_hud.ogf
 attach_place_idx				= 0
 
-shell_point						= 0.013,0.04,0.468
-shell_bone              	= wpn_body
+shell_point				= 0,0,0
+shell_bone              			= gilza
 
-fire_point			= 0,0.029,0.284
-fire_bone               	= wpn_body
+fire_point				= 0,0,0
+fire_bone               				= muzzle
 
-anm_show						= pb_draw
-anm_show_empty					= pb_draw, pb_opened
+anm_show				= pb_draw
+anm_show_empty				= pb_draw, opened
+anm_hide            				= pb_holster
+anm_hide_empty				= pb_holster, opened
+		
+anm_idle            				= pb_idle
+anm_idle_empty      			= pb_idle, opened
+anm_shots				= pb_shoot, shoot
+anm_shot_l				= pb_shoot, shoot_last
+anm_idle_aim				= pb_idle_aim
+anm_idle_aim_empty			= pb_idle_aim, opened
+anm_reload				= pb_reload, reload
+anm_reload_empty			= pb_reload_empty, reload_empty
+anm_idle_moving				= pb_idle_moving
+anm_idle_moving_empty			= pb_idle_moving, opened
+anm_idle_moving_crouch			= pb_idle_crouch
+anm_idle_moving_crouch_empty		= pb_idle_crouch, opened
+anm_idle_sprint				= pb_idle_sprint
+anm_idle_sprint_empty			= pb_idle_sprint, opened
+anm_bore				= pb_idle_aim
+anm_bore_empty				= pb_idle_aim, opened
 
-anm_hide             			= pb_holster
-anm_hide_empty             		= pb_holster, pb_opened
-
-anm_idle             			= pb_idle
-anm_idle_empty             		= pb_idle, pb_opened
-
-anm_shots						= pb_shoot
-anm_shot_l						= pb_shoot, pb_open
-
-anm_idle_aim					= pb_idle_aim
-anm_idle_aim_empty				= pb_idle_aim, pb_opened
-
-anm_reload						= pb_reload
-anm_reload_empty				= pb_reload, pb_close
-
-anm_idle_moving 				= pb_idle_moving
-anm_idle_moving_empty 			= pb_idle_moving, pb_opened
-
-anm_idle_sprint					= pb_idle_sprint
-anm_idle_sprint_empty			= pb_idle_sprint, pb_opened
-
-anm_bore						= pb_idle_bore
-anm_bore_empty					= pb_idle_bore, pb_opened
-
-aim_hud_offset_pos				= -0.106000,0.034000,0.003000
-aim_hud_offset_rot				= -0.015000,0.002500,-0.047500
+aim_hud_offset_pos 			= -0.101,0.0449,-0.05
+aim_hud_offset_rot 			= 0.0026,0.0126,-0.015
 
 gl_hud_offset_pos				= 0,0,0
 gl_hud_offset_rot				= 0,0,0
@@ -264,8 +257,8 @@ gl_hud_offset_rot				= 0,0,0
 lean_hud_offset_pos			= 0,0,0
 lean_hud_offset_rot			= 0,0,0
 
-aim_hud_offset_pos_16x9				= -0.167000,0.065500,0.000000
-aim_hud_offset_rot_16x9				= 0.015000,0.055000,-0.022500
+aim_hud_offset_pos_16x9 			= -0.101,0.0449,-0.05
+aim_hud_offset_rot_16x9 			= 0.0026,0.0126,-0.015
 
 ;-----------------------------------------------------------------------------
 ; ”никальные

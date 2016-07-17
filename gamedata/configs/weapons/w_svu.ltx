@@ -198,11 +198,11 @@ scope_y 				= -2
 ;------------------------------ S.T.A.L.K.E.R`s sound remake ------------------------------
 ;звуки
 snd_draw				= weapons\svu\svu_draw
-snd_holster			= weapons\sniper_holster
-snd_shoot				= weapons\svu\svu_shot
-snd_empty				= weapons\ak_empty, 0.5
+snd_holster				= weapons\sniper_holster
+snd_shoot				= weapons\svu\svu_shoot
+snd_empty				= weapons\ak_empty,	0.5
 snd_reload				= weapons\svu\svu_reload
-snd_close				= weapons\generic_close
+snd_silncer_shot				= weapons\svu\svu_shot
 ;------------------------------------------------------------------------------------------
 
 
@@ -212,21 +212,21 @@ attach_place_idx		= 0
 item_visual             = dynamics\weapons\wpn_svu\wpn_svu_hud
 
 
-hands_position				= -0.044500,-0.209998,0.273998
-hands_orientation			= 1.800001,-0.600001,0.200002
+hands_position				= -0.012,-0.17,0.25
+hands_orientation				= 0.55,2.39,0.15
 
-hands_position_16x9				= 0.005000,-0.227498,0.332498
-hands_orientation_16x9			= 3.649998,2.150000,-0.250000
+hands_position_16x9			= -0.012,-0.17,0.25
+hands_orientation_16x9			= 0.55,2.39,0.15
 
-item_position			= 0,0,0
-item_orientation		= 0,0,0
+item_position				= 0,0,0
+item_orientation				= 0,0,0
 
-shell_point				= 0.025,0.05,0.124
-shell_dir               = 0.0, 1.0, 0.0
-shell_bone				= wpn_body
+shell_point				= 0,0,0
+shell_dir               				= 0,1,0
+shell_bone				= gilza
 
-fire_point              = 0.0,0.043,0.495
-fire_bone               = wpn_body
+fire_point					= 0,0,0
+fire_bone               				= muzzle
 
 aim_hud_offset_pos				= -0.071000,0.031999,-0.103000
 aim_hud_offset_rot				= -0.002500,0.020000,0.000000
@@ -240,15 +240,16 @@ gl_hud_offset_rot			= 0,0,0
 lean_hud_offset_pos		= 0,0,0
 lean_hud_offset_rot		= 0,0,0
 
-anm_show						= svu_draw
-anm_hide             	= svu_holster
-anm_shots					= svu_shoot
-anm_reload					= svu_reload
-anm_bore						= svu_idle_bore
-anm_idle             	= svu_idle
+anm_show				= svu_draw
+anm_hide             				= svu_holster
+anm_shots				= svu_shoot, shoot
+anm_reload				= svu_reload_empty, reload_empty
+anm_bore					= svu_idle_aim
+anm_idle             				= svu_idle
 anm_idle_aim				= svu_idle_aim
-anm_idle_moving 			= svu_idle_moving
-anm_idle_sprint			= svu_idle_moving
+anm_idle_moving 				= svu_idle_moving
+anm_idle_moving_crouch			= svu_idle_crouch
+anm_idle_sprint				= svu_idle_sprint
 
 ;-----------------------------------------------------------------------------
 ; Уникальный СВУ2-А

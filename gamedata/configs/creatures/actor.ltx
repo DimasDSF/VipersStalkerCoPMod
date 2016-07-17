@@ -166,17 +166,17 @@ explosion_immunity 		= 1.0
 fire_wound_immunity 	= 1.0
 
 [actor_condition]
-satiety_v				= 0.0000640 	;скорость уменьшения сытости со временем
+satiety_v				= 0.0000540 	;скорость уменьшения сытости со временем
 radiation_v				= 0.0	;скорость уменьшения радиации
 satiety_power_v			= 0.005		;увеличение силы при уменьшении сытости
-satiety_health_v		= 0.0001    ;увеличение здоровья при уменьшении сытости
+satiety_health_v		= 0.00005    ;увеличение здоровья при уменьшении сытости
 satiety_critical		= 0.4       ;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
 radiation_health_v		= 0.002     ;уменьшение здоровья при воздействии радиации
 morale_v				= 0.0001	;скорость восстановления морали
 psy_health_v			= 0.001		;скорость восстановления psy-здоровья
 alcohol_v				= -0.0003
 health_hit_part			= 1.0		;процент хита, уходящий на отнимание здоровья
-power_hit_part			= 0.1		;процент хита, уходящий на отнимание силы
+power_hit_part			= 0.4		;процент хита, уходящий на отнимание силы
 max_power_leak_speed	= 0.0		;накопление усталости (макс граница, до которой восстанавливается сила) в секунду игрового времени
 max_walk_weight			= 55
 
@@ -213,7 +213,7 @@ walk_power              = 0.00002  ;0.000012                                ;уме
 walk_weight_power       = 0.00015   ;0.0001;                        ;умешьшение силы за секнду во время ходьбы с учетом веса ноши, для максимального допустимого веса
 overweight_walk_k       = 20			;18        ;10                                ;коэффициент влияние перегрузки ноши (умножается на walk_weight_power)
 accel_k                 = 3			;5                                        ;коэффициент на бег (умножается walk_power, walk_weight_power)
-sprint_k                = 6 ;75        ;коэффициент на "sprint" бег (умножается walk_power, walk_weight_power)
+sprint_k                = 8 ;75        ;коэффициент на "sprint" бег (умножается walk_power, walk_weight_power)
 
 ; хромота
 limping_health_begin =        0.4                ;порог здоровья меньше которого актер начинает хромать
@@ -344,28 +344,32 @@ wound_2              =actor\hurt1,actor\hurt2,actor\hurt3,actor\hurt4
 light_burn           =actor\pain1,actor\pain2,actor\pain3
 
 [actor_hud]
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_01
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_sviter
 
-position                = -0.044000,-0.156000,0.100000
-orientation             = -0.500000,1.000000,-2.000000
+position                = -0.044,-0.156,0.1
+orientation             = -0.5,1.0,-2.0
 
 
 ancor_0        = lead_gun ;r_hand
 ancor_1        = l_hand
 
+[actor_hud_00]:actor_hud
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_stalker
 [actor_hud_01]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_01
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_novice
 [actor_hud_02]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_02
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_dolg
 [actor_hud_03]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_03
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_svoboda
 [actor_hud_04]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_04
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_cs_heavy
 [actor_hud_05]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_05
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_sviter
 [actor_hud_06]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_06
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_specops
 [actor_hud_07]:actor_hud
-visual         			= dynamics\weapons\wpn_hand\wpn_hand_07
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_seva
+[actor_hud_08]:actor_hud
+visual         			= dynamics\weapons\wpn_hand\wpn_hand_dolg_heavy
 [actor_hud_exo]:actor_hud
 visual         			= dynamics\weapons\wpn_hand\wpn_hand_exo
