@@ -964,7 +964,8 @@
 	            <cell x="100" y="102" point_x="250" point_y="225"/>
 	            <cell x="100" y="151" point_x="205" point_y="220"/>
 	            <cell x="100" y="228" point_x="50" point_y="190"/>
-	            <cell x="100" y="330" point_x="110" point_y="180"/>
+	            <cell x="100" y="306" point_x="110" point_y="180"/>
+	            <cell x="100" y="354" point_x="110" point_y="180"/>
 	        </column>
 	        <column>
 	            <cell x="200" y="0" point_x="60" point_y="205"/>

@@ -13,7 +13,7 @@ local sleep_fade_pp_eff		= 4
 local START_MIN_SURGE_TIME 	= 2*60*60
 local START_MAX_SURGE_TIME 	= 4*60*60
 local MIN_SURGE_TIME 		= 8*60*60	--12*60*60
-local MAX_SURGE_TIME 		= 32*60*60	--24*60*60
+local MAX_SURGE_TIME 		= 24*60*60	--24*60*60
 local prev_sec 				= 0
 local delta_v
 

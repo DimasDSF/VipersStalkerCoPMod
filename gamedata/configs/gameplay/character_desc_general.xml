@@ -122,10 +122,10 @@
       wpn_beretta = 1 \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ss190 = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
-
+	  
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -155,10 +155,11 @@
       wpn_beretta = 1 \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ss190 = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
       wpn_binoc = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -188,9 +189,10 @@
       wpn_beretta = 1 \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ss190 = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -220,9 +222,10 @@
       wpn_beretta = 1 \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ss190 = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -252,9 +255,10 @@
       wpn_beretta = 1 \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ss190 = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -283,9 +287,10 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -317,9 +322,10 @@
     <supplies>
       [spawn] \n
       wpn_ak74u \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -346,9 +352,10 @@
     <supplies>
       [spawn] \n
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -375,9 +382,10 @@
     <supplies>
       [spawn] \n
       wpn_ak74u \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -404,9 +412,10 @@
     <supplies>
       [spawn] \n
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -436,10 +445,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -467,10 +477,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
+
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -498,10 +509,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
+
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -529,10 +541,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
+	  
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -562,10 +575,11 @@
       [spawn] \n
       
       wpn_ak74 = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
+
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -594,10 +608,10 @@
       [spawn] \n
       
       wpn_abakan \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_drugs_2.xml"
 #include "gameplay\character_artifacts_1.xml"
@@ -625,10 +639,11 @@
       [spawn] \n
       
       wpn_spas12 \n
-      ammo_12x70_buck = 1 \n
 	  wpn_fort = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
+	  
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -658,11 +673,11 @@
 
       [spawn] \n
       wpn_spas12 \n
-      ammo_12x70_buck = 1 \n
 	  wpn_walther = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -692,11 +707,11 @@
       [spawn] \n
       
       wpn_abakan = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
-
+	  
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_drugs_2.xml"
 #include "gameplay\character_artifacts_1.xml"
@@ -725,10 +740,11 @@
       [spawn] \n
       
       wpn_ak74 = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
+
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -758,11 +774,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_walther = 1 \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -792,11 +808,11 @@
       [spawn] \n
       
       wpn_abakan \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_walther = 1 \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
-
+	  
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -828,11 +844,11 @@
       [spawn] \n
       
       wpn_abakan = 1, scope \n
-      ammo_5.45x39_ap = 1 \n
       wpn_walther = 1 \n
-      ammo_9x19_pbp = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -863,11 +879,11 @@
       [spawn] \n
       
       wpn_abakan = 1 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -898,11 +914,11 @@
       [spawn] \n
       
       wpn_val = 1 \n
-      ammo_9x39_pab9 = 1 \n
       wpn_walther = 1 \n
-      ammo_9x19_pbp = 1 \n
       grenade_f1 = 3 \n
-
+	  
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -933,11 +949,11 @@
       [spawn] \n
       
       wpn_protecta = 1 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_fort = 1 \n
-      ammo_9x18_pmm = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -968,11 +984,11 @@
       [spawn] \n
       
       wpn_groza  = 1 \n
-      ammo_9x39_pab9 = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -1005,10 +1021,11 @@
       [spawn] \n
       
       wpn_groza = 1 \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro  = 1 \n
       grenade_f1 = 4 \n
+
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -1039,10 +1056,11 @@
       [spawn] \n
       
       wpn_groza = 1 \n
-      ammo_9x39_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro  = 1 \n
       grenade_f1 = 1 \n
+
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -1073,11 +1091,11 @@
       [spawn] \n
       
       wpn_svd \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro  = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_7_62.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -1108,10 +1126,10 @@
       [spawn] \n
       
       wpn_pkm \n
-      ammo_pkm_100 = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro  = 1 \n
 
+#include "gameplay\ammo\character_ammo_pkm.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -1143,11 +1161,11 @@
       [spawn] \n
       
       wpn_protecta = 1 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro  = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -1178,11 +1196,11 @@
       [spawn] \n
       
       wpn_val = 1, scope \n
-      ammo_9x39_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro  = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -1219,10 +1237,10 @@
     <supplies>
       [spawn] \n
       wpn_mp5 \n
-      ammo_9x19_fmj = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1251,9 +1269,9 @@
 	  
       wpn_mp5 \n
       wpn_pm \n
-      ammo_9x19_fmj = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1282,9 +1300,9 @@
       
       wpn_l85  \n
       wpn_pm \n
-	  ammo_5.56x45_ss190 = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1312,8 +1330,10 @@
       [spawn] \n
       wpn_mp5 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
 
+
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1342,9 +1362,9 @@
 	  
       wpn_mp5 \n
       wpn_pm \n
-      ammo_9x19_fmj = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1372,10 +1392,10 @@
       [spawn] \n
 	  
 	  wpn_wincheaster1300 \n
-	  ammo_12x70_buck = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1404,12 +1424,12 @@
     <supplies>
       [spawn] \n
       
-	  ammo_12x70_buck = 1 \n
 	  wpn_wincheaster1300 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1437,11 +1457,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1469,11 +1489,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1501,11 +1521,11 @@
       [spawn] \n
       
       wpn_l85  \n
-	  ammo_5.56x45_ss190 = 1 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1532,12 +1552,12 @@
     <supplies>
       [spawn] \n
       
-	  ammo_12x70_buck = 1 \n
 	  wpn_wincheaster1300 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1565,11 +1585,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1597,10 +1617,11 @@
       [spawn] \n
 	  
       wpn_mp5 = 1, silencer \n
-      ammo_9x19_fmj = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 1 \n
+
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1628,11 +1649,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1662,11 +1683,11 @@
       [spawn] \n
       
       wpn_lr300 = 1, silencer, scope  \n
-	  ammo_5.56x45_ss190 = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1696,11 +1717,11 @@
       [spawn] \n
       
       wpn_l85 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1727,11 +1748,11 @@
       [spawn] \n
       
       wpn_lr300 = 1, silencer, scope  \n
-	  ammo_5.56x45_ss190 = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1761,10 +1782,10 @@
       [spawn] \n
 	  
       wpn_mp5 = 1, silencer \n
-      ammo_9x19_pbp = 1 \n
       wpn_hpsa \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1793,11 +1814,11 @@
       [spawn] \n
       
       wpn_l85 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1825,11 +1846,11 @@
       [spawn] \n
       
       wpn_ak74 = 1  \n
-	  ammo_5.45x39_ap = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1859,10 +1880,10 @@
       [spawn] \n
       
       wpn_svd \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_colt1911 = 1 \n
-      ammo_11.43x23_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_7_62.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -1893,11 +1914,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_desert_eagle = 1 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -1928,11 +1949,11 @@
       [spawn] \n
       
       wpn_g36 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_walther \n
-      ammo_9x19_pbp = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -1963,11 +1984,11 @@
       [spawn] \n
       
       wpn_sig550 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_sig220 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -1998,10 +2019,10 @@
       [spawn] \n
       
       wpn_svd \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_mp5 = 1, silencer \n
-      ammo_9x19_pbp = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_7_62.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -2032,10 +2053,10 @@
       [spawn] \n
       
       wpn_svu \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_colt1911 = 1 \n
-      ammo_11.43x23_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_7_62.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -2068,10 +2089,10 @@
       [spawn] \n
       
       wpn_vintorez = 1 \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_sig220 = 1, silencer \n
-      ammo_11.43x23_hydro = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_7_62.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -2102,10 +2123,10 @@
       [spawn] \n
       
       wpn_svu \n
-      ammo_7.62x54_7h1 = 1 \n
 	  wpn_walther \n
-      ammo_9x19_pbp = 1 \n
 
+#include "gameplay\ammo\character_ammo_7_62.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -2136,11 +2157,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -2171,11 +2192,11 @@
       [spawn] \n
       
       wpn_sig550 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -2206,11 +2227,11 @@
       [spawn] \n
       
       wpn_g36 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -2241,11 +2262,11 @@
       [spawn] \n
       
       wpn_g36 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -2281,10 +2302,10 @@
     <supplies>
       [spawn] \n
       wpn_bm16 \n
-      ammo_12x70_buck = 1 \n
 	  wpn_pm  \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2312,10 +2333,10 @@
     <supplies>
       [spawn] \n
       wpn_bm16 \n
-      ammo_12x70_buck = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2342,10 +2363,10 @@
     <supplies>
       [spawn] \n
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_pm  \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2375,11 +2396,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_hpsa  \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2407,11 +2428,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_hpsa  \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2439,11 +2460,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2471,11 +2492,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_pm \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2503,11 +2524,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2535,11 +2556,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2568,11 +2589,11 @@
       [spawn] \n
       
 	  wpn_wincheaster1300 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2601,11 +2622,11 @@
       [spawn] \n
       
 	  wpn_ak74 \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2634,10 +2655,11 @@
       [spawn] \n
       
       wpn_mp5 \n
-      ammo_9x19_pbp  = 1 \n
 	  wpn_beretta \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2666,11 +2688,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_hpsa \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2699,11 +2721,11 @@
       [spawn] \n
       
       wpn_mp5 \n
-      ammo_9x19_pbp  = 1 \n
 	  wpn_colt1911 \n
-	  ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2732,11 +2754,11 @@
       [spawn] \n
       
 	  wpn_ak74u \n
-	  ammo_5.45x39_fmj  = 1 \n
 	  wpn_hpsa \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2766,11 +2788,11 @@
       [spawn] \n
       
       wpn_spas12 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2800,11 +2822,11 @@
       [spawn] \n
       
       wpn_spas12 \n
-      ammo_12x70_buck = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp  = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2834,11 +2856,11 @@
       [spawn] \n
       
       wpn_spas12 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2868,11 +2890,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2902,11 +2924,11 @@
       [spawn] \n
       
       wpn_lr300 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2938,11 +2960,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2972,11 +2994,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3006,11 +3028,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3040,11 +3062,11 @@
       [spawn] \n
       
       wpn_protecta \n
-      ammo_12x76_zhekan = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3074,11 +3096,11 @@
       [spawn] \n
       
       wpn_protecta \n
-      ammo_12x76_zhekan = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3116,8 +3138,9 @@
       
       wpn_mp5 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3146,10 +3169,10 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj  = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3180,10 +3203,11 @@
       [spawn] \n
 
       wpn_mp5 = 1 \n
-      ammo_9x19_pbp = 1 \n
       wpn_hpsa \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3212,11 +3236,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3245,11 +3269,11 @@
       [spawn] \n
       
       wpn_ak74 = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3280,11 +3304,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3313,11 +3337,11 @@
       [spawn] \n
       
       wpn_wincheaster1300  \n
-      ammo_12x76_zhekan = 1 \n
       wpn_hpsa \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3346,11 +3370,11 @@
       [spawn] \n
       
       wpn_l85 \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3379,11 +3403,11 @@
       [spawn] \n
       
       wpn_lr300 = 1, scope \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_colt1911 = 1 \n
-      ammo_11.43x23_fmj  = 1 \n
 	  grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3412,10 +3436,10 @@
       [spawn] \n
       
       wpn_lr300 = 1, scope, silencer \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_sig220 = 1, silencer \n
-      ammo_11.43x23_fmj  = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3445,11 +3469,11 @@
       [spawn] \n
       
       wpn_l85 = 1 \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_usp \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3480,11 +3504,11 @@
       [spawn] \n
       
       wpn_g36 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3515,11 +3539,11 @@
       [spawn] \n
       
       wpn_sig550 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3551,11 +3575,11 @@
       [spawn] \n
       
       wpn_sig550 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3586,11 +3610,11 @@
       [spawn] \n
       
       wpn_g36 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3621,11 +3645,11 @@
       [spawn] \n
       
       wpn_protecta \n
-      ammo_12x76_zhekan = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3656,11 +3680,11 @@
       [spawn] \n
       
       wpn_protecta \n
-      ammo_12x76_zhekan = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -3693,11 +3717,11 @@
       [spawn] \n
       
       wpn_fn2000 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_usp \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -3728,11 +3752,11 @@
       [spawn] \n
       
       wpn_fn2000 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -3770,10 +3794,10 @@
       [spawn] \n
       
       wpn_bm16 \n
-      ammo_12x70_buck  = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3802,10 +3826,10 @@
       [spawn] \n
       
       wpn_toz34  \n
-      ammo_12x70_buck  = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3834,10 +3858,10 @@
       [spawn] \n
       
       wpn_toz34  \n
-      ammo_12x70_buck  = 1 \n
       wpn_fort = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3866,10 +3890,10 @@
       [spawn] \n
       
  	  wpn_ak74u = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3900,11 +3924,11 @@
       [spawn] \n
       
  	  wpn_ak74u  \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3933,11 +3957,11 @@
       [spawn] \n
       
  	  wpn_ak74u  \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3966,11 +3990,11 @@
       [spawn] \n
       
       wpn_toz34  \n
-      ammo_12x76_zhekan = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3999,11 +4023,11 @@
       [spawn] \n
       
  	  wpn_ak74  \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm  \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4033,11 +4057,11 @@
       [spawn] \n
       
       wpn_ak74  \n
-      ammo_12x70_buck  = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4066,11 +4090,11 @@
       [spawn] \n
       
  	  wpn_ak74u = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_hpsa = 1 \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4099,10 +4123,11 @@
       [spawn] \n
       
  	  wpn_ak74 = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_hpsa \n
       grenade_rgd5 = 1 \n
-
+	  
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4131,11 +4156,11 @@
       [spawn] \n
       
       wpn_ak74u  \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4164,11 +4189,11 @@
       [spawn] \n
       
  	  wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_beretta  \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4197,11 +4222,11 @@
       [spawn] \n
       
       wpn_l85 \n
-      ammo_5.56x45_ss190  = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4231,12 +4256,12 @@
     <supplies>
       [spawn] \n
 
-      wpn_wincheaster1300 \n
-      ammo_12x70_buck = 1 \n      
+      wpn_wincheaster1300 \n 
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4265,12 +4290,12 @@
     <supplies>
       [spawn] \n
 
-      wpn_l85 \n
-      ammo_5.56x45_ap = 1 \n      
+      wpn_l85 \n    
 	  wpn_colt1911 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4300,11 +4325,11 @@
       [spawn] \n
 
       wpn_ak74 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4333,12 +4358,12 @@
     <supplies>
       [spawn] \n
 
-      wpn_lr300 \n
-      ammo_5.56x45_ap = 1 \n      
+      wpn_lr300 \n   
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4367,12 +4392,12 @@
     <supplies>
       [spawn] \n
 
-      wpn_wincheaster1300  \n
-      ammo_12x70_buck = 1 \n      
+      wpn_wincheaster1300  \n  
       wpn_hpsa \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4402,11 +4427,11 @@
       [spawn] \n
 
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4436,11 +4461,11 @@
       [spawn] \n
 
       wpn_l85 \n
-      ammo_5.56x45_ap = 1 \n 
       wpn_colt1911 = 1 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4470,11 +4495,11 @@
       [spawn] \n
 
 	  wpn_ak74 = 1 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_beretta \n
-      ammo_9x19_pbp = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4504,14 +4529,14 @@
       [spawn] \n
 
       wpn_wincheaster1300 \n
-      ammo_12x70_buck = 1 \n
-	  ammo_12x76_zhekan = 1 \n
       wpn_ak74u \n
-	  ammo_5.45x39_fmj = 1 \n
 	  wpn_colt1911 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4541,11 +4566,11 @@
       [spawn] \n
 
       wpn_mp5 \n
-      ammo_9x19_fmj = 1 \n
       wpn_toz34  \n
-      ammo_12x76_zhekan = 1 \n
 	  grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -4577,11 +4602,11 @@
       [spawn] \n
       
       wpn_val = 1, scope \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220 = 1, silencer \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4613,11 +4638,11 @@
       [spawn] \n
       
       wpn_spas12 = 1 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_colt1911 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4649,11 +4674,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_colt1911 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4685,13 +4710,13 @@
       [spawn] \n
       
       wpn_g36 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_spas12 \n
-      ammo_12x70_buck = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 2 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4723,11 +4748,11 @@
       [spawn] \n
       
       wpn_spas12 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4759,11 +4784,11 @@
       [spawn] \n
       
       wpn_sig550 = 1 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4795,11 +4820,11 @@
       [spawn] \n
       
       wpn_spas12 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_sig220 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4831,11 +4856,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
 	  wpn_usp \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4867,11 +4892,12 @@
       [spawn] \n
       
       wpn_lr300 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_sig220 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4903,11 +4929,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_desert_eagle \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_2.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -4941,11 +4967,11 @@
       [spawn] \n
  	  
       wpn_protecta \n
-      ammo_12x76_zhekan = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -4977,11 +5003,11 @@
       [spawn] \n
       
       wpn_fn2000 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -5014,11 +5040,11 @@
       [spawn] \n
       
       wpn_groza = 1 \n
-      ammo_9x39_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -5050,13 +5076,13 @@
       [spawn] \n
       
       wpn_vintorez \n
-      ammo_9x39_ap = 1 \n
 	  wpn_sig220 = 1 \n
-	  ammo_11.43x23_hydro = 1 \n
       wpn_spas12 \n
-      ammo_12x76_zhekan = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_9_39.xml"
 #include "gameplay\character_items_3.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -5090,10 +5116,10 @@
 
       [spawn] \n
 	  wpn_ak74u \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5121,11 +5147,11 @@
     <supplies>
       [spawn] \n
 	  wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
 	  wpn_pm \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5155,11 +5181,11 @@
       [spawn] \n
 	  
       wpn_ak74 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5187,11 +5213,11 @@
       [spawn] \n
 	  
       wpn_abakan \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5221,11 +5247,11 @@
       [spawn] \n
 	  
       wpn_abakan \n
-      ammo_5.45x39_ap = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5255,11 +5281,11 @@
       [spawn] \n
 	  
       wpn_groza \n
-      ammo_9x39_ap = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_9_39.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5287,11 +5313,11 @@
       [spawn] \n
 	  
       wpn_val = 1 \n
-      ammo_9x39_ap = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5318,11 +5344,11 @@
       [spawn] \n
 	  
       wpn_abakan = 1, scope\n
-      ammo_5.45x39_ap = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5352,10 +5378,10 @@
       [spawn] \n
       
       wpn_svd = 1 \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_fort = 1 \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_7_62.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5389,10 +5415,10 @@
       [spawn] \n
       
       wpn_ak74u \n
-      ammo_5.45x39_fmj = 1 \n
 	  wpn_fort \n
-      ammo_9x18_fmj = 1 \n		
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5421,10 +5447,10 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
-	  wpn_pm \n
-      ammo_9x18_fmj = 1 \n		
+	  wpn_pm \n	
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5453,10 +5479,10 @@
       [spawn] \n
       
       wpn_ak74u \n
-      ammo_5.45x39_fmj = 1 \n
 	  wpn_fort \n
-      ammo_9x18_fmj = 1 \n		
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -5487,11 +5513,11 @@
       [spawn] \n
       
       wpn_wincheaster1300 \n
-      ammo_12x70_buck = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
 	  grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5519,11 +5545,11 @@
       [spawn] \n
       
       wpn_l85 \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
 	  grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5551,11 +5577,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_pm \n
-      ammo_9x18_fmj = 1 \n
 	  grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5583,11 +5609,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
 	  grenade_rgd5 = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5617,11 +5643,11 @@
       [spawn] \n
       
       wpn_l85 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_walther \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -5649,11 +5675,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_pm \n
-      ammo_9x18_pmm = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -5681,11 +5707,11 @@
       [spawn] \n
       
       wpn_lr300 = 1 \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_fort \n
-      ammo_9x18_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -5713,11 +5739,11 @@
       [spawn] \n
       
       wpn_ak74 = 1 \n
-      ammo_5.45x39_fmj = 1 \n
       wpn_beretta \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5745,11 +5771,11 @@
       [spawn] \n
       
       wpn_lr300 = 1, scope \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_hpsa \n
-      ammo_9x19_fmj = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5777,11 +5803,11 @@
       [spawn] \n
       
       wpn_ak74 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_pm \n
-      ammo_9x18_pmm = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5809,11 +5835,11 @@
       [spawn] \n
       
       wpn_l85 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_pm \n
-      ammo_9x18_pmm = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5841,11 +5867,11 @@
       [spawn] \n
       
       wpn_abakan = 1, scope \n
-      ammo_5.45x39_ap = 1 \n
       wpn_fort \n
-      ammo_9x18_pmm = 1 \n
       grenade_rgd5 = 2 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -5875,11 +5901,11 @@
       [spawn] \n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_walther = 1 \n
-      ammo_9x19_pbp = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_5_56.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -5909,11 +5935,11 @@
       [spawn] \n
       
       wpn_val \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_fmj = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -5943,11 +5969,11 @@
       [spawn] \n
       
       wpn_val = 1, scope \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220 = 1, silencer \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -5977,10 +6003,10 @@
       [spawn] \n
       
       wpn_svd \n
-      ammo_7.62x54_7h1 = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_7_62.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -6010,11 +6036,11 @@
       [spawn] \n
       
       wpn_sig550 = 1 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 3 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -6046,10 +6072,10 @@
       [spawn] \n
       
       wpn_vintorez = 1 \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220 = 1, silencer \n
-      ammo_11.43x23_hydro = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_9_39.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6079,11 +6105,11 @@
       [spawn] \n
       
       wpn_groza \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220 = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_9_39.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6113,11 +6139,11 @@
       [spawn] \n
       
       wpn_protecta \n
-      ammo_12x76_zhekan = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6147,11 +6173,11 @@
       [spawn] \n
       
       wpn_g36 \n
-      ammo_5.45x39_ap = 1 \n
       wpn_usp \n
-      ammo_11.43x23_hydro = 1 \n
       grenade_f1 = 4 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_monolith.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6188,10 +6214,10 @@
 			[spawn]\n
 			
       		wpn_ak74u \n
-      		ammo_5.45x39_fmj = 1 \n
       		wpn_fort \n
-      		ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6220,10 +6246,10 @@
 			[spawn]\n
 			
       		wpn_wincheaster1300 \n
-      		ammo_12x70_buck = 1 \n
       		wpn_pm \n
-      		ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_buckshot.xml"
 #include "gameplay\character_items_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6252,10 +6278,10 @@
 			[spawn]\n
 			
       		wpn_mp5 \n
-      		ammo_9x19_fmj = 1 \n
       		wpn_pm \n
-      		ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6285,10 +6311,10 @@
 		<supplies>
 			[spawn]\n
       		wpn_ak74u \n
-      		ammo_5.45x39_fmj = 1 \n
       		wpn_fort \n
-      		ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -6317,10 +6343,10 @@
 			[spawn]\n
 			
       		wpn_wincheaster1300 \n
-      		ammo_12x70_buck = 1 \n
       		wpn_hpsa \n
-      		ammo_9x19_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -6349,9 +6375,10 @@
 			[spawn]\n
 			
       		wpn_mp5 = 1 \n
-      		ammo_9x19_pbp = 1 \n
       		wpn_hpsa \n
 
+#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_2_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -6380,10 +6407,10 @@
 			[spawn]\n
 			
 			wpn_ak74 \n
-      		ammo_5.45x39_fmj = 1 \n
 			wpn_colt1911 \n
-      		ammo_11.43x23_fmj = 1 \n
-
+			
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_2_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -6414,10 +6441,10 @@
       [spawn]\n
       
       wpn_ak74u = 1 \n
-      ammo_5.45x39_fmj = 1 \n
 	  wpn_fort \n
-      ammo_9x18_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6447,10 +6474,10 @@
       	[spawn]\n
 		
    	    wpn_ak74 = 1 \n
-      	ammo_5.45x39_fmj = 1 \n
 	 	wpn_fort \n
-     	ammo_9x18_pmm = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_45.xml"
+#include "gameplay\ammo\character_ammo_9_18.xml"
 #include "gameplay\character_items_nd_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6480,10 +6507,10 @@
       [spawn]\n
 	
    	wpn_abakan = 1 \n
-    ammo_5.45x39_fmj = 1 \n
 	wpn_fort \n
-    ammo_9x18_pmm = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6513,10 +6540,10 @@
       	[spawn]\n
 		
    	    wpn_ak74 = 1 \n
-      	ammo_5.45x39_fmj = 1 \n
 	 	wpn_fort \n
-     	ammo_9x18_pmm = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_18.xml"
+#include "gameplay\ammo\character_ammo_5_45.xml"
 #include "gameplay\character_items_nd_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -6548,10 +6575,10 @@
       [spawn]\n
       
       wpn_sig550 \n
-      ammo_5.56x45_ap = 1 \n
       wpn_walther \n
-      ammo_9x19_pbp = 1 \n
 
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_9_19.xml"
 #include "gameplay\character_items_3_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6583,10 +6610,10 @@
       [spawn]\n
       
       wpn_spas12 = 1 \n
-      ammo_12x76_zhekan = 1 \n
       wpn_usp = 1 \n
-      ammo_11.43x23_hydro = 1 \n
 
+#include "gameplay\ammo\character_ammo_buckshot.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6618,10 +6645,10 @@
       [spawn]\n
       
       wpn_groza \n
-      ammo_9x39_ap = 1 \n
       wpn_sig220  \n
-      ammo_11.43x23_fmj = 1 \n
 
+#include "gameplay\ammo\character_ammo_9_39.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items_3_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6653,10 +6680,10 @@
       [spawn]\n
       
       wpn_pkm  \n
-      ammo_pkm_100 = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_hydro = 1 \n
 
+#include "gameplay\ammo\character_ammo_11_43.xml"
+#include "gameplay\ammo\character_ammo_pkm.xml"
 #include "gameplay\character_items_3_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_4.xml"
@@ -6711,10 +6738,11 @@
       [spawn] \n
 	  
       wpn_lr300 = 1, silencer \n
-      ammo_5.56x45_ss190 = 1 \n
       wpn_colt1911 \n
-      ammo_11.43x23_fmj  = 1 \n
       grenade_rgd5 = 1 \n
+
+#include "gameplay\ammo\character_ammo_5_56.xml"
+#include "gameplay\ammo\character_ammo_11_43.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"

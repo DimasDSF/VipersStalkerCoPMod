@@ -1,6 +1,6 @@
 medkit = 1, prob=0.10 \n
 bandage = 1, prob=0.5 \n
-antirad	= 1, prob=0.02 \n
+antirad	= 1, prob=0.01 \n
 drug_booster = 1, prob=0.08 \n
 drug_coagulant = 1, prob=0.08 \n
 drug_antidot = 1, prob=0.06 \n

@@ -86,6 +86,39 @@
                 <has_info>zat_b51_processing_category_7</has_info>
                 <next>71</next>
             </phrase>
+            <phrase id="81">
+                <text />
+                <has_info>zat_b51_ordered_item_8_1</has_info>
+                <next>811</next>
+                <next>812</next>
+            </phrase>
+            <phrase id="8">
+                <text />
+                <has_info>zat_b51_processing_category_8</has_info>
+                <next>81</next>
+            </phrase>
+            <phrase id="91">
+                <text />
+                <has_info>zat_b51_ordered_item_9_1</has_info>
+                <next>911</next>
+                <next>912</next>
+            </phrase>
+            <phrase id="9">
+                <text />
+                <has_info>zat_b51_processing_category_9</has_info>
+                <next>91</next>
+            </phrase>
+            <phrase id="101">
+                <text />
+                <has_info>zat_b51_ordered_item_10_1</has_info>
+                <next>1011</next>
+                <next>1012</next>
+            </phrase>
+            <phrase id="100">
+                <text />
+                <has_info>zat_b51_processing_category_10</has_info>
+                <next>101</next>
+            </phrase>
             <phrase id="4">
                 <text />
                 <has_info>zat_b51_processing_category_4</has_info>
@@ -119,8 +152,11 @@
                 <next>4</next>
                 <next>5</next>
                 <next>6</next>
-                <next>7</next>
-            </phrase>
+				<next>7</next>
+			    <next>8</next>
+                <next>9</next>
+                <next>100</next>
+			</phrase>
             <phrase id="1">
                 <text />
                 <has_info>zat_b51_processing_category_1</has_info>
@@ -433,6 +469,54 @@
                 <next>1113</next>
                 <next>1114</next>
             </phrase>
+            <phrase id="811">
+                <text>zat_b51_stalker_nimble_get_order_811</text>
+                <dont_has_info>zat_b51_told_about_item_8_1</dont_has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+                <next>1114</next>
+            </phrase>
+            <phrase id="812">
+                <text>zat_b51_stalker_nimble_get_order_812</text>
+                <has_info>zat_b51_told_about_item_8_1</has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+                <next>1114</next>
+            </phrase>
+            <phrase id="911">
+                <text>zat_b51_stalker_nimble_get_order_911</text>
+                <dont_has_info>zat_b51_told_about_item_9_1</dont_has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+                <next>1114</next>
+            </phrase>
+            <phrase id="912">
+                <text>zat_b51_stalker_nimble_get_order_912</text>
+                <has_info>zat_b51_told_about_item_9_1</has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+                <next>1114</next>
+            </phrase>
+            <phrase id="1011">
+                <text>zat_b51_stalker_nimble_get_order_1011</text>
+                <dont_has_info>zat_b51_told_about_item_10_1</dont_has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+                <next>1114</next>
+            </phrase>
+            <phrase id="1012">
+                <text>zat_b51_stalker_nimble_get_order_1012</text>
+                <has_info>zat_b51_told_about_item_10_1</has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+                <next>1114</next>
+            </phrase>
         </phrase_list>
     </dialog>
     <dialog id="zat_b51_stalker_nimble_place_order">
@@ -462,13 +546,16 @@
                 <text>zat_b51_stalker_nimble_place_order_1</text>
                 <dont_has_info>zat_b51_finished_categories_all</dont_has_info>
                 <next>11</next>
-                <next>12</next>
+				<next>12</next>
                 <next>13</next>
                 <next>14</next>
                 <next>15</next>
                 <next>16</next>
                 <next>17</next>
                 <next>18</next>
+                <next>19</next>
+                <next>20</next>
+				<next>21</next>
             </phrase>
             <phrase id="1112">
                 <text>zat_b51_stalker_nimble_place_order_1112</text>
@@ -480,6 +567,9 @@
                 <disable_info>zat_b51_processing_category_5</disable_info>
                 <disable_info>zat_b51_processing_category_6</disable_info>
                 <disable_info>zat_b51_processing_category_7</disable_info>
+                <disable_info>zat_b51_processing_category_8</disable_info>
+                <disable_info>zat_b51_processing_category_9</disable_info>
+                <disable_info>zat_b51_processing_category_10</disable_info>
                 <next>11121</next>
             </phrase>
             <phrase id="11121">
@@ -494,6 +584,9 @@
                 <disable_info>zat_b51_processing_category_5</disable_info>
                 <disable_info>zat_b51_processing_category_6</disable_info>
                 <disable_info>zat_b51_processing_category_7</disable_info>
+                <disable_info>zat_b51_processing_category_8</disable_info>
+                <disable_info>zat_b51_processing_category_9</disable_info>
+                <disable_info>zat_b51_processing_category_10</disable_info>
                 <next>11131</next>
             </phrase>
             <phrase id="11111">
@@ -702,6 +795,96 @@
             </phrase>
             <phrase id="18">
                 <text>zat_b51_stalker_nimble_place_order_18</text>
+                <dont_has_info>zat_b51_finished_category_8</dont_has_info>
+                <next>181</next>
+                <next>182</next>
+                <next>183</next>
+            </phrase>
+            <phrase id="181">
+                <text>zat_b51_stalker_nimble_place_order_181</text>
+                <dont_has_info>zat_b51_finishing_category_8</dont_has_info>
+                <dont_has_info>zat_b51_order_refused</dont_has_info>
+                <give_info>zat_b51_processing_category_8</give_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+            </phrase>
+            <phrase id="182">
+                <text>zat_b51_stalker_nimble_place_order_182</text>
+                <dont_has_info>zat_b51_finishing_category_8</dont_has_info>
+                <give_info>zat_b51_processing_category_8</give_info>
+                <has_info>zat_b51_order_refused</has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+            </phrase>
+            <phrase id="183">
+                <text>zat_b51_stalker_nimble_place_order_183</text>
+                <give_info>zat_b51_finished_category_8</give_info>
+                <has_info>zat_b51_finishing_category_8</has_info>
+            </phrase>
+            <phrase id="19">
+                <text>zat_b51_stalker_nimble_place_order_19</text>
+                <dont_has_info>zat_b51_finished_category_9</dont_has_info>
+                <next>191</next>
+                <next>192</next>
+                <next>193</next>
+            </phrase>
+            <phrase id="191">
+                <text>zat_b51_stalker_nimble_place_order_191</text>
+                <dont_has_info>zat_b51_finishing_category_9</dont_has_info>
+                <dont_has_info>zat_b51_order_refused</dont_has_info>
+                <give_info>zat_b51_processing_category_9</give_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+            </phrase>
+            <phrase id="192">
+                <text>zat_b51_stalker_nimble_place_order_192</text>
+                <dont_has_info>zat_b51_finishing_category_9</dont_has_info>
+                <give_info>zat_b51_processing_category_9</give_info>
+                <has_info>zat_b51_order_refused</has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+            </phrase>
+            <phrase id="193">
+                <text>zat_b51_stalker_nimble_place_order_193</text>
+                <give_info>zat_b51_finished_category_9</give_info>
+                <has_info>zat_b51_finishing_category_9</has_info>
+            </phrase>
+            <phrase id="20">
+                <text>zat_b51_stalker_nimble_place_order_20</text>
+                <dont_has_info>zat_b51_finished_category_10</dont_has_info>
+                <next>201</next>
+                <next>202</next>
+                <next>203</next>
+            </phrase>
+            <phrase id="201">
+                <text>zat_b51_stalker_nimble_place_order_201</text>
+                <dont_has_info>zat_b51_finishing_category_10</dont_has_info>
+                <dont_has_info>zat_b51_order_refused</dont_has_info>
+                <give_info>zat_b51_processing_category_10</give_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+            </phrase>
+            <phrase id="202">
+                <text>zat_b51_stalker_nimble_place_order_202</text>
+                <dont_has_info>zat_b51_finishing_category_10</dont_has_info>
+                <give_info>zat_b51_processing_category_10</give_info>
+                <has_info>zat_b51_order_refused</has_info>
+                <next>1111</next>
+                <next>1112</next>
+                <next>1113</next>
+            </phrase>
+            <phrase id="203">
+                <text>zat_b51_stalker_nimble_place_order_203</text>
+                <give_info>zat_b51_finished_category_10</give_info>
+                <has_info>zat_b51_finishing_category_10</has_info>
+            </phrase>
+            <phrase id="21">
+                <text>zat_b51_stalker_nimble_place_order_21</text>
             </phrase>
             <phrase id="2">
                 <text>zat_b51_stalker_nimble_place_order_2</text>
@@ -1968,11 +2151,11 @@
         <phrase_list>
             <phrase id="1">
                 <text>zat_a2_stalker_barmen_about_sci_helpers_1</text>
-		        <dont_has_info>zat_b106_gonta_dead</dont_has_info>
+                <dont_has_info>zat_b106_gonta_dead</dont_has_info>
                 <give_info>zat_a2_stalker_barmen_about_sci_helpers</give_info>
             </phrase>
             <phrase id="2">
-		        <has_info>zat_b106_gonta_dead</has_info>
+                <has_info>zat_b106_gonta_dead</has_info>
                 <text>zat_a2_stalker_barmen_about_sci_helpers_2</text>
                 <give_info>zat_a2_stalker_barmen_about_sci_helpers</give_info>
             </phrase>
@@ -2063,7 +2246,7 @@
                 <text>zat_b103_merc_dialog_about_toolkit_0</text>
                 <next>1</next>
                 <next>2</next>
-		        <action>dialog_manager.action_disable_phrase</action>
+                <action>dialog_manager.action_disable_phrase</action>
             </phrase>
         </phrase_list>
     </dialog>
@@ -3162,26 +3345,26 @@
             <phrase id="11">
                 <text>zat_b22_stalker_medic_need_health_care_11</text>
             </phrase>
-			<phrase id="111111">
-			    <text>zat_b22_stalker_medic_need_health_care_11111</text>
+            <phrase id="111111">
+                <text>zat_b22_stalker_medic_need_health_care_11111</text>
                 <precondition>dialogs.check_money_300</precondition>
-			</phrase>
-			<phrase id="1111">
-			    <text>zat_b22_stalker_medic_need_health_care_1111</text>
-				<precondition>dialogs.check_money_300_has</precondition>
-				<action>dialogs.medic_magic_potion</action>
-			</phrase>
-			<phrase id="11111">
-			    <text>zat_b22_stalker_medic_need_health_care_11111</text>
-			</phrase>
+            </phrase>
+            <phrase id="1111">
+                <text>zat_b22_stalker_medic_need_health_care_1111</text>
+                <precondition>dialogs.check_money_300_has</precondition>
+                <action>dialogs.medic_magic_potion</action>
+            </phrase>
+            <phrase id="11111">
+                <text>zat_b22_stalker_medic_need_health_care_11111</text>
+            </phrase>
             <phrase id="111">
                 <text>zat_b22_stalker_medic_need_health_care_111</text>
             </phrase>
             <phrase id="1">
                 <text>zat_b22_stalker_medic_need_health_care_1</text>
                 <precondition>dialogs.actor_needs_bless</precondition>
-			    <next>111111</next>
-				<next>1111</next>
+                <next>111111</next>
+                <next>1111</next>
             </phrase>
             <phrase id="2">
                 <text>zat_b22_stalker_medic_need_health_care_2</text>
@@ -7237,34 +7420,34 @@
 </phrase>
          <phrase id="1">
          <text>Конечно можно, с тебя 450 рублей.</text>
-		 <dont_has_info>sleep_arend_skad</dont_has_info>
+         <dont_has_info>sleep_arend_skad</dont_has_info>
          <next>3</next>
          <next>4</next>
          </phrase>
-		 
-		 <phrase id="2">
+         
+         <phrase id="2">
          <text>Ты уже арендовал кровать.</text>
-		 <has_info>sleep_arend_skad</has_info>
-		 <next>5</next>
+         <has_info>sleep_arend_skad</has_info>
+         <next>5</next>
          </phrase>
-		 
-		 <phrase id="3">
+         
+         <phrase id="3">
          <text>Вот держи.</text>
-		 <precondition>tris_dialog.proverka_na_money_450</precondition>
-		 <dont_has_info>sleep_arend_skad</dont_has_info>
-		 <action>tris_dialog.del_money_450</action>
-		 <give_info>sleep_arend_skad</give_info>
+         <precondition>tris_dialog.proverka_na_money_450</precondition>
+         <dont_has_info>sleep_arend_skad</dont_has_info>
+         <action>tris_dialog.del_money_450</action>
+         <give_info>sleep_arend_skad</give_info>
          </phrase>
-		 
-		 <phrase id="4">
+         
+         <phrase id="4">
          <text>У меня нет таких денег.</text>
          </phrase>
-		 
-		 <phrase id="5">
+         
+         <phrase id="5">
          <text>Забыл наверно.</text>
          </phrase>
-		 
-	</phrase_list>
+         
+    </phrase_list>
     </dialog>
 <dialog id="kridit1">
     <dont_has_info>zaim1</dont_has_info>

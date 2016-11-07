@@ -77,7 +77,7 @@ upgr_icon_height   	= 162
 
 full_icon_name		= npc_icon_novice_outfit
 
-cost				= 500
+cost				= 4000
 slot				= 6
 full_scale_icon		= 0,11		;иконка сталкера в костюме в полный рост
 
@@ -156,7 +156,7 @@ upgr_icon_width		= 302
 upgr_icon_height   	= 130
 full_icon_name		= npc_icon_stalker_outfit
 
-cost				= 5000
+cost				= 10000
 slot				= 6
 full_scale_icon		= 14,11			;иконка сталкера в костюме в полный рост
 
@@ -243,7 +243,7 @@ upgr_icon_width		= 302
 upgr_icon_height   	= 117
 full_icon_name		= npc_icon_svoboda_light_outfit
 
-cost				= 6500
+cost				= 30000
 slot				= 6
 full_scale_icon		= 10,11			;иконка сталкера в костюме в полный рост
 
@@ -325,7 +325,7 @@ upgr_icon_width		= 302
 upgr_icon_height   	= 130
 full_icon_name		= npc_icon_dolg_outfit
 
-cost				= 6500
+cost				= 30000
 slot				= 6
 full_scale_icon		= 8,11			;иконка сталкера в костюме в полный рост
 
@@ -408,7 +408,7 @@ upgr_icon_width		= 285
 upgr_icon_height   	= 159
 full_icon_name		= npc_icon_scientific_outfit
 
-cost				= 25000
+cost				= 55000
 full_scale_icon		= 12,11			;иконка сталкера в костюме в полный рост
 
 immunities_sect			= sect_scientific_outfit_immunities
@@ -416,16 +416,16 @@ helmet_avaliable	 	= false
 
 
 ; MEDIUM RESISTANCE
-burn_protection 				= 0.0875
-shock_protection 				= 0.400
-radiation_protection 			= 0.0080
-chemical_burn_protection 		= 0.1100
-telepatic_protection 			= 0.0600
-strike_protection 				= 0.22
-explosion_protection 			= 0.25
-wound_protection				= 0.22
+burn_protection 				= 0.09
+shock_protection 				= 0.600
+radiation_protection 			= 0.010
+chemical_burn_protection 		= 0.1700
+telepatic_protection 			= 0.0900
+strike_protection 				= 0.15
+explosion_protection 			= 0.17
+wound_protection				= 0.19
 
-hit_fraction_actor				= 0.65
+hit_fraction_actor				= 0.7
 bones_koeff_protection 			= actor_armor_sci
 
 artefact_count          = 2
@@ -444,8 +444,8 @@ wound_immunity				= 0.03
 radiation_immunity			= 0.0
 telepatic_immunity			= 0.0
 chemical_burn_immunity		= 0.0
-explosion_immunity			= 0.04
-fire_wound_immunity			= 0.02
+explosion_immunity			= 0.01
+fire_wound_immunity			= 0.01
 
 [sect_scientific_outfit_immunities_add]
 burn_immunity				= -0.01			;коэффициенты иммунитета самого костюма
@@ -491,7 +491,7 @@ upgr_icon_width		= 305
 upgr_icon_height   	= 131
 full_icon_name		= npc_icon_svoboda_heavy_outfit
 
-cost				= 20000
+cost				= 75000
 slot				= 6
 full_scale_icon		= 2,6			;иконка сталкера в костюме в полный рост
 
@@ -500,7 +500,7 @@ power_loss				= 0.9
 
 ; MEDIUM RESISTANCE
 burn_protection 				= 0.0800
-shock_protection 				= 0.300
+shock_protection 				= 0.500
 radiation_protection 			= 0.0045
 chemical_burn_protection 		= 0.0400
 telepatic_protection 			= 0.0
@@ -819,7 +819,7 @@ upgr_icon_width		= 301
 upgr_icon_height   	= 157
 full_icon_name		= npc_icon_dolg_heavy_outfit
 
-cost				= 25000
+cost				= 90000
 full_scale_icon		= 8,6		;иконка сталкера в костюме в полный рост
 
 immunities_sect			= sect_dolg_heavy_outfit_immunities
@@ -914,11 +914,11 @@ burn_protection 				= 0.0750
 shock_protection 				= 0.300
 radiation_protection 			= 0.100
 chemical_burn_protection 		= 0.100
-telepatic_protection 			= 0.050
+telepatic_protection 			= 0.0
 strike_protection 				= 0.4
 explosion_protection 			= 0.3
 wound_protection				= 0.4
-fire_wound_protection 			= 0.7
+;fire_wound_protection 			= 0.7
 
 hit_fraction_actor				= 0.25
 bones_koeff_protection			= actor_armor_exo
@@ -938,15 +938,15 @@ installed_upgrades      =
 upgrade_scheme          = upgrade_scheme_exo_outfit
 
 [sect_exo_outfit_immunities]
-burn_immunity				= 0.02			;коэффициенты иммунитета самого костюма
+burn_immunity				= 0.03			;коэффициенты иммунитета самого костюма
 strike_immunity				= 0.0
-shock_immunity				= 0.02
-wound_immunity				= 0.02
+shock_immunity				= 0.03
+wound_immunity				= 0.03
 radiation_immunity			= 0.0
 telepatic_immunity			= 0.0
-chemical_burn_immunity		= 0.02
-explosion_immunity			= 0.02
-fire_wound_immunity			= 0.02
+chemical_burn_immunity		= 0.03
+explosion_immunity			= 0.03
+fire_wound_immunity			= 0.04
 
 [sect_exo_outfit_immunities_add]
 burn_immunity				= -0.01			;коэффициенты иммунитета самого костюма
@@ -1026,30 +1026,30 @@ upgr_icon_y			= 619
 upgr_icon_width		= 106
 upgr_icon_height   	= 149
 
-cost			= 1000
+cost			= 2500
 
 immunities_sect 			= sect_helm_respirator_immunities
 bones_koeff_protection		= actor_helm_respirator
 
-telepatic_protection 		= 0.0200
-radiation_protection 		= 0.0015
-chemical_burn_protection 	= 0.0500
+telepatic_protection 		= 0.0
+radiation_protection 		= 0.0
+chemical_burn_protection 	= 0.1000
 
 upgrades                = up_gr_firstab_helm_respirator
 installed_upgrades      =
 upgrade_scheme          = upgrade_scheme_helm_respirator
 
 [sect_helm_respirator_immunities]
-burn_immunity			= 0.04
+burn_immunity			= 0.01
 strike_immunity			= 0.0
-shock_immunity			= 0.04
+shock_immunity			= 0.01
 wound_immunity			= 0.0
 wound_2_immunity		= 0.0
 radiation_immunity		= 0.0
 telepatic_immunity		= 0.0
-chemical_burn_immunity	= 0.04
-explosion_immunity		= 0.04
-fire_wound_immunity		= 0.04
+chemical_burn_immunity	= 0.08
+explosion_immunity		= 0.0
+fire_wound_immunity		= 0.0
 
 ;---------------------------------------------------------------------------------------------
 ;		СТАЛЬНОЙ ШЛЕМ
@@ -1075,12 +1075,12 @@ upgr_icon_y			= 619
 upgr_icon_width		= 149
 upgr_icon_height   	= 143
 
-cost			= 1200
+cost			= 4000
 
 immunities_sect 			= sect_helm_hardhat_immunities
 bones_koeff_protection		= actor_helm_hardhat
 
-telepatic_protection 		= 0.040
+telepatic_protection 		= 0.0
 strike_protection 			= 0.0
 explosion_protection 		= 0.0
 wound_protection			= 0.0
@@ -1090,16 +1090,16 @@ installed_upgrades      =
 upgrade_scheme          = upgrade_scheme_helm_hardhat
 
 [sect_helm_hardhat_immunities]
-burn_immunity			= 0.03
+burn_immunity			= 0.005
 strike_immunity			= 0.0
-shock_immunity			= 0.03
+shock_immunity			= 0.005
 wound_immunity			= 0.0
 wound_2_immunity		= 0.0
 radiation_immunity		= 0.0
 telepatic_immunity		= 0.0
-chemical_burn_immunity	= 0.03
-explosion_immunity		= 0.03
-fire_wound_immunity		= 0.025
+chemical_burn_immunity	= 0.001
+explosion_immunity		= 0.04
+fire_wound_immunity		= 0.045
 
 ;---------------------------------------------------------------------------------------------
 ;		ШЛЕМ "ЗАСЛОН"
@@ -1125,14 +1125,14 @@ upgr_icon_y			= 619
 upgr_icon_width		= 119
 upgr_icon_height   	= 148
 
-cost			= 6000
+cost			= 8000
 
 immunities_sect 			= sect_helm_protective_immunities
 bones_koeff_protection		= actor_helm_protective
 
 radiation_protection 		= 0.0025
 chemical_burn_protection 	= 0.0500
-telepatic_protection 		= 0.060
+telepatic_protection 		= 0.03
 
 upgrades                = up_gr_firstab_helm_protective, up_gr_seconab_helm_protective
 installed_upgrades      =
@@ -1203,8 +1203,8 @@ wound_2_immunity		= 0.0
 radiation_immunity		= 0.0
 telepatic_immunity		= 0.0
 chemical_burn_immunity	= 0.02
-explosion_immunity		= 0.02
-fire_wound_immunity		= 0.015
+explosion_immunity		= 0.01
+fire_wound_immunity		= 0.01
 
 ;---------------------------------------------------------------------------------------------
 ;		ШЛЕМ "СФЕРА М12"
@@ -1230,16 +1230,16 @@ upgr_icon_y			= 619
 upgr_icon_width		= 162
 upgr_icon_height   	= 143
 
-cost			= 20000
+cost			= 30000
 
 nightvision_sect	= effector_nightvision_2
 
 immunities_sect 	= sect_helm_battle_immunities
 bones_koeff_protection		= actor_helm_battle
 
-telepatic_protection 		= 0.0500
+telepatic_protection 		= 0.0400
 radiation_protection 		= 0.0010
-chemical_burn_protection 	= 0.0200
+chemical_burn_protection 	= 0.0500
 strike_protection 			= 0.0
 explosion_protection 		= 0.0
 wound_protection			= 0.0
@@ -1257,8 +1257,8 @@ wound_2_immunity		= 0.0
 radiation_immunity		= 0.0
 telepatic_immunity		= 0.0
 chemical_burn_immunity	= 0.02
-explosion_immunity		= 0.01
-fire_wound_immunity		= 0.01
+explosion_immunity		= 0.025
+fire_wound_immunity		= 0.025
 
 ;*****************************************************************
 ;******************УНИКАЛЬНЫЕ КОСТЮМЫ И ШЛЕМЫ*********************

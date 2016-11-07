@@ -1057,15 +1057,21 @@ item_count_by_category[4] = 3
 item_count_by_category[5] = 1
 item_count_by_category[6] = 1
 item_count_by_category[7] = 1
+item_count_by_category[8] = 1
+item_count_by_category[9] = 1
+item_count_by_category[10] = 1
 
 local zat_b51_costs_table = {}
 zat_b51_costs_table[1] = {prepay_agreed = 1000, 		prepay_refused = 3000,	cost = 8000}
 zat_b51_costs_table[2] = {prepay_agreed = 4500, 	prepay_refused = 6500,	cost = 16000}
 zat_b51_costs_table[3] = {prepay_agreed = 12000, 	prepay_refused = 18000,	cost = 32000}
 zat_b51_costs_table[4] = {prepay_agreed = 16000, 	prepay_refused = 28000,	cost = 36000}
-zat_b51_costs_table[5] = {prepay_agreed = 25000, 	prepay_refused = 40000,	cost = 65000}
-zat_b51_costs_table[6] = {prepay_agreed = 40000, 	prepay_refused = 65000,	cost = 70000}
-zat_b51_costs_table[7] = {prepay_agreed = 100000,	prepay_refused = 155000,	cost = 190000}
+zat_b51_costs_table[5] = {prepay_agreed = 15000, 	prepay_refused = 25000,	cost = 65000}
+zat_b51_costs_table[6] = {prepay_agreed = 25000, 	prepay_refused = 35000,	cost = 30000}
+zat_b51_costs_table[7] = {prepay_agreed = 50000,	prepay_refused = 70000,	cost = 120000}
+zat_b51_costs_table[8] = {prepay_agreed = 5000,	prepay_refused = 10000,	cost = 15000}
+zat_b51_costs_table[9] = {prepay_agreed = 10000,	prepay_refused = 15000,	cost = 25000}
+zat_b51_costs_table[10] = {prepay_agreed = 15000,	prepay_refused = 20000,	cost = 40000}
 
 local zat_b51_buy_item_table = {}
 zat_b51_buy_item_table[1] = {		[1] = {item = {"wpn_desert_eagle_nimble"}},
@@ -1090,9 +1096,15 @@ zat_b51_buy_item_table[6] = {		[1] = {item = {"scientific_outfit"}}
 	}
 zat_b51_buy_item_table[7] = {		[1] = {item = {"exo_outfit", "helm_battle"}}
 	}
+zat_b51_buy_item_table[8] = {		[1] = {item = {"toolkit_1"}}
+	}
+zat_b51_buy_item_table[9] = {		[1] = {item = {"toolkit_2"}}
+	}
+zat_b51_buy_item_table[10] = {		[1] = {item = {"toolkit_3"}}
+	}
 
 function zat_b51_randomize_item(first_speaker, second_speaker)
-	for i = 1,7 do
+	for i = 1,10 do
 		if has_alife_info("zat_b51_processing_category_"..tostring(i)) then
 			local zat_b51_available_items_table = {}
 			for j = 1, item_count_by_category[i] do
@@ -1106,7 +1118,7 @@ function zat_b51_randomize_item(first_speaker, second_speaker)
 end
 
 function zat_b51_give_prepay(first_speaker, second_speaker)
-	for i = 1,7 do
+	for i = 1,10 do
 		if has_alife_info("zat_b51_processing_category_"..tostring(i))  then
 			if not has_alife_info("zat_b51_order_refused") then
 				dialogs.relocate_money_from_actor(first_speaker, second_speaker, zat_b51_costs_table[i].prepay_agreed)
@@ -1119,7 +1131,7 @@ function zat_b51_give_prepay(first_speaker, second_speaker)
 end
 
 function zat_b51_has_prepay(first_speaker, second_speaker)
-	for i = 1,7 do
+	for i = 1,10 do
 		if has_alife_info("zat_b51_processing_category_"..tostring(i))  then
 			if not has_alife_info("zat_b51_order_refused") then
 				return db.actor:money() >= zat_b51_costs_table[i].prepay_agreed
@@ -1134,7 +1146,7 @@ function zat_b51_hasnt_prepay(first_speaker, second_speaker)
 end
 
 function zat_b51_buy_item(first_speaker, second_speaker)
-	for i = 1,7 do
+	for i = 1,10 do
 		if has_alife_info("zat_b51_processing_category_"..tostring(i)) then
 			for j = 1,#zat_b51_buy_item_table[i] do
 				if has_alife_info("zat_b51_ordered_item_"..tostring(i).."_"..tostring(j)) then
@@ -1164,7 +1176,7 @@ function zat_b51_buy_item(first_speaker, second_speaker)
 end
 
 function zat_b51_refuse_item(first_speaker, second_speaker)
-	for i = 1,7 do
+	for i = 1,10 do
 		if has_alife_info("zat_b51_processing_category_"..tostring(i)) then
 			for j = 1,#zat_b51_buy_item_table[i] do
 				if has_alife_info("zat_b51_ordered_item_"..tostring(i).."_"..tostring(j)) then
@@ -1190,7 +1202,7 @@ function zat_b51_refuse_item(first_speaker, second_speaker)
 end
 
 function zat_b51_has_item_cost(first_speaker, second_speaker)
-	for i = 1,7 do
+	for i = 1,10 do
 		if has_alife_info("zat_b51_processing_category_"..tostring(i)) then
 			return db.actor:money() >= zat_b51_costs_table[i].cost
 		end

@@ -27,7 +27,7 @@ simulation_activities = {
 	bandit = {
 			squad = { 	stalker	 = { prec = function(squad, target) return in_time_interval(8,21) and not xr_conditions.surge_started() and simulation_objects.sim_dist_to(squad, target) <= 350 end }
 					},
-			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(21,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a10_smart_terrain" or target:name() == "jup_a12") end },
+			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(21,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a10_smart_terrain" or target:name() == "jup_a12" or target:name() == "pri_b35_military") end },
 						territory= { prec = function() return in_time_interval(8,21) and not xr_conditions.surge_started() end },
 						surge	 = { prec = function() return xr_conditions.surge_started() end }
 					},
@@ -54,6 +54,7 @@ simulation_activities = {
 					},
 			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(19,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a6" or target:name() == "pri_a16") end },
 						territory= { prec = function() return in_time_interval(8,19) and not xr_conditions.surge_started() end },
+						resource = { prec = function(squad, target) return in_time_interval(8,18) and not xr_conditions.surge_started() end },
 						surge	 = { prec = function() return xr_conditions.surge_started() end }
 					},
 			actor = nil
@@ -67,12 +68,12 @@ simulation_activities = {
 
 	},
 	zombied = {
-			squad = {	bandit	 					= { prec = function(squad, target) return in_time_interval(21,6) and simulation_objects.sim_dist_to(squad, target) <= 350 end },
-						freedom	 					= { prec = function(squad, target) return in_time_interval(21,6) and simulation_objects.sim_dist_to(squad, target) <= 350 end },
-						stalker	 					= { prec = function(squad, target) return in_time_interval(21,6) and simulation_objects.sim_dist_to(squad, target) <= 350 end },
-						dolg						= { prec = function(squad, target) return in_time_interval(21,6) and simulation_objects.sim_dist_to(squad, target) <= 350 end }
+			squad = {	bandit	 					= { prec = function(squad, target) return in_time_interval(21,0) and simulation_objects.sim_dist_to(squad, target) <= 350 end },
+						freedom	 					= { prec = function(squad, target) return in_time_interval(21,0) and simulation_objects.sim_dist_to(squad, target) <= 350 end },
+						stalker	 					= { prec = function(squad, target) return in_time_interval(21,0) and simulation_objects.sim_dist_to(squad, target) <= 350 end },
+						dolg						= { prec = function(squad, target) return in_time_interval(21,0) and simulation_objects.sim_dist_to(squad, target) <= 350 end }
 					},
-			smart = {	zombattck= { prec = function() return in_time_interval(21,6) end },
+			smart = {	zombattck= { prec = function() return in_time_interval(0,6) end },
 						territory= { prec = function() return in_time_interval(6,21) end },
 						lair	 = { prec = function() return in_time_interval(6,21) end }
 					},

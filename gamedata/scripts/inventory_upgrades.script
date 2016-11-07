@@ -186,8 +186,30 @@ local function how_much_repair( item_name, item_condition )
 	local ltx = system_ini()
 	local cost = ltx:r_u32(item_name, "cost")
 	local class = ltx:r_string(item_name, "class")
-	local cof = 0.8
-	return math.floor(cost*(1-item_condition)*cof * cur_price_percent)
+	local cof
+	local mult = 3
+	if (item_condition > 0.9) then
+		cof = 0.55
+	elseif (item_condition < 0.9) then
+		cof = 0.6
+	elseif (item_condition < 0.8) then
+		cof = 0.65
+	elseif (item_condition < 0.7) then
+		cof = 0.73
+	elseif (item_condition < 0.6) then
+		cof = 0.85
+	elseif (item_condition < 0.5) then
+		cof = 0.9
+	elseif (item_condition < 0.4) then
+		cof = 1.0
+	elseif (item_condition < 0.3) then
+		cof = 1.17
+	elseif (item_condition < 0.2) then
+		cof = 1.33
+	elseif (item_condition < 0.1) then
+		cof = 1.5
+	end
+	return math.floor(cost*(1-item_condition)*cof * mult * cur_price_percent)
 end
 
 function can_repair_item( item_name, item_condition, mechanic ) --( string, float, string )
