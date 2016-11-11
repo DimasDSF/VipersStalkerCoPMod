@@ -18,6 +18,21 @@ local smarts_by_no_assault_zones = {
 									["jup_b41_sr_no_assault"] 	= "jup_b41"
 }
 
+function ignore_enemy_by_overrides(obj,enemy,st)
+	local id = obj:id()
+	local enemy_id = enemy:id()
+	-- Overrides from custom data logic
+	db.storage[id].enemy_id = enemy_id
+	local overrides = st.overrides
+	if (overrides and overrides.combat_ignore) then
+		if (xr_logic.pick_section_from_condlist(enemy, obj, overrides.combat_ignore.condlist) == "true") then
+			--obj:enable_memory_object(enemy,false)
+			return true
+		end
+	end
+
+	return false
+end
 
 function is_enemy(obj, enemy, st, not_check_sim)
 	if not obj:alive() then
@@ -30,6 +45,10 @@ function is_enemy(obj, enemy, st, not_check_sim)
 
 	if st.enabled == false then
 		return true
+	end
+	
+	if (ignore_enemy_by_overrides(obj,enemy,st)) then
+		return false
 	end
 
 	local overrides = st.overrides
@@ -54,7 +73,8 @@ function is_enemy(obj, enemy, st, not_check_sim)
 		-- враг не актер.
 		-- сталкер находится в зоне.
 		-- смарт в котором находится сталкер не в состоянии тревоги.
-	if enemy:id() ~= db.actor:id() and not IsMonster(enemy) and character_community(obj) ~= "zombied" and character_community(enemy) ~= "zombied" then
+		-- and character_community(obj) ~= "zombied"
+	if enemy:id() ~= db.actor:id() and not IsMonster(enemy) and character_community(enemy) ~= "zombied" then
 		for k,v in pairs (smarts_by_no_assault_zones) do
 			local zone = db.zone_by_name[k]
 			if zone and (utils.npc_in_zone(obj, zone) or utils.npc_in_zone(enemy, zone)) then
@@ -75,18 +95,42 @@ function is_enemy(obj, enemy, st, not_check_sim)
 			return false
 		end
 	end
-	--printf("checking combat_ignore for stalker[%s] enemy name [%s] in section[%s]",obj:name(), enemy:name(),storage.active_section)
-	--' Если есть оверрайды, то работаем по ним.
-	if overrides and
-		 overrides.combat_ignore
-	then
-		local ret_value = xr_logic.pick_section_from_condlist( enemy, obj, overrides.combat_ignore.condlist )
-		if ret_value == "true" then
-			--printf("pl:Disabling_memory_object[1] for stalker[%s] enemy name [%s] in section[%s]",obj:name(), enemy:name(),storage.active_section)
---			obj:enable_memory_object( enemy, false )
+	
+	if (xr_conditions.surge_started()) then
+		if (character_community(obj) == "monster" or character_community(obj) == "zombied") then
+			return true
+		end
+		
+		if (db.storage[obj_id].combat_ignore.surge_safe) then
+			return true
+		end
+		
+		if (db.storage[enemy_id] and db.storage[enemy_id].combat_ignore and db.storage[enemy_id].combat_ignore.surge_safe and obj:see(enemy) and not ignore_enemy_by_overrides(obj,enemy,st)) then
+			return true
+		end
+		
+		local npc_safe
+		local comm = character_community(enemy)
+		local zone
+
+		local sm = surge_manager.get_surge_manager()
+		for i=1, #sm.covers do
+			zone = sm.covers[i]
+			if (zone:inside(obj:position())) then
+				if not (db.storage[obj_id].combat_ignore.surge_safe) then
+					db.storage[obj_id].combat_ignore.surge_safe = true
+				end
+				npc_safe = true
+				break
+			end
+		end
+		
+		if not (npc_safe) then
+			--obj:enable_memory_object(enemy,false)
 			return false
 		end
-		return true
+	else
+		db.storage[obj_id].combat_ignore.surge_safe = nil
 	end
 	return true
 end
@@ -114,10 +158,6 @@ function action_process_enemy:enemy_callback( obj, enemy )
 		if se_obj and se_obj.m_smart_terrain_id ~= 65535 then
 			local smart_obj = alife():object(se_obj.m_smart_terrain_id)
 			smart_obj:set_alarm()
-
-			if enemy:id() == db.actor:id() and smart_obj.base_on_actor_control ~= nil then
-				smart_obj.base_on_actor_control:actor_attack()
-			end
 		end
 		local se_enemy			= alife():object(enemy:id())
 		if se_obj and se_enemy then
@@ -142,6 +182,15 @@ function action_process_enemy:hit_callback(obj, amount, local_direction, who, bo
 	if amount == 0 then
 		-- Кто-то стрельнул в воздух
 		return
+	end
+	local se_obj = alife():object(obj:id())
+	if se_obj and se_obj.m_smart_terrain_id ~= 65535 then
+		local smart_obj = alife():object(se_obj.m_smart_terrain_id)
+		if who:id() == db.actor:id() and amount > 0 and is_enemy(obj, who, self.st, false) and smart_obj.base_on_actor_control ~= nil then
+			if (character_community(obj) ~= "zombied" and character_community(obj) ~= "killer" and not IsMonster(obj)) or xr_conditions.target_squad_name(obj, jup_b47_merc_guard_squad) then
+				smart_obj.base_on_actor_control:actor_attack()
+			end
+		end
 	end
 
 	if who:id() == db.actor:id() then

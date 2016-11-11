@@ -194,7 +194,7 @@ function evaluator_corpse:__init(name, storage, npc) super (nil, name)
 end
 function evaluator_corpse:evaluate()
 	local npc = self.object
-	if not npc:alive() or npc:best_enemy() or npc:character_community() == "zombied" or self.a.corpse_detection_enabled == false or xr_wounded.is_wounded(npc) or npc:section() == "actor_visual_stalker" then
+	if not npc:alive() or npc:best_enemy() or xr_conditions.surge_started() or npc:character_community() == "zombied" or self.a.corpse_detection_enabled == false or xr_wounded.is_wounded(npc) or npc:section() == "actor_visual_stalker" then
 		self.a.active = nil
 		return false
 	end

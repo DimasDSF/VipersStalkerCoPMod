@@ -570,8 +570,12 @@ function weapon_manager:update_weapon_list(na,cut,max)
 			end
 			return
 		end
-		if not id then
+		if item and not id then
 			id = item:id()
+		else
+			get_console():execute("Crash_Patch_used_for_rx_wmgr_line_573")
+			idpatchitem = self.npc:best_weapon()
+			id = idpatchitem:id()
 		end
 		if rx_utils.item_is_fa(item) then
 			local sec = item:section()

@@ -65,6 +65,18 @@ function check_enemy_name (actor , npc , p)
 	return false
 end
 
+function check_enemy_faction (actor , npc , p)
+	local enemy_id = db.storage[npc:id()].enemy_id
+	local enemy = db.storage[enemy_id] and db.storage[enemy_id].object
+	local name
+	if enemy and enemy:alive() then
+		if (character_community(enemy) == p[1]) then
+			return true
+		end
+	end
+	return false
+end
+
 function is_playing_sound (actor, npc)
 	return xr_sound.sound_table[npc:id()] ~= nil
 end

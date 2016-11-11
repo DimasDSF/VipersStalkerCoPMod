@@ -12,10 +12,9 @@ local sleep_fade_pp_eff		= 4
 
 local START_MIN_SURGE_TIME 	= 2*60*60
 local START_MAX_SURGE_TIME 	= 4*60*60
-local MIN_SURGE_TIME 		= 8*60*60	--12*60*60
+local MIN_SURGE_TIME 		= 12*60*60	--12*60*60
 local MAX_SURGE_TIME 		= 24*60*60	--24*60*60
 local prev_sec 				= 0
-local delta_v
 
 local immuned_to_surge_squads = {
 						["monster_predatory_day"] 	= true,
@@ -49,18 +48,13 @@ function CSurgeManager:initialize()
 	self.ui_disabled 			= false
 	self.blowout_sound 			= false
 
-	self.surge_time = 190
+	self.surge_time = 222
 	self.inited_time = game.CTime()
 	self.last_surge_time = game.get_game_time()
-	delta_v = math.random(START_MIN_SURGE_TIME, START_MAX_SURGE_TIME)
-	self._delta = delta_v
+	self._delta = math.random(START_MIN_SURGE_TIME, START_MAX_SURGE_TIME) -- global minutes, время между выбросами
 	self.count = 0
 	self.covers = {}
 
-	--Vergas---------------------------ON-----------------------
-	VS_surge_news.get_time_next_surge(delta_v,"да")
-	--Vergas---------------------------OFF----------------------
-	
 	self.condlist = {}
 	self.survive = {}
 
@@ -161,13 +155,7 @@ function CSurgeManager:update()
 			local diff = math.abs(self._delta - g_time:diffSec(self.last_surge_time))
 			log("--->diff="..tostring(diff))
 			if(diff<3600) then
-				delta_v = 3*3600+g_time:diffSec(self.last_surge_time)
-				self._delta = delta_v
-	--Vergas---------------------------ON-----------------------
-	VS_surge_news.get_time_next_surge(delta_v)
-	--Vergas---------------------------OFF----------------------
-	
-				
+				self._delta = 3*3600+g_time:diffSec(self.last_surge_time)
 			end
 			self.time_forwarded = false
 		end
@@ -285,7 +273,11 @@ function CSurgeManager:update()
 --						xr_sound.set_sound_play(db.actor:id(), "pri_a17_kovalsky_surge_phase_1")
 					end
 				end
-				level.set_weather_fx("fx_surge_day_3")
+				if (level.get_time_hours() >= 5 and level.get_time_hours() <= 20) then
+					level.set_weather_fx("fx_blowout_day")
+				else
+					level.set_weather_fx("fx_blowout_night")
+				end
 				self:give_surge_hide_task()
 				self.task_given = true
 			end
@@ -294,7 +286,6 @@ function CSurgeManager:update()
 end
 
 function CSurgeManager:start(manual)
-
 	local Y, M, D, h, m, s, ms = 0, 0, 0, 0, 0, 0, 0
 	Y, M, D, h, m, s, ms = self.last_surge_time:get(Y, M, D, h, m, s, ms)
 	if(manual) then
@@ -323,7 +314,6 @@ function CSurgeManager:start(manual)
 --			xr_effects.scenario_autosave(nil,nil,{"st_save_uni_surge_start"})
 		end
 	end
-	VS_send_news.SurgePDAStatusDisconnect() --Даем типс о потере связи.
 end
 --Vergas-----------------------------------------ON-----------------------------
 function get_delta()
@@ -346,14 +336,10 @@ function CSurgeManager:skip_surge()
 	self.started 			= false
 	self.finished 			= true
 	self.levels_respawn 	= {zaton = true, jupiter = true, pripyat = true}
-        delta_v 				= math.random(MIN_SURGE_TIME, MAX_SURGE_TIME)
-	self._delta 			= delta_v
+	self._delta 			= math.random(MIN_SURGE_TIME, MAX_SURGE_TIME)
 	self.surge_message 		= ""
 	self.surge_task_sect 	= ""
 	self.task_given 		= false
-	--Vergas---------------------------ON-----------------------
-	VS_surge_news.get_time_next_surge(delta_v)
-	--Vergas---------------------------OFF----------------------
 
 	self.effector_set			= false
 	self.second_message_given 	= false
@@ -375,15 +361,11 @@ function CSurgeManager:end_surge(manual)
 	self.finished 			= true
 	self.levels_respawn 	= {zaton = true, jupiter = true, pripyat = true}
 	self.last_surge_time 	= game.get_game_time()
-	delta_v 				= math.random(MIN_SURGE_TIME, MAX_SURGE_TIME)
-	self._delta 			= delta_v
+	self._delta 			= math.random(MIN_SURGE_TIME, MAX_SURGE_TIME)
 	self.surge_message 		= ""
 	self.surge_task_sect 	= ""
 	self.task_given 		= false
 	dust_manager.start_dust()
-	--Vergas---------------------------ON-----------------------
-	VS_surge_news.get_time_next_surge(delta_v)
-	--Vergas---------------------------OFF----------------------
 
 	if(self.effector_set) then
 		xr_sound.stop_sound_looped(db.actor:id(), "blowout_rumble")
@@ -417,8 +399,7 @@ function CSurgeManager:end_surge(manual)
 
 	self:respawn_artefacts_and_replace_anomaly_zone()
 	xr_statistic.inc_surges_counter()
-	
-	VS_send_news.SurgePDAStatusReconnect() --Даем типс о восстановлении связи.
+
 end
 
 function CSurgeManager:respawn_artefacts_and_replace_anomaly_zone()

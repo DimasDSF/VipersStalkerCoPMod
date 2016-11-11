@@ -7,7 +7,7 @@ local weapons_tb ={}	--таблица валяющегося оружия
 local corpse_tb = {}	--таблица трупов
 local dust_ini = ini_file("verg\\dust_manager.ltx")
 
-function registrar()
+function register_trash()
 -- собираю мертвых монстров, трупы и валяющееся оружие
 	for i = 1,65535 do
 		local obj = alife():object(i)
@@ -34,7 +34,7 @@ function registrar()
 end
 
 function start_dust()
-	registrar()
+	register_trash()
 	cleaning_dead_monster()
 	cleaning_dead_weapons()
 end
@@ -81,12 +81,20 @@ function cleaning_dead_weapons()
 				if condition < 1 then
 					if condition < dust_ini:r_float("list_parameters","remained_weapons_condition") then
 						--можно удалять пушечку
-						alife():release(weapons_tb[i],true)
-						n = n + 1
+						if (obj_l.parent_id == 65535) then
+							alife():release(weapons_tb[i],true)
+							n = n + 1
+						else
+							get_console():execute("trying_to_remove_a_weapon_with_parent")
+						end
 					else
 						--пушечку не удаляем а только коцаем
 						condition = condition - dust_ini:r_float("list_parameters","remove_condition")
-						obj_l:set_condition(condition)
+						if (obj_l.parent_id == 65535) then
+							obj_l:set_condition(condition)
+						else
+							get_console():execute("trying_to_apply_damage_to_a_weapon_with_parent")
+						end
 					end
 				end
 			end

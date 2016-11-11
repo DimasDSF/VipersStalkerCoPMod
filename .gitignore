@@ -58,3 +58,6 @@ gamedata/levels/
 # Files Not to be backuped
 # ===============
 *.anm
+*.zip
+*.7z
+*.rar
