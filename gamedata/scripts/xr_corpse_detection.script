@@ -5,31 +5,6 @@
 ----------------------------------------------------------------------------------------------------------------------
 lootable_table = {}
 
---Artefacts 23
-lootable_table["af_medusa"] = true
-lootable_table["af_cristall_flower"] = true
-lootable_table["af_night_star"] = true
-lootable_table["af_vyvert"] = true
-lootable_table["af_gravi"] = true
-lootable_table["af_gold_fish"] = true
-lootable_table["af_cristall"] = true
-lootable_table["af_fire"] = true
-lootable_table["af_eye"] = true
-lootable_table["af_dummy_glassbeads"] = true
-lootable_table["af_fireball"] = true
-lootable_table["af_blood"] = true
-lootable_table["af_fuzz_kolobok"] = true
-lootable_table["af_mincer_meat"] = true
-lootable_table["af_soul"] = true
-lootable_table["af_electra_sparkler"] = true
-lootable_table["af_electra_flash"] = true
-lootable_table["af_ice"] = true
-lootable_table["af_electra_moonlight"] = true
-lootable_table["af_baloon"] = true
-lootable_table["af_glass"] = true
-lootable_table["af_dummy_battery"] = true
-lootable_table["af_dummy_dummy"] = true
-
 --Патроны
 lootable_table["ammo_9x18_fmj"] = true
 lootable_table["ammo_9x18_pmm"] = true
@@ -85,7 +60,6 @@ lootable_table["wpn_rpg7"] = true
 lootable_table["wpn_g36"] = true
 lootable_table["wpn_fn2000"] = true
 lootable_table["wpn_pkm"] = true
-lootable_table["wpn_knife"] = true
 
 -- Аддоны
 lootable_table["wpn_addon_scope"] = true
@@ -148,7 +122,6 @@ lootable_table["detector_simple"] = true
 lootable_table["detector_advanced"] = true
 lootable_table["detector_elite"] = true
 lootable_table["detector_scientific"] = true
-lootable_table["device_pda"] = true
 
 --Уникальные предметы
 lootable_table["wpn_pm_actor"] = true
@@ -190,180 +163,149 @@ end
 class "evaluator_corpse" (property_evaluator)
 function evaluator_corpse:__init(name, storage, npc) super (nil, name)
 	self.a = storage
-	self.a.dtimer = 0
 end
 function evaluator_corpse:evaluate()
-	local npc = self.object
-	if not npc:alive() or npc:best_enemy() or xr_conditions.surge_started() or npc:character_community() == "zombied" or self.a.corpse_detection_enabled == false or xr_wounded.is_wounded(npc) or npc:section() == "actor_visual_stalker" then
-		self.a.active = nil
+	if not self.object:alive() then
 		return false
 	end
-	local npc_id = npc:id()
-	if self.a.active and self.a.selected_corpse_id then
-		local corpse = db.storage[self.a.selected_corpse_id] and db.storage[self.a.selected_corpse_id].object
-		if corpse and (db.storage[self.a.selected_corpse_id].corpse_already_selected == nil or db.storage[self.a.selected_corpse_id].corpse_already_selected == npc_id) then
-			if corpse:position():distance_to_sqr(self.a.vertex_position) > 15 then
-				self.a.active = nil
-				return false
-			end
-			return true
-		else
-			self.a.active = nil
-			return false
-		end
-	end
-	local tg = time_global()
-	if self.a.dtimer > tg then
+
+	if self.object:best_enemy() ~= nil then
 		return false
 	end
-	self.a.dtimer = tg+math.random(2000,4000)
+
+	if self.object:character_community() == "zombied" then
+		return false
+	end
+
+	if self.a.corpse_detection_enabled == false then
+		return false
+	end
+
+	if xr_wounded.is_wounded(self.object) then
+		return false
+	end
+
+	if self.object:section() == "actor_visual_stalker" then
+		return false
+	end
+
 	local corpses = release_body_manager.get_release_body_manager().release_objects_table
-	local nearest_corpse_dist = 700 -- Будет выбирать только трупы, ближе чем эта дистанция (проверяется по квадрату расстояния)
+
+	local nearest_corpse_dist = 400 -- Будет выбирать только трупы, ближе чем эта дистанция (проверяется по квадрату расстояния)
 	local nearest_corpse_vertex = nil
 	local nearest_corpse_position = nil
 	local corpse_id	= nil
+
 	for k,v in pairs(corpses) do
 		local id = v.id
 		local corpse_npc = db.storage[id] and db.storage[id].object
-		if corpse_npc and IsStalker(corpse_npc) and db.storage[id].corpse_already_selected == nil then
-			local corpse_pos = corpse_npc:bone_position("bip01_spine")
-			local dist = npc:position():distance_to_sqr(corpse_pos)
-			if dist < nearest_corpse_dist or (npc:see(corpse_npc) and dist < nearest_corpse_dist*1.5) then
+
+		if corpse_npc ~= nil and self.object:see(corpse_npc) and (db.storage[id].corpse_already_selected == nil or db.storage[id].corpse_already_selected == self.object:id()) then
+			if self.object:position():distance_to_sqr(corpse_npc:position()) < nearest_corpse_dist then
+
 				corpse_contain_any_valuable = nil
-				corpse_npc:iterate_inventory(check_item,corpse_npc)
-				if corpse_contain_any_valuable then
+				corpse_npc:iterate_inventory(check_item, corpse_npc)
+
+				if corpse_contain_any_valuable == true then
+
 					--printf("FOUND NEW PRIOR CORPSE %s", corpse_npc:name())
-					local corpse_vertex = level.vertex_id(corpse_pos)
-					if level.vertex_position(corpse_vertex):distance_to_sqr(corpse_pos) > 16 then
-						corpse_vertex = corpse_npc:level_vertex_id()
-					end
-					if npc:accessible(corpse_vertex) and level.vertex_position(corpse_vertex):distance_to_sqr(corpse_pos) <= 15 then
-						nearest_corpse_dist = dist
+					corpse_vertex = level.vertex_id(corpse_npc:position())
+					if self.object:accessible(corpse_vertex) then
+						nearest_corpse_dist = self.object:position():distance_to_sqr(corpse_npc:position())
 						nearest_corpse_vertex = corpse_vertex
-						nearest_corpse_position = corpse_pos --level.vertex_position(corpse_vertex)
+						nearest_corpse_position = corpse_npc:position()
 						corpse_id = id
 					end
+
 				end
+--			else
+--				printf("FOUND CORPSE %s FAR %s", corpse_npc:name(), self.object:position():distance_to_sqr(corpse_npc:position()))
 			end
+
 		end
 	end
+
 	if nearest_corpse_vertex ~= nil then
 		self.a.vertex_id = nearest_corpse_vertex
 		self.a.vertex_position = nearest_corpse_position
+		
+		if self.a.selected_corpse_id ~= nil and self.a.selected_corpse_id ~= corpse_id then
+			if db.storage[self.a.selected_corpse_id] ~= nil then
+				db.storage[self.a.selected_corpse_id].corpse_already_selected = nil
+			end			
+		end
+
 		self.a.selected_corpse_id = corpse_id
-		self.a.active = true
+		db.storage[self.a.selected_corpse_id].corpse_already_selected = self.object:id()		
+		
 		return true
 	end
+
 	return false
 end
+
 
 
 ----------------------------------------------------------------------------------------------------------------------
 --Actions
 ----------------------------------------------------------------------------------------------------------------------
 class "action_search_corpse" (action_base)
-function action_search_corpse:__init (npc_name,action_name,storage) super (nil,action_name)
+function action_search_corpse:__init (npc_name,action_name, storage) super (nil, action_name)
 	self.a = storage
 end
 function action_search_corpse:initialize()
 	action_base.initialize(self)
-	local npc = self.object
-	npc:set_desired_position()
-	npc:set_desired_direction()
-	npc:set_path_type(game_object.level_path)
-	npc:set_dest_level_vertex_id(self.a.vertex_id)
-	local dist = npc:position():distance_to(self.a.vertex_position)
-	if dist < 1.3 or npc:level_vertex_id() == self.a.vertex_id then
-	elseif dist < math.random(5,30) then
-		state_mgr.set_state(self.object,"patrol")
-	else
-		state_mgr.set_state(self.object,"rush")
-	end
-	db.storage[self.a.selected_corpse_id].corpse_already_selected = npc:id()
-	self.timer = time_global()+50000
+	self.object:set_desired_position()
+	self.object:set_desired_direction()
+
+	self.object:set_dest_level_vertex_id(self.a.vertex_id)
+	--state_mgr.set_state(self.object, "patrol", nil, nil, {look_position = self.a.vertex_position})
+	state_mgr.set_state(self.object, "patrol")
 end
-function action_search_corpse:execute()
+function action_search_corpse:execute ()
 	action_base.execute(self)
-	local npc = self.object
-	if self.timer < time_global() then
-		get_all_from_corpse(npc) --fix
+
+	if self.object:position():distance_to_sqr(self.a.vertex_position) > 2 then
 		return
 	end
-	if npc:position():distance_to(self.a.vertex_position) < 1.3 or npc:level_vertex_id() == self.a.vertex_id then
-		if not self.sound then
-			if math.random(100) < 60 then
-				xr_sound.set_sound_play(npc:id(),"corpse_loot_begin")
-			end
-			self.timer = time_global()+9000
-			self.sound = true
-		end
-		local look_pos = self.a.vertex_position
-		local corpse = db.storage[self.a.selected_corpse_id] and db.storage[self.a.selected_corpse_id].object
-		if corpse then
-			look_pos = corpse:bone_position("bip01_spine")
-		end
-		state_mgr.set_state(npc,"search_corpse",nil,nil,{look_position = look_pos})
-	else
-		if state_mgr.get_state(npc) == "search_corpse" then
-			state_mgr.set_state(self.object,"rush")
-		end
-		npc:set_dest_level_vertex_id(self.a.vertex_id)
-	end
+
+	state_mgr.set_state(self.object, "search_corpse", nil, nil, {look_position = self.a.vertex_position})
+	xr_sound.set_sound_play(self.object:id(), "corpse_loot_begin")
 end
-function action_search_corpse:finalize()
-	action_base.finalize(self)
-	if db.storage[self.a.selected_corpse_id] then
+function action_search_corpse:finalize ()
+	if self.a.selected_corpse_id ~= nil and db.storage[self.a.selected_corpse_id] ~= nil then 
 		db.storage[self.a.selected_corpse_id].corpse_already_selected = nil
 	end
-	self.a.selected_corpse_id = nil
-	self.a.active = nil
-	self.sound = nil
-	state_mgr.set_state(self.object,"idle",nil,nil,nil,{fast_set = true})
+	
+	action_base.finalize(self)
 end
 
 local transfer_to_npc = nil
-local items_value = 0
 
 function get_item(npc, item)
-	local wm,bwpn_prior
-	if rx_wmgr and rx_wmgr.wm_modes.enabled_ext then
-		wm = rx_wmgr.get_wm(transfer_to_npc)
-		local bwpn = wm:get_weapon() or transfer_to_npc:best_weapon()
-		if bwpn then
-			bwpn_prior = wm:get_weapon_prior(bwpn)
-		end
-	end
 	if lootable_table[item:section()] == true then
-		if items_value < 100 then
-			if bwpn_prior and rx_utils.item_is_fa(item) then
-				if bwpn_prior < wm:get_weapon_prior(item) then
-					items_value = items_value+80
-				end
-			end
-			items_value = items_value+item:cost()*item:condition()/30
-		end
-		npc:transfer_item(item,transfer_to_npc)
+		npc:transfer_item(item, transfer_to_npc)
 	end
 end
 
 function get_all_from_corpse(npc)
-	local id = npc:id()
-	db.storage[id].corpse_detection.active = nil
-	db.storage[id].corpse_detection.dtimer = time_global()+500
-	local corpse_npc_id = db.storage[id].corpse_detection.selected_corpse_id
+	printf("GET ALL FROM CORPSE")
+
+	local corpse_npc_id = db.storage[npc:id()].corpse_detection.selected_corpse_id
 	local corpse_npc = db.storage[corpse_npc_id] and db.storage[corpse_npc_id].object
+
 	if corpse_npc == nil then
 		return
 	end
-	items_value = 0
+
 	transfer_to_npc = npc
-	corpse_npc:iterate_inventory(get_item,corpse_npc)
-	if items_value >= 100 then
-		xr_sound.set_sound_play(id,"corpse_loot_good")
-	elseif items_value > 0 and math.random(items_value) < 50 then
-		xr_sound.set_sound_play(id,"corpse_loot_bad")
+	corpse_npc:iterate_inventory(get_item, corpse_npc)
+	
+	if math.random(100) > 20 then
+		xr_sound.set_sound_play(npc:id(), "corpse_loot_begin")
+	else
+		xr_sound.set_sound_play(npc:id(), "corpse_loot_bad")
 	end
-	printf("GET ALL FROM CORPSE value = %s",items_value)
 end
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -422,6 +364,6 @@ function is_under_corpse_detection(npc)
 		return false
 	end
 
-	local current_action_id = mgr:current_action_id()
+	local current_action_id = mgr:current_action_id() 
 	return  current_action_id == xr_actions_id.corpse_exist
 end

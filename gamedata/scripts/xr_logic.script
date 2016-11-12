@@ -237,7 +237,6 @@ end
 function disable_generic_schemes(npc, stype)
 	if stype == modules.stype_stalker then
 		xr_combat.disable_scheme(npc, "combat")
-    if rx_ai then rx_ai.disable_schemes(npc, stype) end
 		xr_hit.disable_scheme(npc, "hit")
 		xr_meet.disable_scheme(npc, "actor_dialogs")
 		--'xr_heli_hunter.disable_scheme(npc, "heli_hunter")
@@ -307,7 +306,6 @@ end
 		xr_combat_ignore.set_combat_ignore_checker(npc, ini, "combat_ignore")
 		xr_reach_task.set_reach_task(npc, ini, "reach_task")
 
-		if rx_ai then rx_ai.enable_schemes(ini,npc) end
 	elseif stype == modules.stype_mobile then
 		local combat_section = utils.cfg_get_string(ini, section, "on_combat", npc, false, "")
 		if combat_section then

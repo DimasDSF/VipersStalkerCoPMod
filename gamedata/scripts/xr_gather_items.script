@@ -9,12 +9,7 @@ function evaluator_gather_items:evaluate()
 	if self.a.gather_items_enabled ~= true then
 		return false
 	end
-	if self.object:motivation_action_manager():evaluator(xr_evaluators_id.wounded_exist):evaluate() or self.object:motivation_action_manager():evaluator(xr_evaluators_id.corpse_exist):evaluate() then
-		return false
-	end
-	if (xr_conditions.surge_started()) then
-		return false
-	end
+
 	return self.object:is_there_items_to_pickup()
 end
 
@@ -26,7 +21,7 @@ function add_to_binder(object, ini, scheme, section, storage)
 	local manager = object:motivation_action_manager()
 
 	manager:remove_evaluator(stalker_ids.property_items)
-	manager:add_evaluator(stalker_ids.property_items, this.evaluator_gather_items("is_there_items_to_pickup", storage, object))	
+	manager:add_evaluator(stalker_ids.property_items, this.evaluator_gather_items("is_there_items_to_pickup", storage, object))
 end
 function set_gather_items(npc, ini, scheme, section)
 	local st = xr_logic.assign_storage_and_bind(npc, ini, scheme, section)

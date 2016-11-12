@@ -61,7 +61,6 @@ function action_wounded:initialize ()
 	self.object:movement_enabled(false)
 	self.object:disable_trade()
 	self.object:wounded(true)
-	self.prewt = time_global()
 end
 function action_wounded:execute ()
 		action_base.execute (self)
@@ -81,12 +80,11 @@ function action_wounded:execute ()
 	-- Проверяем возможность скушать аптечку.
 	if self.a.autoheal == true then
 		if wound_manager.can_use_medkit ~= true then
-			local wounded_time = xr_logic.pstor_retrieve(self.object, "wounded_time") or 0
+			local begin_wounded = xr_logic.pstor_retrieve(self.object, "begin_wounded")
 			local current_time = time_global()
-			wounded_time = wounded_time+current_time-self.prewt
-			xr_logic.pstor_store(self.object, "wounded_time", wounded_time)
-			self.prewt = current_time
-			if wounded_time > 200000 then
+			if begin_wounded == nil then
+				xr_logic.pstor_store(self.object, "begin_wounded", current_time)
+			elseif current_time - begin_wounded > 60000 then
 				local npc = self.object
 				sim:create("medkit_script",
 								npc:position(),
@@ -187,8 +185,11 @@ function Cwound_manager:unlock_medkit()
 	self.can_use_medkit = true
 end
 function Cwound_manager:eat_medkit()
+	--printf("EAT MEDKIT %s", self.npc:name())
 	if self.can_use_medkit == true then
+		--printf("can use medkit")
 		if self.npc:object("medkit_script") ~= nil then
+			--printf("eat medkit")
 			self.npc:eat(self.npc:object("medkit_script"))
 		end
 
@@ -200,15 +201,17 @@ function Cwound_manager:eat_medkit()
 			alife():release(alife():object(self.npc:object("medkit_scientic"):id()), true)
 		end
 
-		local wounded_time = xr_logic.pstor_retrieve(self.npc, "wounded_time")
-		if wounded_time ~= nil and wounded_time <= 200000 then
-			xr_sound.set_sound_play(self.npc:id(),"help_thanks")
+
+		local begin_wounded = xr_logic.pstor_retrieve(self.npc, "begin_wounded")
+		local current_time = time_global()
+		if begin_wounded ~= nil and current_time - begin_wounded <= 60000 then
+			xr_sound.set_sound_play(self.npc:id(), "help_thanks")
 		end
-
-		xr_logic.pstor_store(self.npc, "wounded_time", nil)
-
+		
+		xr_logic.pstor_store(self.npc, "begin_wounded", nil)
 
 		self.can_use_medkit = false
+		db.storage[self.npc:id()].wounded_already_selected = nil
 		self:update()
 	end
 end

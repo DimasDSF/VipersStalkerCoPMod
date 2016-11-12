@@ -13,8 +13,7 @@ function eva_state_mgr_weapon:evaluate()
 --		printf("    no weapon")
 		return true
 	end
-	local bestweapon = rx_utils and rx_utils.get_weapon(self.object) or self.object:best_weapon()
-	if not isWeapon(bestweapon) then
+	if not isWeapon(self.object:best_weapon()) then
 --		printf("isWeapon = false")
 --		if self.object:best_weapon() == nil then
 --			printf(" weapon nil")
@@ -23,11 +22,12 @@ function eva_state_mgr_weapon:evaluate()
 --		end
 		return true
 	end
+	local bestweapon = self.object:best_weapon()
 	local activeitem = self.object:active_item()
 	
 	if (weapon == "strapped" and
 	   ((strappable_weapon(bestweapon) and 
-	   self.object:weapon_strapped()) or
+	   self.object:weapon_strapped() and self.object:is_weapon_going_to_be_strapped(bestweapon)) or
 	   (not strappable_weapon(bestweapon) and activeitem == nil))) then
 	   
 --	   printf("    weapon realy strapped")
@@ -43,7 +43,7 @@ function eva_state_mgr_weapon:evaluate()
 			(activeitem ~= nil) and
 			(bestweapon ~= nil) and
 			(activeitem:id() == bestweapon:id()) and
-			 self.object:weapon_unstrapped()
+			(not self.object:is_weapon_going_to_be_strapped(bestweapon) and self.object:weapon_unstrapped())
 			
 		) then
 --		printf(" weapon realy unstrapped")
@@ -69,21 +69,27 @@ function eva_state_mgr_weapon_locked:__init(name, st) super (nil, name)
 	self.st = st
 end
 function eva_state_mgr_weapon_locked:evaluate()
-	local weapon = state_lib.states[self.st.target_state].weapon
-	if (weapon == nil) then
---		printf("    no weapon")
-		return false
-	end
-	local bestweapon = rx_utils and rx_utils.get_weapon(self.object) or self.object:best_weapon()
-	if bestweapon == nil then
-		return false
-	end
-
 	local weapon_strapped = self.object:weapon_strapped()
 	local weapon_unstrapped = self.object:weapon_unstrapped()
 
 	--log(string.format("%s [%s] [%s]", self.object:name(), tostring(weapon_strapped), tostring(weapon_unstrapped)))
 	if not (weapon_unstrapped or weapon_strapped) then
+		return true
+	end
+	
+	local bestweapon = self.object:best_weapon()
+	if bestweapon == nil then
+		return false
+	end
+
+	
+	local is_weapon_going_to_be_strapped = self.object:is_weapon_going_to_be_strapped(bestweapon)
+	
+	if is_weapon_going_to_be_strapped and not weapon_strapped then
+		return true
+	end
+
+	if not is_weapon_going_to_be_strapped and not weapon_unstrapped and self.object:active_item() ~= nil then
 		return true
 	end
 	
@@ -103,7 +109,7 @@ class "eva_state_mgr_weapon_strapped_now" (property_evaluator)
 function eva_state_mgr_weapon_strapped_now:__init(name) super (nil, name)
 end
 function eva_state_mgr_weapon_strapped_now:evaluate()
-	local best_weapon = rx_utils and rx_utils.get_weapon(self.object) or self.object:best_weapon()
+	local best_weapon = self.object:best_weapon()
 
 	if not isWeapon(best_weapon) then
 		return true
@@ -112,7 +118,7 @@ function eva_state_mgr_weapon_strapped_now:evaluate()
 	local active_item = self.object:active_item()
 
 	return (not strappable_weapon(best_weapon) and active_item == nil) or
-		   self.object:weapon_strapped()
+		   (self.object:is_weapon_going_to_be_strapped(best_weapon) and self.object:weapon_strapped())
 end
 
 --' Необходимо ли держать оружие в руках
@@ -131,11 +137,11 @@ function eva_state_mgr_weapon_unstrapped_now:__init(name) super (nil, name)
 end
 function eva_state_mgr_weapon_unstrapped_now:evaluate()
 	local active_item = self.object:active_item()
-	local best_weapon = rx_utils and rx_utils.get_weapon(self.object) or self.object:best_weapon()
+	local best_weapon = self.object:best_weapon()
 	return  active_item ~= nil and		
 			best_weapon ~= nil and
 			active_item:id() == best_weapon:id() and
-			self.object:weapon_unstrapped()
+			(not self.object:is_weapon_going_to_be_strapped(best_weapon) and self.object:weapon_unstrapped())
 end
 
 
@@ -264,7 +270,7 @@ end
 
 function get_weapon(obj, target_state)
 	if state_lib.states[target_state].weapon_slot == nil then
-		return rx_utils and rx_utils.get_weapon(obj) or obj:best_weapon()
+		return obj:best_weapon()
 	else
 		return obj:item_in_slot(state_lib.states[target_state].weapon_slot)
 	end
@@ -312,9 +318,9 @@ local state_queue_params = {
 
 function get_queue_params(npc, target, st)
 	local a = state_queue_params[st.animation]
-	local weap = rx_utils and rx_utils.get_weapon(npc) or npc:best_weapon()
 	if a ~= nil then
 		if a[3] ~= nil then
+			local weap = npc:best_weapon()
 			local old_aim_time = npc:aim_time(weap)
 			if old_aim_time ~= a[3] then
 				db.storage[npc:id()].old_aim_time = old_aim_time
@@ -322,13 +328,13 @@ function get_queue_params(npc, target, st)
 			end
 		end
 		if db.storage[npc:id()].old_aim_time ~= nil then
-			npc:aim_time(weap, db.storage[npc:id()].old_aim_time)
+			npc:aim_time(npc:best_weapon(), db.storage[npc:id()].old_aim_time)
 			db.storage[npc:id()].old_aim_time = nil
 		end
 		return a[1], a[2]
 	end
 	if db.storage[npc:id()].old_aim_time ~= nil then
-		npc:aim_time(weap, db.storage[npc:id()].old_aim_time)
+		npc:aim_time(npc:best_weapon(), db.storage[npc:id()].old_aim_time)
 		db.storage[npc:id()].old_aim_time = nil
 	end
 	return 3, 1000

@@ -72,11 +72,6 @@ end
 function hear_callback(obj, who_id, sound_type, sound_position, sound_power)
 	local st = db.storage[obj:id()]
 	local s_type = get_sound_type(sound_type)
-	if (s_type == "WPN_hit" or s_type == "MST_attack" or s_type == "MST_damage") and sound_position:distance_to_sqr(obj:position()) < 650 then
-		if not xr_wounded.is_wounded(obj) then
-			xr_danger.set_script_danger(obj,3000)
-		end
-	end
 	local story_id = get_object_story_id(who_id) or "any"
 	if st.hear_sounds == nil then
 		return

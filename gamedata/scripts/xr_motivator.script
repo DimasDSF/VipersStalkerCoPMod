@@ -179,7 +179,6 @@ function motivator_binder:net_spawn(sobject)
 end
 
 function motivator_binder:net_destroy()
-	if rx_ai then rx_ai.npc_net_destroy(self.object) end
 	--printf("motivator_binder:net_destroy(): self.object:name()='%s'", self.object:name())
 	xrs_dyn_music.npc_table[self.object:id()] = nil
 
@@ -283,12 +282,10 @@ function motivator_binder:hit_callback(obj, amount, local_direction, who, bone_i
 --		self.need_relation_update = who:id() == db.actor:id()
 		xr_wounded.hit_callback(obj:id())
 	end
-	if rx_ai then rx_ai.npc_hit(obj,amount,local_direction,who,bone_index,self.object) end
 end
 
 function motivator_binder:death_callback(victim, who)
 	self:hit_callback(victim, 1, vector():set(0,0,0), who, "from_death_callback")
-	if rx_ai then rx_ai.npc_death(self.object,who) end
 	xrs_dyn_music.npc_table[self.object:id()] = nil
 	xr_combat_ignore.fighting_with_actor_npcs[self.object:id()] = nil
 --	xrs_dyn_music.stop_combat(self.object:id())
@@ -338,10 +335,7 @@ function motivator_binder:death_callback(victim, who)
 		end
 
 	end
-	release_body_manager.get_release_body_manager():moving_dead_body(self.object,true)
---VSm
-	VScallback.OnNpcDeth(victim, who)
---VSm
+	release_body_manager.get_release_body_manager():moving_dead_body(self.object)
 end
 
 function motivator_binder:use_callback(obj, who)
@@ -471,7 +465,6 @@ function motivator_binder:update(delta)
 		end
 		self.need_relation_update = false
 	end]]--
-	if rx_ai then rx_ai.npc_update(self.object,self.st) end
 end
 
 function motivator_binder:reload(section)
@@ -530,9 +523,6 @@ function motivator_binder:hear_callback(self, who_id, sound_type, sound_position
 	if who_id == self:id() then
 		return
 	end
-	if rx_ai then
-		rx_ai.npc_hear(self,who_id,sound_type,sound_position,sound_power)
-	end
 	xr_hear.hear_callback(self, who_id, sound_type, sound_position, sound_power)
 end
 
@@ -550,7 +540,6 @@ function addCommonPrecondition(action)
 	action:add_precondition (world_property(xr_evaluators_id.wounded_exist,		false))
 	action:add_precondition (world_property(xr_evaluators_id.corpse_exist,		false))
 	action:add_precondition (world_property(stalker_ids.property_items,		false))
-	if rx_ai then rx_ai.addCommonPrecondition(action) end
 end
 
 

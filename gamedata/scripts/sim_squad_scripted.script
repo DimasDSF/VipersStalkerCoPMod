@@ -780,19 +780,6 @@ end
 function sim_squad_scripted:can_switch_online()
 	return cse_alife_online_offline_group.can_switch_online(self)
 end
-function sim_squad_scripted:switch_offline()
-	if rx_ai then
-		rx_ai.squad_switch_offline(self)
-		return
-	end
-	cse_alife_online_offline_group.switch_offline(self)
-end
-function sim_squad_scripted:switch_online()
-	if rx_ai then
-		rx_ai.squad_switch_online(self)
-	end
-	cse_alife_online_offline_group.switch_online(self)
-end
 
 --***********************************************************************************************
 --*										MAP LOCATION											*

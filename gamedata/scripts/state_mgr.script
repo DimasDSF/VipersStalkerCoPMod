@@ -17,9 +17,6 @@ function evaluator_state_mgr_idle:__init(name, state_manager) super (nil, name)
 	self.mgr = nil
 end
 function evaluator_state_mgr_idle:evaluate()
-	if self.st.fix_hang_time > time_global() then
-		return true
-	end
 	local t = self.st.target_state == "idle" and
 			 --not self.st.planner:evaluator(self.st.properties["locked"]):evaluate() and
 			not self.st.planner:evaluator(self.st.properties["animstate_locked"]):evaluate() and
@@ -74,9 +71,6 @@ function evaluator_state_mgr_idle_alife:evaluate()
 	if not self.object:alive() then
 		return true
 	end
-	if self.st.fix_hang_time > time_global() then
-		return true
-	end
 	-- апдейт менеджера анимаций
 	-- раньше он был тут, сейчас он вынесен из эвалуатора
 
@@ -129,9 +123,6 @@ function evaluator_state_mgr_idle_items:__init(name, state_manager) super (nil, 
 	self.t = nil
 end
 function evaluator_state_mgr_idle_items:evaluate()
-	if self.st.fix_hang_time > time_global() then
-		return true
-	end
 	if not self.object:alive() then
 		return true
 	end
@@ -200,7 +191,6 @@ function act_state_mgr_to_idle:__init(name,state_manager) super (nil, name)
 end
 function act_state_mgr_to_idle:initialize()
 	action_base.initialize(self)
-	self.timer = time_global()+8000
 --'	self.object:movement_enabled(true)
 
 	self.object:inactualize_patrol_path		()
@@ -218,9 +208,6 @@ function act_state_mgr_to_idle:initialize()
 	self.object:set_path_type           	( game_object.level_path )
 end
 function act_state_mgr_to_idle:execute()
-	if self.timer < time_global() then
---		self.st.fix_hang_time = time_global()+5000
-	end
 	utils.send_to_nearest_accessible_vertex( self.object, self.object:level_vertex_id() )
 	self.object:set_path_type           	( game_object.level_path )
 	if self.object:best_enemy() then
@@ -278,9 +265,7 @@ function eva_state_mgr_end:evaluate()
 		--end
 	else
 		if current_action_id ~= stalker_ids.action_danger_planner and
-			 current_action_id ~= stalker_ids.action_anomaly_planner and
-			 (not rx_facer or (current_action_id ~= rx_facer.actid_facer and current_action_id ~= rx_facer.actid_steal_up_facer)) and
-			 (not rx_bandage or current_action_id ~= rx_bandage.actid_bandage)
+			 current_action_id ~= stalker_ids.action_anomaly_planner
 		then
 			self.st.combat = false
 		end
@@ -348,10 +333,10 @@ function act_state_mgr_end:weapon_update()
 		end
 	end
 
-	local wpn = rx_utils and rx_utils.get_weapon(self.object) or self.object:best_weapon()
 	local t = state_lib.states[self.st.target_state].weapon
+	local w = isWeapon(self.object:best_weapon())
 
-	if not wpn then
+	if not w then
 		return
 	end
 	if t == "fire" or t == "sniper_fire" then
@@ -371,16 +356,16 @@ function act_state_mgr_end:weapon_update()
 				if t == "sniper_fire" then
 					sniper_aim = self.object:position():distance_to(look_object:position())*aim_ratio
 					if sniper_aim <= min_ratio then
-						self.object:set_item(object.fire1, wpn, 1, min_ratio)
+						self.object:set_item(object.fire1, self.object:best_weapon(), 1, min_ratio)
 						return
 					end
-					self.object:set_item(object.fire1, wpn, 1, sniper_aim)
+					self.object:set_item(object.fire1, self.object:best_weapon(), 1, sniper_aim)
 				else
-					self.object:set_item(object.fire1, wpn, state_mgr_weapon.get_queue_params(self.object, look_object, state_lib.states[self.st.target_state]))
+					self.object:set_item(object.fire1, self.object:best_weapon(), state_mgr_weapon.get_queue_params(self.object, look_object, state_lib.states[self.st.target_state]))
 				end
 				return
 			else
-				self.object:set_item(object.idle, wpn)
+				self.object:set_item(object.idle, self.object:best_weapon())
 				return
 			end
 		end
@@ -389,17 +374,17 @@ function act_state_mgr_end:weapon_update()
 			self.st.look_object == nil
 		then
 			if t == "sniper_fire" then
-				self.object:set_item(object.fire1, wpn, 1, sniper_aim)
+				self.object:set_item(object.fire1, self.object:best_weapon(), 1, sniper_aim)
 			else
-				self.object:set_item(object.fire1, wpn, state_mgr_weapon.get_queue_params(self.object, nil, state_lib.states[self.st.target_state]))
+				self.object:set_item(object.fire1, self.object:best_weapon(), state_mgr_weapon.get_queue_params(self.object, nil, state_lib.states[self.st.target_state]))
 			end
 			return
 		end
-		self.object:set_item(object.fire1, wpn, state_mgr_weapon.get_queue_params(self.object, nil, state_lib.states[self.st.target_state]))
+		self.object:set_item(object.fire1, self.object:best_weapon(), state_mgr_weapon.get_queue_params(self.object, nil, state_lib.states[self.st.target_state]))
 		return
 	elseif t == "unstrapped" then
 		--printf("[%s] not shooting", self.object:name())
-		self.object:set_item(state_mgr_weapon.get_idle_state(self.st.target_state), wpn)
+		self.object:set_item(state_mgr_weapon.get_idle_state(self.st.target_state), self.object:best_weapon())
 	end
 end
 function act_state_mgr_end:finalize()
@@ -438,7 +423,6 @@ function state_manager:__init(npc)
 	self.animation_position = nil
 	self.animation_direction = nil
 	self.pos_direction_applied = false
-	self.fix_hang_time = 0
 end
 function state_manager:set_state(state_name, callback, timeout, target, extra)
 	--printf("Set State called: for %s State: %s", self.npc:name(), state_name)

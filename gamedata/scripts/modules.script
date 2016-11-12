@@ -35,7 +35,6 @@ load_scheme("xr_smartcover",					"smartcover",		stype_stalker)
 load_scheme("xr_companion",						"companion",		stype_stalker)
 load_scheme("xr_animpoint",						"animpoint",		stype_stalker)
 load_scheme("xr_reach_task",					"reach_task",		stype_stalker)
-if rx_ai then rx_ai.load_schemes() end
 
 ----------------------------------------------------------------------
 -- Загрузка модулей монстров:
