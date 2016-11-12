@@ -12,6 +12,9 @@ function evaluator_gather_items:evaluate()
 	if self.object:motivation_action_manager():evaluator(xr_evaluators_id.wounded_exist):evaluate() or self.object:motivation_action_manager():evaluator(xr_evaluators_id.corpse_exist):evaluate() then
 		return false
 	end
+	if (xr_conditions.surge_started()) then
+		return false
+	end
 	return self.object:is_there_items_to_pickup()
 end
 

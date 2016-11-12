@@ -6,6 +6,8 @@ lair		= 0 ; логово монстров
 territory	= 0
 actor		= 0
 squad 		= 0
+mercbase	= 0 ; наемники выбирают один из таких смартов ночью
+mercterr	= 0 ; наемники занимают один из таких смартов днем
 zombattck	= 0 ; зомби нападают на этот смарт ночью
 
 [default_resource]:default
@@ -66,10 +68,12 @@ sim_avail = true
 [zat_stalker_base_smart]:default_base
 surge = 1
 sim_avail = true
-zombattck = 2
 
 ;no sim
 [zat_medic_home_smart]:default
+;lair = 1
+;surge = 1
+;sim_avail = {+zat_b22_actor_can_hurt} true, false
 sim_avail = false
 
 [zat_b7_stalker_raider]:default
@@ -1197,6 +1201,7 @@ sim_avail = {-jup_b19_agreed_to_go} true, {+jup_b19_complete} true, {+jup_b19_ya
 sim_avail = true
 surge		= 1
 territory 	= 2
+mercterr	= 2
 
 [jup_b202]:default
 sim_avail =	{-jup_b52_actor_items_can_be_stolen} true, {+jup_b202_actor_items_returned} true, false
@@ -1212,6 +1217,7 @@ surge		= 1
 [jup_b204]:default
 lair = 1
 territory = 2
+mercterr = 1
 sim_avail = {+jup_b204_wachman_dead} true, false
 
 [jup_b205_smart_terrain]:default
@@ -1236,6 +1242,7 @@ sim_avail = {+jup_b208_burers_hunt_done} true,  true
 surge		= 1
 territory = 1
 lair = 2
+mercbase = 2
 
 [jup_b209]:default_resource
 territory = 1
@@ -1280,6 +1287,7 @@ lair = 1
 sim_avail = true ; {jup_b47_actor_pick_docs} true, false ; {+jup_b47_products_info_complite} true, false ; {+jup_b47_task_end} true, false ; , {+jup_b47_all_merc_dead} true, false
 lair = 1
 territory = 2
+mercterr = 1
 
 [jup_b6_anom_2]:default_resource
 sim_avail = {-jup_b6_give_task} true, {+jup_b6_task_fail} true, {+jup_b6_anom_2_count_end} true, false
@@ -1296,9 +1304,7 @@ surge = 1
 sim_avail = false
 
 [jup_b219]:default
-sim_avail = true
-territory = 2
-lair = 2
+sim_avail = false
 
 [jup_b8_smart_terrain]:default
 sim_avail = true
@@ -1312,6 +1318,7 @@ sim_avail = false
 sim_avail = false
 
 [jup_a9]:default_lair
+mercterr = 2
 sim_avail =  true
 
 ;---------	SIMULATION	--------
@@ -1331,10 +1338,12 @@ lair = 1
 [jup_sim_4]:default_lair
 territory = 1
 lair = 1
+mercterr = 1
 sim_avail =  true
 
 [jup_sim_5]:default_lair
 territory = 1
+mercterr = 1
 sim_avail =  true
 
 [jup_sim_6]:default
@@ -1360,6 +1369,7 @@ sim_avail =  true
 
 [jup_sim_11]:default_lair
 territory = 1
+mercterr = 1
 sim_avail =  true
 
 [jup_sim_12]:default_lair
@@ -1384,12 +1394,13 @@ sim_avail =  true
 [jup_sim_17]:default_lair
 sim_avail =  true
 resource 	= 2
+mercterr 	= 1
 
 [jup_sim_18]:default
 sim_avail =  true
 territory = 2
-base = 2
 lair = 1
+mercbase = 2
 
 [jup_sim_19]:default_lair
 territory = 1
@@ -1413,7 +1424,6 @@ sim_avail = {+pri_a15_cutscene_end} true, false
 
 [pri_a16]:default_base
 sim_avail = {+pri_a28_actor_in_zone_stay} true, false
-zombattck = 2
 
 [pri_a17]:default
 sim_avail = {-pri_a17_actor_bring_gauss_rifle -pri_a17_actor_has_gauss_rifle} false, true
@@ -1522,6 +1532,7 @@ territory = 1
 sim_avail = {-pri_b35_task_end +pri_b35_task_running} false, true
 base = 2
 surge = 1
+zombattck = 2
 
 [pri_b305_dogs]:default
 sim_avail = false

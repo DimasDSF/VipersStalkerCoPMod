@@ -387,7 +387,7 @@ prior = 120
 path_walk = duty_guarder_walk
 path_look = duty_guarder_look
 on_info = {!actor_enemy =see_actor !npc_in_zone(jup_a6_sr_light) =actor_has_weapon =actor_in_zone(jup_a6_sr_noweap) =dist_to_actor_le(35)} remark@jup_a6_duty_guarder
-combat_ignore_cond = {=check_enemy_name(freedom)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
+combat_ignore_cond = {=fighting_dist_ge(70)} true, {=check_enemy_name(freedom)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
 out_restr = jup_a6_sr_noweap
 in_restr = jup_a6_sr_light
 meet = no_meet
@@ -397,7 +397,7 @@ anim = threat
 target = story | actor
 on_info = %=play_sound(jup_a6_base_guard)%
 on_game_timer = 75 | walker@jup_a6_duty_guarder
-combat_ignore_cond = {=check_enemy_name(freedom)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
+combat_ignore_cond = {=fighting_dist_ge(70)} true, {=check_enemy_name(freedom)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
 out_restr = jup_a6_sr_noweap
 in_restr = jup_a6_sr_light
 meet = no_meet
@@ -413,7 +413,7 @@ prior = 120
 path_walk = freedom_guarder_walk
 path_look = freedom_guarder_look
 on_info = {!actor_enemy =see_actor !npc_in_zone(jup_a6_sr_light) =actor_has_weapon =actor_in_zone(jup_a6_sr_noweap) =dist_to_actor_le(35)} remark@jup_a6_freedom_guarder
-combat_ignore_cond = {=check_enemy_name(duty)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
+combat_ignore_cond = {=fighting_dist_ge(70)} true, {=check_enemy_name(duty)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
 out_restr = jup_a6_sr_noweap
 in_restr = jup_a6_sr_light
 meet = no_meet
@@ -423,7 +423,7 @@ anim = threat
 target = story | actor
 on_info = %=play_sound(jup_a6_base_guard)%
 on_game_timer = 75 | walker@jup_a6_freedom_guarder
-combat_ignore_cond = {=check_enemy_name(duty)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
+combat_ignore_cond = {=fighting_dist_ge(70)} true, {=check_enemy_name(duty)} true, {=npc_in_zone(jup_a6_sr_light)} true, false
 out_restr = jup_a6_sr_noweap
 in_restr = jup_a6_sr_light
 meet = no_meet

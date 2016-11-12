@@ -5,11 +5,16 @@ arrive_dist = 80
 respawn_params = respawn@jup_b202
 
 [respawn@jup_b202]
-spawn_burers
+spawn_burer
+spawn_chimera
 
-[spawn_burers]
+[spawn_burer]
 spawn_squads = simulation_burer
-spawn_num = {+jup_b218_pripyat_group_gathering} 2, 0
+spawn_num = {-jup_b52_actor_items_can_be_stolen} 1, {+jup_b202_actor_items_returned} 1, 0
+
+[spawn_chimera]
+spawn_squads = simulation_chimera
+spawn_num = {-jup_b52_actor_items_can_be_stolen} 1, {+jup_b202_actor_items_returned} 1, 0
 
 [exclusive]
 jup_b202_stalker_snag_wounded = jupiter\jup_b202_snag_wounded.ltx

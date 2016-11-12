@@ -1,0 +1,30 @@
+[smart_terrain]
+squad_id = 16
+max_population = 2
+respawn_params = respawn@jup_b208
+
+[respawn@jup_b208]
+spawn_tushkano
+spawn_chimera
+spawn_controller
+spawn_poltergeist
+
+[spawn_tushkano]
+spawn_squads = simulation_tushkano
+spawn_num = {+jup_b208_burers_hunt_done} 2, 0
+
+[spawn_chimera]
+spawn_squads = simulation_chimera
+spawn_num = {+jup_b208_burers_hunt_done +jup_b212_jupiter_chimera_dead} 1, 0
+
+[spawn_controller]
+spawn_squads = simulation_controller
+spawn_num = {+jup_b208_burers_hunt_done +jup_b212_jupiter_chimera_dead} 1, 0
+
+[spawn_poltergeist]
+spawn_squads = simulation_poltergeist_tele
+spawn_num = {+jup_b208_burers_hunt_done +jup_b212_jupiter_chimera_dead} 1, 0
+
+[exclusive]
+burer_1 = jupiter\jup_b208_burers.ltx
+burer_2 = jupiter\jup_b208_burers.ltx

@@ -150,8 +150,8 @@ satiety_health_v				= 0.0001	;0.03			;увеличение здоровья при уменьшении сытости
 satiety_critical				= -1.0		;0.25						;критическое значения сытости (в процентах от 0..1) когда здоровье начианает уменьшаться
 radiation_health_v				= 0.01	;0.006			;уменьшение здоровья при воздействии радиации
 morale_v						= 0.01					;скорость восстановления морали
-health_hit_part					= 1.0		;0.8			;процент хита, уходящий на отнимание здоровья
-power_hit_part					= 1.0		;0.9			;процент хита, уходящий на отнимание силы
+health_hit_part					= 0.5		;0.8			;процент хита, уходящий на отнимание здоровья
+power_hit_part					= 0.6		;0.9			;процент хита, уходящий на отнимание силы
 psy_health_v					= 0.1						;скорость восстановления psy-здоровья
 
 protections_sect 				= chimera_protections
@@ -269,7 +269,7 @@ distance_to_corpse				= 1.2		; дист. до трупа, при которой он переходит в состоя
 ; Vision
 ;-------------------------------------------------------------------------
 eye_fov							= 110	;140
-eye_range						= 100	;50
+eye_range						= 140	;50
 
 vision_free_section				= chimera_vision_free
 vision_danger_section			= chimera_vision_danger
@@ -279,25 +279,25 @@ vision_danger_section			= chimera_vision_danger
 
 [chimera_vision_free]
 min_view_distance   			= 0.8				; коэффициент, который множится на eye_range, в зависимости от угла
-max_view_distance	 			= 1.0				; коэффициент, который множится на eye_range, в зависимости от угла
+max_view_distance	 			= 1.8				; коэффициент, который множится на eye_range, в зависимости от угла
 visibility_threshold	 		= 100.0				; значение, при достижении суммой которого объект считается видимым
 always_visible_distance 		= 0.3
 time_quant						= 0.001
 decrease_value					= 0.01				; значение, на которое уменьшается вес, если объект попал в фрустум, но отсёкся по каким-то причинам
 velocity_factor		     		= 0.5
 luminocity_factor				= 0.1 				; фактор освещения (только для Актёра)
-transparency_threshold			= 0.25
+transparency_threshold			= 0.8
 
 [chimera_vision_danger]
 min_view_distance   			= 0.8				; коэффициент, который множится на eye_range, в зависимости от угла
-max_view_distance	 			= 1.0				; коэффициент, который множится на eye_range, в зависимости от угла
+max_view_distance	 			= 1.8				; коэффициент, который множится на eye_range, в зависимости от угла
 visibility_threshold	 		= 100.0				; значение, при достижении суммой которого объект считается видимым
 always_visible_distance 		= 0.3
 time_quant						= 0.001
 decrease_value					= 0.01				; значение, на которое уменьшается вес, если объект попал в фрустум, но отсёкся по каким-то причинам
 velocity_factor		     		= 0.5
 luminocity_factor				= 0.1 				; фактор освещения (только для Актёра)
-transparency_threshold			= 0.25
+transparency_threshold			= 0.8
 
 [chimera_protections]
 skin_armor = 0.7

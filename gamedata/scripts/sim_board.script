@@ -17,7 +17,7 @@ local board = nil
 simulation_activities = {
 	stalker = {
 			squad = nil,
-			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(18,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a6" or target:name() == "jup_b41" or target:name() == "pri_a16") end },
+			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(18,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a6" or target:name() == "pri_a16") end },
 						surge	 = { prec = function() return xr_conditions.surge_started() end },
 						territory= { prec = function() return in_time_interval(8,18) and not xr_conditions.surge_started() end },
 						resource = { prec = function(squad, target) return in_time_interval(8,18) and not xr_conditions.surge_started() end } -- and squad:has_detector()
@@ -42,7 +42,7 @@ simulation_activities = {
 						monster_zombied_day	 		= { prec = function(squad, target) return in_time_interval(8,19)	and not xr_conditions.surge_started() and simulation_objects.sim_dist_to(squad, target) <= 350 end	},
 						monster_special	 			= { prec = function(squad, target) return in_time_interval(8,19)	and not xr_conditions.surge_started() and simulation_objects.sim_dist_to(squad, target) <= 350 end	}
 					},
-			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(19,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a6" or target:name() == "jup_b41" or target:name() == "pri_a16") end },
+			smart = { 	base	 = { prec = function(squad, target) return in_time_interval(19,8) and not xr_conditions.surge_started() and not travel_manager.check_squad_for_enemies(squad) and (target:name() == "zat_stalker_base_smart" or target:name() == "jup_a6" or target:name() == "pri_a16") end },
 						territory= { prec = function() return in_time_interval(8,19) and not xr_conditions.surge_started() end },
 						resource = { prec = function(squad, target) return in_time_interval(8,18) and not xr_conditions.surge_started() end },
 						surge	 = { prec = function() return xr_conditions.surge_started() end }
@@ -61,10 +61,12 @@ simulation_activities = {
 	},
 	killer = {
 			squad = nil,
-			smart = {	territory= { prec = function() return  not xr_conditions.surge_started()  end },
+			smart = {	mecrterr = { prec = function() return in_time_interval(8,17) and not xr_conditions.surge_started()  end },
+						mecrbase = { prec = function() return in_time_interval(17,8) and not xr_conditions.surge_started()  end },
+						territory= { prec = function() return in_time_interval(8,17) and not xr_conditions.surge_started()  end },
 						surge	 = { prec = function() return xr_conditions.surge_started() end }
 					},
-			actor = { prec = function(squad, target) return simulation_objects.sim_dist_to(squad, target) <= 350 end }
+			actor = { prec = function(squad, target) return in_time_interval(10,15) and simulation_objects.sim_dist_to(squad, target) <= 350 end }
 
 	},
 	zombied = {
