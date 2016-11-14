@@ -106,28 +106,29 @@ end
 
 
 
-class "drop_manager"
-function drop_manager:__init(npc)
-	self.npc = npc
-end
-function drop_manager:create_release_item()
-	--' Спрашиваем у серверного объекта генерились ли предметы
-	local se_obj = alife():object(self.npc:id())
-	if se_obj == nil or se_obj.death_droped == true then
+function create_release_item(npc)
+	local id = npc:id()
+	local se_obj = alife():object(id)
+	if not (se_obj) then
+		alun_utils.printf("death dropped: se_obj is nil!")
 		return
 	end
-	se_obj.death_droped = true
+	local death_dropped = alun_utils.load_var(npc,"death_dropped",false)
+	if (death_dropped) then
+		alun_utils.printf("death dropped: already dropped")
+		return
+	end
+	alun_utils.save_var(npc,"death_dropped",true)
 
-	--' Запускаем итератор на удаление предметов
-	self.npc:iterate_inventory(keep_item, self.npc)
+	npc:iterate_inventory(keep_item, npc)
 
 	--' Проверка на отсутствие спауна лута
-	local ini = self.npc:spawn_ini()
+	local ini = npc:spawn_ini()
 
 	if ini and ini:section_exist("dont_spawn_loot") then
 		return
 	end
-	local st		= db.storage[self.npc:id()]
+	local st		= db.storage[id]
 	local st_ini 	= st and st.ini
 	if st_ini and st_ini:line_exist(st.section_logic , "dont_spawn_loot") then
 		return
@@ -136,20 +137,20 @@ function drop_manager:create_release_item()
 	--' Доспавниваем необходимое количество итемов:
 	--' Необходимо составить список объектов которые могут быть заспавнены для персонажа
 
-	local spawn_items = item_by_community[character_community(self.npc)]
+	local spawn_items = item_by_community[character_community(npc)]
 	if spawn_items == nil then
 		return
 	end
 	for k,v in pairs(spawn_items) do
 		--' По каждому объекту необходимо получить зависимости
-		if check_item_dependence(self.npc, k) == true then
+		if check_item_dependence(npc, k) == true then
 			--' По каждому объекту необходимо получить количество
 			if count_by_level[k] == nil then
 				abort("Incorrect count settings in death_manager for object[%s]", k)
 			end
 			local number = math.ceil(math.random(count_by_level[k].min, count_by_level[k].max))
 			--' Необходимо заспавнить нужное количество.
-			create_items(self.npc, k, number, v)
+			create_items(npc, k, number, v)
 		end
 	end
 

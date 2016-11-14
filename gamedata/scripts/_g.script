@@ -81,7 +81,7 @@ local scripts_to_print =	{
 							["task_objects"]	 = true
 							}
 function printf(fmt,...)
-
+--[[
 	local is_g = 0
 	local result = fmt
 	if debug == nil then
@@ -101,7 +101,7 @@ function printf(fmt,...)
 		result = fmt
 	end
 	log(string.format(result,...))
-
+	]]
 end
 
 ----------------------------------------------------------------------
@@ -476,7 +476,12 @@ end
 
 -- Крешнуть игру (после вывода сообщения об ошибке в лог)
 function abort(fmt, ...)
-	local reason = string.format(fmt, ...)
+	local params = {...}
+	local i = 0
+	local reason = fmt and string.gsub(fmt,"%%s",function(a) i = i + 1 return tostring(params[i]) end)
+	if (alun_utils) then
+		alun_utils.debug_write(reason)
+	end
 	--error_log(reason)
 end
 
@@ -528,9 +533,21 @@ function start_game_callback()
 		["monster_predatory_day"]			= "monster",
 		["monster_predatory_night"]			= "monster",
 		["monster_vegetarian"]				= "monster",
-		["monster_zombied_day"]				= "monster",
-		["monster_zombied_night"]			= "monster",
-		["monster_special"]					= "monster"
+		["monster_zombied_day"]				= "zombied",
+		["monster_zombied_night"]			= "zombied",
+		["monster_special"]					= "monster",
+		["stalker_sci"] 					= "stalker",
+		["stalker_hunter_day"] 				= "stalker",
+		["stalker_hunter_night"] 			= "stalker",
+		["stalker_elite"] 					= "stalker",
+		["stalker_guide"]					= "stalker",
+		["freedom_sci"] 					= "freedom",
+		["freedom_elite"] 					= "freedom",
+		["dolg_hunter_day"] 				= "dolg",
+		["dolg_hunter_night"] 				= "dolg",
+		["dolg_elite"] 						= "dolg",
+		["bandit_elite"] 					= "bandit",
+		["monolith_sci"]					= "monolith"
 	}
 
 	monster_classes = {
@@ -603,9 +620,6 @@ function start_game_callback()
 	xr_sound.start_game_callback()
 	dialog_manager.fill_phrase_table()
 	xr_s.init()
---'VSm'--
-	VScallback.init()
---'VSm'--
 --'Повелитель Зоны 2.0'--
 	god.init()
 --'Повелитель Зоны 2.0'--

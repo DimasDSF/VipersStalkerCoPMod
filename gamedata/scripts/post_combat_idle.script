@@ -9,6 +9,8 @@ end
 function evaluator_combat_enemy:evaluate()
 	local best_enemy = self.object:best_enemy()
 	if best_enemy ~= nil and not xr_combat_ignore.is_enemy(self.object, best_enemy, db.storage[self.object:id()].combat_ignore, true) then
+		self.st.last_best_enemy_id = nil
+		self.st.last_best_enemy_name = nil
 		return false
 	end
 	if best_enemy ~= nil and self.st.timer ~= nil then

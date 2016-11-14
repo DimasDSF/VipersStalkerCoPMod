@@ -336,7 +336,7 @@ cost				= 450
 boost_time			= 30.0
 boost_radiation_restore	= 0.005
 eat_alcohol				= 0.05
-boost_bleeding_restore	= -0.01
+eat_satiety 			= -0.2
 
 hide_time_wpn           = 3 ; Tris mod
 
@@ -366,6 +366,11 @@ eat_portions_num	= 1
 
 use_sound			= interface\inv_medkit
 
+;AI Tweaks xr_help_wounded
+attach_angle_offset		= -2.6,2.3,0
+attach_position_offset	= 0.156, -0.035081, 0.05
+attach_bone_name    = bip01_l_hand
+auto_attach       = false
 
 [medkit]:booster
 $spawn 				= "food and drugs\medkit"

@@ -138,6 +138,7 @@ end
 --------------------
 function se_stalker:on_spawn()
 	cse_alife_human_stalker.on_spawn(self)
+	if (ai_tweaks) then ai_tweaks.se_stalker_on_spawn(self) end
 end
 --------------------
 function se_stalker:on_death(killer)

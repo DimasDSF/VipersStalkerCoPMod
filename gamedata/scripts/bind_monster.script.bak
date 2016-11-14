@@ -206,8 +206,6 @@ function generic_object_binder:death_callback(victim, who)
 		if alife():object(self.object:id()) ~= nil then
 			alife():release(alife():object(self.object:id()), true)
 		end
-	else
-		release_body_manager.get_release_body_manager():moving_dead_body(self.object,true)
 	end
 --' Подключим колбэк юзанья, для возможности снятия частей монстров
 	self:exist_use()
@@ -301,7 +299,6 @@ function generic_object_binder:net_spawn(sobject)
 	end
 
 	if not self.object:alive() then
-		release_body_manager.get_release_body_manager():moving_dead_body(self.object)
 		return true
 	end
 	if alife():object(self.object:id()) == nil then

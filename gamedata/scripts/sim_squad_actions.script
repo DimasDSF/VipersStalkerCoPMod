@@ -2,7 +2,12 @@
 --'*	Действие: Захватить точку
 --'******************************************************
 local STAY_POINT_IDLE_MIN = 180*60 --
-local STAY_POINT_IDLE_MAX = 950*60 --
+local STAY_POINT_IDLE_MAX = 300*60 --
+local IDLE_MIN = {}
+local IDLE_MAX = {}
+local ini = ini_file("ai_tweaks\\sim_squad_actions.ltx")
+local ini_loaded
+
 class "reach_target"
 function reach_target:__init(squad)
 	self.name = "reach_target"
@@ -27,6 +32,10 @@ function reach_target:update(under_simulation)
 		squad:clear_assigned_target()
 		return true
 	end
+	if not (squad_target.am_i_reached) then
+		squad_target = alun_utils.fake_squad()
+	end
+
 	if squad_target:am_i_reached(squad) then
 		squad_target:on_after_reach(squad)
 		return true
@@ -40,6 +49,10 @@ function reach_target:make(under_simulation)
 	if not under_simulation then
 		squad_target = alife():object(squad.assigned_target_id)
 	end
+	if (squad_target and not squad_target.am_i_reached) then
+		squad_target = alun_utils.fake_squad()
+	end
+
 	if squad_target then
 		squad_target:on_reach_target(squad)
 	end
@@ -65,7 +78,16 @@ function stay_on_target:__init(squad)
 	--' Смарт в котором остаемся
 	self.name = "stay_point"
 	self.start_time = nil
-	self.idle_time = math.random(STAY_POINT_IDLE_MIN, STAY_POINT_IDLE_MAX)
+
+	if not (ini_loaded) then
+		IDLE_MIN = alun_utils.collect_sections(ini,{"stay_point_idle_min"})
+		IDLE_MAX = alun_utils.collect_sections(ini,{"stay_point_idle_max"})
+		ini_loaded = true
+	end
+
+	local min_time = squad.player_id and IDLE_MIN[squad.player_id] or STAY_POINT_IDLE_MIN
+	local max_time = squad.player_id and IDLE_MAX[squad.player_id] or STAY_POINT_IDLE_MAX
+	self.idle_time = math.random( tonumber(min_time) , tonumber(max_time) )
 end
 -- Сохранение
 function stay_on_target:save(packet)

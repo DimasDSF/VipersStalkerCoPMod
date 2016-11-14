@@ -206,6 +206,8 @@ function generic_object_binder:death_callback(victim, who)
 		if alife():object(self.object:id()) ~= nil then
 			alife():release(alife():object(self.object:id()), true)
 		end
+	else
+		release_body_manager.get_release_body_manager():moving_dead_body(self.object,true)
 	end
 --' Подключим колбэк юзанья, для возможности снятия частей монстров
 	self:exist_use()
@@ -277,6 +279,7 @@ function generic_object_binder:hit_callback(obj, amount, local_direction, who, b
 	end
 
 	if amount > 0 then
+		if (ai_tweaks) then ai_tweaks.monster_hit_callback(obj,amount,local_direction,who,bone_index) end
 		printf("HIT_CALLBACK: %s amount=%s bone=%s who:id() = [%s] actor:id() = [%s]", obj:name(), amount, tostring(bone_index), who:id(), db.actor:id())
 	end
 end
@@ -299,6 +302,7 @@ function generic_object_binder:net_spawn(sobject)
 	end
 
 	if not self.object:alive() then
+		release_body_manager.get_release_body_manager():moving_dead_body(self.object)
 		return true
 	end
 	if alife():object(self.object:id()) == nil then

@@ -176,6 +176,12 @@ function eva_state_mgr_weapon_fire:__init(name, st) super (nil, name)
 	self.st = st
 end
 function eva_state_mgr_weapon_fire:evaluate()
+	if (ai_tweaks) then
+		if (state_lib.states[self.st.target_state].weapon == "fire" or state_lib.states[self.st.target_state].weapon == "sniper_fire") then
+			local weap = get_weapon(self.object, self.st.target_state)
+			ai_tweaks.npc_on_weapon_fire(self.object,weap)
+		end
+	end
 	return state_lib.states[self.st.target_state].weapon == "fire" or
 	       state_lib.states[self.st.target_state].weapon == "sniper_fire"
 end
@@ -189,6 +195,10 @@ end
 function act_state_mgr_weapon_unstrapp:initialize()
 	action_base.initialize(self)
 	self.object:set_item(get_idle_state(self.st.target_state), get_weapon(self.object, self.st.target_state))
+	if (ai_tweaks) then
+		local weap = get_weapon(self.object, self.st.target_state)
+		ai_tweaks.npc_on_weapon_unstrapped(self.object,weap)
+	end
 end
 function act_state_mgr_weapon_unstrapp:execute()
 	action_base.execute(self)
@@ -208,6 +218,9 @@ function act_state_mgr_weapon_strapp:initialize()
 	--' printf("weapon is: %s movement type is: %s", tostring(weap), tostring(self.object:movement_type()))
 	if strappable_weapon(weap) then
 		self.object:set_item(object.strap, weap)
+		if (ai_tweaks) then
+			ai_tweaks.npc_on_weapon_strapped(self.object,weap)
+		end
 	else
 		self.object:set_item(object.idle, nil)
 	end
@@ -246,6 +259,9 @@ function act_state_mgr_weapon_drop:initialize()
 	if strappable_weapon(weap) then
 		self.object:set_item(object.drop, weap)
 		death_manager.set_weapon_drop_condition(weap)
+		if (ai_tweaks) then
+			ai_tweaks.npc_on_weapon_drop(self.object,weap)
+		end
 	else
 		self.object:set_item(object.idle, nil)
 	end

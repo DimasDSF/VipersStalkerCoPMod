@@ -4,29 +4,36 @@
 --' Made by Distemper ----------------------------------------------------------------
 --' 11.02.08 ----------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------
-local IDLE_AFTER_DEATH = 40000
-local function add_to_release_table(release_tbl, object_id)
+
+function printf(txt,...)
+	--alun_utils.printf(txt,...)
+end
+
+local MIN_RELEASE_DISTANCE = 70
+local IDLE_AFTER_DEATH = 60 -- врем€ лежани€ после смерти, в секундах
+local BODY_MAX_COUNT = 35 -- количество тел которое одновременно может находитс€ на локации
+local function add_to_release_table(release_tbl,object_id,death)
 	printf("add to release_objects_table ["..object_id.."]")
 	local obj_params = {}
 	obj_params.id = object_id
-	obj_params.death_time = time_global()
+	if death then
+		obj_params.death_time = time_global()
+	end
 	table.insert(release_tbl, obj_params)
 end
 
 local function find_nearest_obj_to_release(release_tbl)
-	local max_distanse = 4900
+	local max_distanse = MIN_RELEASE_DISTANCE*MIN_RELEASE_DISTANCE
 	local pos_in_table = nil
 	local actor = db.actor
 	local actor_pos = actor:position()
-	for k,v in pairs(release_tbl) do
-		printf("release_objects_table["..k.."] = "..v.id)
+	--for k,v in pairs(release_tbl) do
+	for i=1, #release_tbl do
+		local v = release_tbl[i]
 		local object = alife():object(v.id)
 		if object then
-			printf("object_id = "..object.id)
-			printf("object_position x = "..vec_to_str(object.position))
 			local distance_to_body = actor_pos:distance_to_sqr(object.position)
-			printf("distanse = "..distance_to_body)
-			if distance_to_body > max_distanse and ((v.death_time == nil) or (time_global() > v.death_time + IDLE_AFTER_DEATH)) then
+			if distance_to_body > max_distanse and ((v.death_time == nil) or (time_global() > v.death_time + IDLE_AFTER_DEATH*1000)) then
 				max_distanse = distance_to_body
 				pos_in_table = k
 			end
@@ -42,8 +49,7 @@ class "Crelease_body"
 function Crelease_body:__init()
 	self.release_objects_table = {} -- таблица "—“≈ " трупов
 	self.keep_items_table = {} -- таблица квестовых предметов
- 	self.body_max_count = 15 -- количество тел которое одновременно может находитс€ в игре
-	self.current_object_id = 0 -- id только что убитого npc
+ 	self.body_max_count = BODY_MAX_COUNT
 	--' »терируемс€ по списку квестовых итемов.
 	local snd_ini = ini_file("misc\\death_generic.ltx")
 	if not snd_ini:section_exist("keep_items") then
@@ -57,7 +63,7 @@ function Crelease_body:__init()
 	end
 end
 
-function Crelease_body:moving_dead_body(obj)
+function Crelease_body:moving_dead_body(obj,death)
 	printf("current body name ["..obj:name().."]")
 	printf("-------table-------")
 	print_table(self.release_objects_table)
@@ -66,13 +72,10 @@ function Crelease_body:moving_dead_body(obj)
 	local object_id = obj:id()
 	if self:inspection_result(obj) then
 		printf("inspection_result return  ->  true")
-		if #self.release_objects_table <= self.body_max_count then
-			add_to_release_table(self.release_objects_table, object_id)
-			return
-		else
+		add_to_release_table(self.release_objects_table,object_id,death)
+		if #self.release_objects_table > self.body_max_count then
 			self:try_to_release()
 		end
-		add_to_release_table(self.release_objects_table, object_id)
 	end
 end
 
@@ -95,7 +98,6 @@ function Crelease_body:try_to_release()
 				alife():release(release_object, true)
 			end
 		end
-
 		table.remove(self.release_objects_table, pos_in_table)
 	end
 end
@@ -145,31 +147,20 @@ function  Crelease_body:check_for_known_info(obj)
 end
 
 function Crelease_body:save(packet)
-	set_save_marker(packet, "save", false, "Crelease_body")
-	local count = #self.release_objects_table
-	packet:w_u16(count)
-	for k,v in pairs(self.release_objects_table) do
-		packet:w_u16(v.id)
-	end
-	local level_id = game_graph():vertex(alife():actor().m_game_vertex_id):level_id()
-	packet:w_u16(level_id)
-	set_save_marker(packet, "save", true, "Crelease_body")
+	set_save_marker(packet,"save",false,"Crelease_body")
+	packet:w_u16(0)
+	packet:w_u16(0)
+	set_save_marker(packet,"save",true,"Crelease_body")
 end
 
 function Crelease_body:load(reader)
-	set_save_marker(reader, "load", false, "Crelease_body")
-	local count = reader:r_u16()
-	self.release_objects_table = {}
-	for i = 1, count do
-		local vid = reader:r_u16()
-		self.release_objects_table[i] = {}
-		self.release_objects_table[i].id = vid
+	set_save_marker(reader,"load",false,"Crelease_body")
+	local l1 = reader:r_u16()
+	for i = 1,l1 do
+		local l0 = reader:r_u16()
 	end
-	local level_id = reader:r_u16()
-	if level_id ~= game_graph():vertex(alife():object(0).m_game_vertex_id):level_id() then
-		self.release_objects_table = {}
-	end
-	set_save_marker(reader, "load", true, "Crelease_body")
+	local l2 = reader:r_u16()
+	set_save_marker(reader,"load",true,"Crelease_body")
 end
 
 function get_release_body_manager()

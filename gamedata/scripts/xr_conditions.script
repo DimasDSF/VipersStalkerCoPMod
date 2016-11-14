@@ -1,3 +1,49 @@
+function dist_to_job_point_le(actor, npc, p)
+	if not (npc) then
+		return false
+	end
+    local smart = xr_gulag.get_npc_smart(npc)
+    if smart == nil then return false end
+
+        local npc_info = smart.npc_info[npc:id()]
+    if npc_info then
+        local npc_job = smart.job_data[npc_info.job_id]
+
+        local alife_task = npc_job.alife_task
+        if alife_task then
+            return npc:position():distance_to_sqr(alife_task:position()) <= p[1]*p[1]
+        end
+    end
+
+    return false
+end
+function dist_to_job_point_ge(actor, npc, p)
+	if not (npc) then
+		return false
+	end
+    local smart = xr_gulag.get_npc_smart(npc)
+    if smart == nil then return false end
+
+        local npc_info = smart.npc_info[npc:id()]
+    if npc_info then
+        local npc_job = smart.job_data[npc_info.job_id]
+
+        local alife_task = npc_job.alife_task
+        if alife_task then
+            return npc:position():distance_to_sqr(alife_task:position()) >= p[1]*p[1]
+        end
+    end
+
+    return false
+end
+
+function is_enemy_fighting_actor(actor,npc,p)
+	local be = npc:best_enemy()
+	if (be and xr_combat_ignore.fighting_with_actor_npcs[be:id()]) then
+		return true
+	end
+	return false
+end
 
 -- Каждая функция в этом файле используется как условие xr_logic: {=функция !функция}
 -- Если в функцию необходимо передавать параметры, то:  {=функция(парам1:парам2:...) !функция(парам1:парам2:...)}
@@ -129,6 +175,9 @@ end
 
 -- Проверка выполняет ли кто указанную работу
 function is_obj_on_job(actor, npc, p)
+	if not (npc) then
+		return false
+	end
 	local smart
 	if p and p[2] then
 		smart = sim_board.get_sim_board():get_smart_by_name(p[2])
@@ -151,6 +200,9 @@ end
 -- проверка того что дистанция до обьекта <= заданной
 -- параметры: [sid,dist]
 function distance_to_obj_on_job_le(actor, npc, p)
+	if not (npc) then
+		return false
+	end
 	local smart = xr_gulag.get_npc_smart(npc)
 	for k,v in pairs(smart.npc_info) do
 		local npc_job = smart.job_data[v.job_id]

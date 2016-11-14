@@ -49,9 +49,6 @@ function actor_binder:net_spawn(data)
 		level.enable_input()
 	end
 	xr_s.on_game_load()                                    --' Distemper 03.2008 --
---VSm
-	VScallback.OnGameLoad()
---VSm
 	self.weather_manager:reset()
 	--' Загружаем настройки дропа
 	death_manager.init_drop_settings()
@@ -61,9 +58,6 @@ function actor_binder:net_spawn(data)
 	self.already_jumped = false
 	self.loaded = false
 	benchmark.main()							          --' Distemper 06.2008 --
- if rx_ai then 
-	rx_ai.actor_net_spawn()
-  end
 	if (gps_habar) then gps_habar.on_game_load() end -- Idler
 	return true
 end
@@ -178,9 +172,6 @@ function actor_binder:on_item_take (obj)
 ]]
 	end
 	treasure_manager.get_treasure_manager():on_item_take(obj:id())
-	if rx_ai then
-		rx_ai.actor_item_take(obj)
-	end 
 	if (gps_habar) then gps_habar.on_item_take(obj) end -- Idler
 end
 ----------------------------------------------------------------------------------------------------------------------
@@ -190,7 +181,7 @@ end
 
 function actor_binder:use_inventory_item(obj)
 	if(obj) then
-		local s_obj = alife():object(obj:id())
+	  local s_obj = alife():object(obj:id())
 		if(s_obj) and (s_obj:section_name()=="drug_anabiotic") then
 			xr_effects.disable_ui_only(db.actor, nil)
 			level.add_cam_effector("camera_effects\\surge_02.anm", 10, false, "bind_stalker.anabiotic_callback")
@@ -361,9 +352,6 @@ function actor_binder:update(delta)
 	
 	xr_s.on_actor_update(delta)
 
---VSm
-	VScallback.OnActorUpdate(self,delta)
---VSm
 	if(self.surge_manager) then
 		if(self.f_surge_manager_loaded ~= true) then
 			self.surge_manager:initialize()
@@ -389,13 +377,14 @@ function actor_binder:update(delta)
 	end
 	pda.fill_sleep_zones()
 	god.god_update()
-  if rx_ai then rx_ai.actor_update() end
 	if (gps_habar) then gps_habar.on_actor_update(delta) end -- Idler
 end
+	if posteffects_sn then
+		posteffects_sn.adding_effect()
+	end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:save(packet)
 	set_save_marker(packet, "save", false, "actor_binder")
-  if rx_ai then rx_ai.actor_save(packet) end
 	object_binder.save(self, packet)
 	--' Сохраняем уровень сложности
 	packet:w_u8(level.get_game_difficulty())

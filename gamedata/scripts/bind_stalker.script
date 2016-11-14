@@ -59,10 +59,22 @@ function actor_binder:net_spawn(data)
 	self.loaded = false
 	benchmark.main()							          --' Distemper 06.2008 --
 	if (gps_habar) then gps_habar.on_game_load() end -- Idler
+	-- alundaio
+	if (spawn_manager) then spawn_manager.on_game_load() end
+	if (alun_plugin_manager) then
+		alun_plugin_manager.actor_net_spawn(self.object,data)
+	end
+	if (xrs_debug_tools) then xrs_debug_tools.on_game_load() end
+	if (ai_tweaks) then ai_tweaks.on_game_load() end
+	if (itms_manager) then itms_manager.on_game_load() end
+	-- end alundaio
 	return true
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:net_destroy()
+	if (alun_plugin_manager) then
+		alun_plugin_manager.actor_net_destroy(self.object)
+	end
 	xr_sound.stop_sounds_by_id(self.object:id())
 	local board_factions = sim_board.get_sim_board().players
 	if(board_factions) then
@@ -123,8 +135,11 @@ end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:take_item_from_box(box, item)
 	local box_name = box:name()
-	
 	if (gps_habar) then gps_habar.on_item_take_from_box(box, item) end -- Idler
+	if (alun_plugin_manager and alun_plugin_manager.actor_take_item_from_box) then
+		alun_plugin_manager.actor_take_item_from_box(box,item)
+	end
+	if (itms_manager) then itms_manager.actor_take_item_from_box(box,item) end
 end
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -145,6 +160,8 @@ function actor_binder:on_trade (item, sell_bye, money)
 	else
 		 game_stats.money_trade_update (-money)
 	end
+	if (alun_plugin_manager) then alun_plugin_manager.actor_on_trade(item,sell_bye,money) end
+	if (itms_manager) then itms_manager.actor_on_trade(item,sell_bye,money) end
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:article_callback(npc, group, name)
@@ -173,10 +190,21 @@ function actor_binder:on_item_take (obj)
 	end
 	treasure_manager.get_treasure_manager():on_item_take(obj:id())
 	if (gps_habar) then gps_habar.on_item_take(obj) end -- Idler
+	-- Alundaio
+	if (alun_plugin_manager and alun_plugin_manager.actor_item_take) then
+		alun_plugin_manager.actor_item_take(obj)
+	end
+	if (ai_tweaks) then ai_tweaks.actor_item_take(obj) end
+	if (itms_manager) then itms_manager.actor_item_take(obj) end
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:on_item_drop (obj)
 	if (gps_habar) then gps_habar.on_item_drop(obj) end -- Idler
+	if (alun_plugin_manager) then
+		alun_plugin_manager.actor_item_drop(obj)
+	end
+	if (itms_manager) then itms_manager.actor_item_drop(obj) end
+	if (ai_tweaks) then ai_tweaks.actor_item_drop(obj) end
 end
 
 function actor_binder:use_inventory_item(obj)
@@ -194,6 +222,12 @@ function actor_binder:use_inventory_item(obj)
 		else
 			if (spalnik) then spalnik.use_inventory_item(s_obj) end --Idler используем спальник?
 		end
+		if (alun_plugin_manager and alun_plugin_manager.actor_item_use) then
+			alun_plugin_manager.actor_item_use(obj)
+		end
+
+		if (itms_manager) then itms_manager.actor_item_use(obj) end
+		if (ai_tweaks) then ai_tweaks.actor_item_use(obj) end
 	end
 end
 
@@ -378,6 +412,13 @@ function actor_binder:update(delta)
 	pda.fill_sleep_zones()
 	god.god_update()
 	if (gps_habar) then gps_habar.on_actor_update(delta) end -- Idler
+	-- alundaio
+	if (alun_plugin_manager) then alun_plugin_manager.on_actor_update() end
+	if (spawn_manager) then spawn_manager.on_actor_update() end
+	if (itms_manager) then itms_manager.on_actor_update() end
+	if (ai_tweaks) then ai_tweaks.on_actor_update() end
+	if (xrs_debug_tools) then xrs_debug_tools.on_actor_update() end
+	-- alundaio
 end
 	if posteffects_sn then
 		posteffects_sn.adding_effect()
@@ -447,6 +488,15 @@ function actor_binder:save(packet)
 		packet:w_bool(true)
 		utils.w_CTime(packet, self.last_mutant_hunter_achievement_spawn_time)
 	end
+	--alundaio
+	if (alun_plugin_manager) then
+		alun_plugin_manager.actor_save(self.object,packet)
+	end
+
+	if (spawn_manager) then spawn_manager.on_actor_save(self.object,packet) end
+	if (ai_tweaks) then ai_tweaks.on_actor_save(self.object,packet) end
+	-- end
+
 	set_save_marker(packet, "save", true, "actor_binder")
 end
 ----------------------------------------------------------------------------------------------------------------------
@@ -503,6 +553,13 @@ function actor_binder:load(reader)
 	if stored_achievement_time == true then
 		self.last_mutant_hunter_achievement_spawn_time = utils.r_CTime(reader)
 	end
+	--alundaio
+	if (alun_plugin_manager) then
+		alun_plugin_manager.actor_load(self.object,reader)
+	end
+	if (spawn_manager) then spawn_manager.on_actor_load(self.object,reader) end
+	if (ai_tweaks) then ai_tweaks.on_actor_load(self.object,reader) end
+	-- end alundaio
 	set_save_marker(reader, "load", true, "actor_binder")
 end
 

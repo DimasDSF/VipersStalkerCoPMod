@@ -119,7 +119,15 @@ function action_wounded:execute ()
 			print_table(self.a.hp_state_see)
 			abort("wrong wounded animation %s", self.object:name())
 		end
-		state_mgr.set_state(self.object, wound_manager_state, nil, nil, {look_object = victim}, nil)
+
+		local id = self.object:id()
+		local po = db.storage[id].victim_surrender and level.object_by_id(db.storage[id].victim_surrender)
+		if (po and po:alive() and po:best_enemy() and po:best_enemy():id() == id) then
+			state_mgr.set_state(self.object, "prisoner")
+		else
+			db.storage[id].victim_surrender = nil
+			state_mgr.set_state(self.object, wound_manager_state, nil, nil, {look_object = victim}, nil)
+		end
 	end
 
 	-- нужно отыграть фоновый

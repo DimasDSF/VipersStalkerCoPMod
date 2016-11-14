@@ -162,7 +162,7 @@ function load_job(smart)
 														"meet = meet@generic_lager\n"..
 														"path_walk = surge_"..it.."_walk\n"..
 														"def_state_standing = guard\n"..
-														"def_state_moving = run\n"
+														"def_state_moving = {=dist_to_job_point_ge(25)} sprint, {=dist_to_job_point_ge(5)} run, patrol\n"
 
 						if level.patrol_path_exists(gname.."_surge_"..it.."_look") then
 								job_ltx = job_ltx.."path_look = surge_"..it.."_look\n"

@@ -86,6 +86,8 @@ function motivator_binder:net_spawn(sobject)
 	self.object:set_callback(callback.death, motivator_binder.death_callback, self)
 	self.object:set_callback(callback.use_object, motivator_binder.use_callback, self)
 	self.object:set_callback(callback.sound, motivator_binder.hear_callback, self)
+	self.object:set_callback(callback.on_item_take, self.on_item_take, self)
+	self.object:set_callback(callback.on_item_drop, self.on_item_drop, self)
 	--memusage.collect_info(self.object, "after__callback")
 
 	-- ставим дефолтное расстояние входа в смарткаверы
@@ -175,10 +177,32 @@ function motivator_binder:net_spawn(sobject)
 
 	self.object:group_throw_time_interval(2000)
 
+	-- start [Alundaio]
+	alun_utils.add_stalker(self.object)
+	if (ai_tweaks) then
+		ai_tweaks.npc_on_net_spawn(self.object,sobject)
+	end
+	-- End [Alundaio]
 	return true
 end
+function motivator_binder:on_item_take(item)
+	if ( alun_plugin_manager and alun_plugin_manager.npc_on_item_take ) then
+		alun_plugin_manager.npc_on_item_take(self.object,item)
+	end
+	if (ai_tweaks) then ai_tweaks.npc_on_item_take(self.object,item) end
+end
 
+function motivator_binder:on_item_drop(item)
+	if ( alun_plugin_manager and alun_plugin_manager.npc_on_item_take ) then
+		alun_plugin_manager.npc_on_item_drop(self.object,item)
+	end
+	if (ai_tweaks) then ai_tweaks.npc_on_item_drop(self.object,item) end
+end
 function motivator_binder:net_destroy()
+	-- start [Alundaio]
+	if (ai_tweaks) then ai_tweaks.npc_on_net_destroy(self.object) end
+	alun_utils.del_stalker(self.object)
+	-- end [Alundaio]
 	--printf("motivator_binder:net_destroy(): self.object:name()='%s'", self.object:name())
 	xrs_dyn_music.npc_table[self.object:id()] = nil
 
@@ -282,6 +306,10 @@ function motivator_binder:hit_callback(obj, amount, local_direction, who, bone_i
 --		self.need_relation_update = who:id() == db.actor:id()
 		xr_wounded.hit_callback(obj:id())
 	end
+
+	-- start [Alundaio]
+	if (ai_tweaks) then ai_tweaks.npc_hit_callback(obj,amount,local_direction,who,bone_index) end
+	-- end [Alundaio]
 end
 
 function motivator_binder:death_callback(victim, who)
@@ -320,7 +348,7 @@ function motivator_binder:death_callback(victim, who)
 	end
 
 	sr_light.check_light(self.object)
-	death_manager.drop_manager(self.object):create_release_item()
+	death_manager.create_release_item(self.object)
 	db.delete_enemy( self.e_index )
 
 	self:clear_callbacks()
@@ -335,7 +363,11 @@ function motivator_binder:death_callback(victim, who)
 		end
 
 	end
-	release_body_manager.get_release_body_manager():moving_dead_body(self.object)
+	release_body_manager.get_release_body_manager():moving_dead_body(self.object,true)
+
+	-- Start [Alundaio]
+	if (ai_tweaks) then ai_tweaks.npc_on_death_callback(self.object,who) end
+	-- End [Alundaio]
 end
 
 function motivator_binder:use_callback(obj, who)
@@ -347,6 +379,9 @@ function motivator_binder:use_callback(obj, who)
 		if self.st.active_section then
 			xr_logic.issue_event(self.object, self.st[self.st.active_scheme], "use_callback", obj, who)
 		end
+		-- start [Alundaio]
+		if (ai_tweaks) then ai_tweaks.npc_on_item_use(obj,who) end
+		-- end [Alundaio]
 	end
 end
 
@@ -367,7 +402,7 @@ function motivator_binder:update(delta)
 
 	if self.first_update == false then
 		if object_alive == false then
-			death_manager.drop_manager(object):create_release_item()
+			death_manager.create_release_item(self.object)
 		end
 		self.first_update = true
 	end
@@ -465,6 +500,10 @@ function motivator_binder:update(delta)
 		end
 		self.need_relation_update = false
 	end]]--
+
+	-- Start [Alundaio]
+	if (ai_tweaks) then ai_tweaks.npc_on_update(object,db.storage[object:id()]) end
+	-- End [Alundaio]
 end
 
 function motivator_binder:reload(section)
@@ -540,6 +579,9 @@ function addCommonPrecondition(action)
 	action:add_precondition (world_property(xr_evaluators_id.wounded_exist,		false))
 	action:add_precondition (world_property(xr_evaluators_id.corpse_exist,		false))
 	action:add_precondition (world_property(stalker_ids.property_items,		false))
+	-- start [Alundaio]
+	if (ai_tweaks) then ai_tweaks.npc_addcommonprecondition(action) end
+	-- end [Alundaio]
 end
 
 

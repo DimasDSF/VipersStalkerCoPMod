@@ -241,6 +241,9 @@ function sim_squad_scripted:update()
 		self:set_location_types()
 		self.need_to_reset_location_masks = false
 	end
+	if (alun_plugin_manager and alun_plugin_manager.squad_update) then
+		alun_plugin_manager.squad_update(self)
+	end
 end
 
 
@@ -269,6 +272,13 @@ local function can_help_actor(squad)
 	if game_graph():vertex(squad.m_game_vertex_id):level_id() ~= game_graph():vertex(alife():actor().m_game_vertex_id):level_id() then
 		return false
 	end
+
+	if (ai_tweaks) then
+		if (ai_tweaks.squad_can_help_actor(squad)) then
+			return true
+		end
+	end
+
 	if has_alife_info("sim_duty_help_harder") and squad:get_squad_community() == "duty" then
 		return true
 	elseif has_alife_info("sim_freedom_help_harder") and squad:get_squad_community() == "freedom" then
@@ -312,6 +322,26 @@ function sim_squad_scripted:generic_update()
 		self:get_next_action(false)
 		return
 	end
+
+	if (itms_manager) then
+		local target_id = itms_manager.squad_assign_new_target(self)
+		if (target_id) then
+			self.assigned_target_id = target_id
+			self.current_action = nil
+			self:get_next_action(false)
+			return
+		end
+	end
+
+	if (ai_tweaks) then
+		local target_id = ai_tweaks.squad_assign_new_target(self)
+		if (target_id) then
+			self.assigned_target_id = target_id
+			self.current_action = nil
+			self:get_next_action(false)
+			return
+		end
+	end
 	if self.assigned_target_id and alife():object(self.assigned_target_id) and alife():object(self.assigned_target_id):clsid() ~= clsid.online_offline_group_s then
 		local squad_target = self.board:get_squad_target(self)
 		if squad_target:clsid() == clsid.online_offline_group_s then
@@ -347,6 +377,10 @@ function sim_squad_scripted:get_next_action(under_simulation)
 	local squad_target = alife():object(self.assigned_target_id)
 	--printf("assigned_target = [%s]", tostring(self.assigned_target_id))
 	if self.current_target_id == nil then
+		if (squad_target and not squad_target.am_i_reached) then
+			squad_target = alun_utils.fake_squad()
+		end
+
 		if squad_target == nil or squad_target:am_i_reached(self) then
 			if squad_target ~= nil then
 				squad_target:on_reach_target(self)
@@ -392,6 +426,7 @@ end
 --' Удаление конкретного персонажа отряда
 function sim_squad_scripted:remove_npc(npc_id)
 	local npc = alife():object(npc_id)
+	if (ai_tweaks) then ai_tweaks.squad_on_npc_death(self,npc) end
 	self:on_npc_death(npc)
 	--printf("releasing object ["..npc:name().."]")
 	alife():release(npc, true)
@@ -527,6 +562,7 @@ function sim_squad_scripted:add_squad_member(spawn_section, spawn_position, lv_i
 		db.spawned_vertex_by_id[obj.id] = lv_id
 	end
 
+	if (ai_tweaks) then ai_tweaks.squad_on_add_npc(self,obj,spawn_section,spawn_position,lv_id,gv_id) end
 	return obj.id
 end
 
@@ -775,10 +811,27 @@ function sim_squad_scripted:on_unregister()
 	end
 end
 function sim_squad_scripted:can_switch_offline()
+	if (alun_plugin_manager) then alun_plugin_manager.squad_can_switch_offline(self) end
 	return cse_alife_online_offline_group.can_switch_offline(self)
 end
 function sim_squad_scripted:can_switch_online()
+	if (alun_plugin_manager) then alun_plugin_manager.squad_can_switch_online(self) end
 	return cse_alife_online_offline_group.can_switch_online(self)
+end
+function sim_squad_scripted:switch_offline()
+	if rx_ai then
+		rx_ai.squad_switch_offline(self)
+		return
+	end
+	if (alun_plugin_manager) then alun_plugin_manager.squad_switch_offline(self) end
+	cse_alife_online_offline_group.switch_offline(self)
+end
+function sim_squad_scripted:switch_online()
+	if rx_ai then
+		rx_ai.squad_switch_online(self)
+	end
+	if (alun_plugin_manager) then alun_plugin_manager.squad_switch_online(self) end
+	cse_alife_online_offline_group.switch_online(self)
 end
 
 --***********************************************************************************************
@@ -855,6 +908,11 @@ function sim_squad_scripted:show()
 			spot = "alife_presentation_squad_neutral"
 		end
 	end
+
+	if (dev_debug) then
+		spot = "storyline_task_location"
+	end
+
 	if(spot~="") then
 		if spot == self.spot_section then
 			level.map_change_spot_hint(self.current_spot_id, self.spot_section, self:get_squad_props())

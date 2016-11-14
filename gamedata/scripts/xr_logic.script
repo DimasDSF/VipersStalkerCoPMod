@@ -237,6 +237,7 @@ end
 function disable_generic_schemes(npc, stype)
 	if stype == modules.stype_stalker then
 		xr_combat.disable_scheme(npc, "combat")
+	if alun_plugin_manager then alun_plugin_manager.disable_axr_schemes(npc, stype) end
 		xr_hit.disable_scheme(npc, "hit")
 		xr_meet.disable_scheme(npc, "actor_dialogs")
 		--'xr_heli_hunter.disable_scheme(npc, "heli_hunter")
@@ -306,6 +307,10 @@ end
 		xr_combat_ignore.set_combat_ignore_checker(npc, ini, "combat_ignore")
 		xr_reach_task.set_reach_task(npc, ini, "reach_task")
 
+		-- Alun
+		if (ai_tweaks) then ai_tweaks.set_schemes(npc,ini,section) end
+		if ( alun_plugin_manager ) then alun_plugin_manager.set_axr_schemes(npc,ini,section) end
+		-- Alun end
 	elseif stype == modules.stype_mobile then
 		local combat_section = utils.cfg_get_string(ini, section, "on_combat", npc, false, "")
 		if combat_section then
@@ -456,6 +461,10 @@ function reset_generic_schemes_on_scheme_switch(npc, scheme, section)
 		restrictor_manager.get_restrictor_manager(npc):reset_restrictions(st, section)
 		xr_hear.reset_hear_callback(st, section)
 
+		if (ai_tweaks) then ai_tweaks.reset_schemes(npc,scheme,section,st) end
+		if ( alun_plugin_manager ) then
+			alun_plugin_manager.reset_axr_schemes(npc,scheme,section,st)
+		end
 	elseif st.stype == modules.stype_mobile then
 		--printf("_bp: disabling talk")
 		--npc:disable_talk() -- теперь делается в dialog_manager_reset
@@ -564,15 +573,30 @@ function check_action(npc, st, event_fn, p)
 end
 
 
-function pick_section_from_condlist(actor, npc, condlist)
+function pick_section_from_condlist(actor, npc, condlist, p)
 	local rval = nil -- math.random(100)
 	--printf("_bp: pick_section_from_condlist: rval = %d", rval)
 
 	local newsect = nil
 	local infop_conditions_met
+
+	-- Used to create dynamic custom data logic for one script to be used with multiple npcs (info must have npcx_ as prefix)
+	-- I found it useful to have multiple squads as companions that have their own info for their current action.
+	local is_npc_info
+
+	if not( condlist ) then
+		--alun_plugin_manager.debug_write("condlist is nil!%s",p)
+		abort("object '%s' : condition list is nil! %s",npc:name())
+		return
+	end
+
 	for n, cond in pairs(condlist) do
 		infop_conditions_met = true -- изначально считаем, что все условия переключения удовлетворены
 		for inum, infop in pairs(cond.infop_check) do
+			if ( infop.name and string.find(infop.name,"npcx_") ) then
+				is_npc_info = true
+			end
+
 			if infop.prob then
 				if not rval then
 					rval = math.random(100)
@@ -618,13 +642,19 @@ function pick_section_from_condlist(actor, npc, condlist)
 						end
 					end
 				end
-			elseif has_alife_info(infop.name) then
+			elseif ( has_alife_info(infop.name) and is_npc_info ~= true ) then
 				if not infop.required then
 					--'printf("FAILED: actor has infop '%s', which is NOT needed [%s]", infop.name, tostring(has_alife_info(infop.name)))
 					infop_conditions_met = false -- инфопоршен есть, но он не должен присутствовать
 					break
 				else
 					--'printf("PASSED: actor has infop '%s', which is needed [%s]", infop.name, tostring(has_alife_info(infop.name)))
+				end
+			elseif ( is_npc_info and npc:has_info(infop.name) ) then
+				if not infop.required then
+					--'printf("FAILED: actor has infop '%s', which is NOT needed [%s]", infop.name, tostring(has_alife_info(infop.name)))
+					infop_conditions_met = false -- инфопоршен есть, но он не должен присутствовать
+					break
 				end
 			else
 				if infop.required then
@@ -655,13 +685,21 @@ function pick_section_from_condlist(actor, npc, condlist)
 						xr_effects[infop.func](actor, npc)
 					end
 				elseif infop.required then
-					if not has_alife_info(infop.name) then
-						actor:give_info_portion(infop.name)
+					if ( is_npc_info and npc:dont_has_info(infop.name) ) then
+						npc:give_info_portion(infop.name)
+					else
+						if not ( has_alife_info(infop.name)  ) then
+							actor:give_info_portion(infop.name)
+						end
 					end
 				else
-					if has_alife_info(infop.name) then
-						--printf("*INFO [disabled]*: npc='%s' id='%s'", actor:name(),infop.name)
-						disable_info(infop.name)
+					if ( is_npc_info and npc:has_info(infop.name) ) then
+						npc:disable_info_portion(infop.name)
+					else
+						if has_alife_info(infop.name) then
+							--printf("*INFO [disabled]*: npc='%s' id='%s'", actor:name(),infop.name)
+							disable_info(infop.name)
+						end
 					end
 				end
 			end
@@ -728,6 +766,7 @@ function try_switch_to_another_section(npc, st, actor)
 
 	if not l then
 		abort("Can't find script switching information in storage, scheme '%s'", db.storage[npc:id()].active_scheme)
+		return
 	end
 
 	local switched = false
@@ -1084,6 +1123,7 @@ function cfg_get_switch_conditions(ini, section, npc)
 	local t
 	local n = 1
 	if not ini:section_exist(tostring(section)) then
+		--abort("cfg get switch cond: section %s does not exist!",section)
 		return
 	end
 	local line_count = ini:line_count(section)
@@ -1254,7 +1294,7 @@ function pstor_is_registered_type(tv)
 end
 
 function pstor_store(obj, varname, val)
-	local npc_id = obj:id()
+	local npc_id = type(obj.id) == "function" and obj:id() or obj.id
 
 	if db.storage[npc_id].pstor == nil then
 		db.storage[npc_id].pstor = {}
@@ -1267,7 +1307,7 @@ function pstor_store(obj, varname, val)
 end
 
 function pstor_retrieve(obj, varname, defval)
-	local npc_id = obj:id()
+	local npc_id = type(obj.id) == "function" and obj:id() or obj.id
 
 	if db.storage[npc_id].pstor ~= nil then
 		local val = db.storage[npc_id].pstor[varname]

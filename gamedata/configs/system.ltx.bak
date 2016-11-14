@@ -6,6 +6,7 @@
 #include "weapons\weapons.ltx"
 #include "misc\inventory_upgrades.ltx"
 #include "misc\items.ltx"
+#include "misc\monster_items.ltx"
 
 #include "creatures\actor.ltx"
 #include "zones\zones.ltx"
@@ -176,9 +177,9 @@ max_count     = 5
 
 [bloody_marks]
 wallmarks     = wm\wm_blood_1,wm\wm_blood_2,wm\wm_blood_3
-dist        = 2.0 ;2.4  ;(м) max расстољние отлета крови
-max_size      = 0.4 ;0.3  ;(м)радиус пљтна при хите силой nominal hit по большому объекту (по маленькому *0.5)
-min_size      = 0.06      ;(м)минимальнvй радиус пљтна
+dist        = 8.0 ;2.4  ;(м) max расстољние отлета крови
+max_size      = 0.8 ;0.3  ;(м)радиус пљтна при хите силой nominal hit по большому объекту (по маленькому *0.5)
+min_size      = 0.1      ;(м)минимальнvй радиус пљтна
 nominal_hit     = 0.5     ;величина номинального хита, при котором разлетаетсљ максимум крови (max_size)
 
 ;капли крови
@@ -783,8 +784,3 @@ monsters\snork\snork
 monsters\snork\snork_dead
 monsters\tushkano\tushkano
 monsters\tushkano\tushkano_dead
-
-
-
-#include "weapons\gl.ltx"
-#include "medic.ltx"
