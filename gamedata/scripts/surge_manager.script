@@ -48,7 +48,7 @@ function CSurgeManager:initialize()
 	self.ui_disabled 			= false
 	self.blowout_sound 			= false
 
-	self.surge_time = 222
+	self.surge_time = 252
 	self.inited_time = game.CTime()
 	self.last_surge_time = game.get_game_time()
 	self._delta = math.random(START_MIN_SURGE_TIME, START_MAX_SURGE_TIME) -- global minutes, время между выбросами
@@ -365,7 +365,7 @@ function CSurgeManager:end_surge(manual)
 	self.surge_message 		= ""
 	self.surge_task_sect 	= ""
 	self.task_given 		= false
-	dust_manager.start_dust()
+--	dust_manager.start_dust()
 
 	if(self.effector_set) then
 		xr_sound.stop_sound_looped(db.actor:id(), "blowout_rumble")

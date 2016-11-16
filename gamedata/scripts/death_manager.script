@@ -14,6 +14,7 @@ local always_keep_item = {}
 
 --' Предметы, относящиеся к патронам. Их надо спаунить другим методом.
 ammo_sections = {}
+ammoap_sectons = {}
 
 local death_ini = ini_file("misc\\death_generic.ltx")
 
@@ -94,6 +95,15 @@ function init_drop_settings()
 		end
 	end
 
+	--' Предметы, относящиеся к патронам. Их надо спаунить другим методом.
+	ammoap_sections = {}
+	local n = death_ini:line_count("ammoap_sections")
+	local id, value = "", ""
+	for i=0,n-1 do
+		result, id, value	= death_ini:r_line("ammoap_sections",i,"","")
+		ammoap_sections[id] = true
+	end
+	
 	--' Предметы, относящиеся к патронам. Их надо спаунить другим методом.
 	ammo_sections = {}
 	local n = death_ini:line_count("ammo_sections")
@@ -186,7 +196,9 @@ function keep_item(npc, item)
 		set_weapon_drop_condition(item)
 		return
 	end
-
+	if ammoap_sections[section] ~= nil then
+		return
+	end
 	if xr_corpse_detection.lootable_table[section] == true and ammo_sections[section] == nil then
 		return
 	end
