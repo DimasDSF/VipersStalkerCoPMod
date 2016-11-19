@@ -187,7 +187,7 @@ function action_process_enemy:hit_callback(obj, amount, local_direction, who, bo
 	if se_obj and se_obj.m_smart_terrain_id ~= 65535 then
 		local smart_obj = alife():object(se_obj.m_smart_terrain_id)
 		if who:id() == db.actor:id() and amount > 0 and is_enemy(obj, who, self.st, false) and smart_obj.base_on_actor_control ~= nil then
-			if (character_community(obj) ~= "zombied" and character_community(obj) ~= "killer" and not IsMonster(obj)) or xr_conditions.target_squad_name(obj, jup_b47_merc_guard_squad) then
+			if (character_community(obj) ~= "zombied" and character_community(obj) ~= "killer" and not IsMonster(obj)) or (alife():object(obj.group_id) ~= nil and string.find( alife():object(obj.group_id):section_name(), "jup_b47_merc_guard_squad" ) ~= nil) then
 				smart_obj.base_on_actor_control:actor_attack()
 			end
 		end

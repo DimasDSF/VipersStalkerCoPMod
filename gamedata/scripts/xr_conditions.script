@@ -1529,6 +1529,18 @@ function check_enemy_smart(actor , npc , p)
 	return false
 end
 
+function check_enemy_is_monster(actor , npc)
+	local enemy_id = db.storage[npc:id()].enemy_id
+	local enemy = db.storage[enemy_id] and db.storage[enemy_id].object
+	if enemy == nil or enemy_id == alife():actor().id then
+		return false
+	end
+	if enemy ~= nil and enemy_id ~= alife():actor().id and IsMonster(enemy) then
+		return true
+	end
+	return false
+end
+
 function zat_b103_actor_has_needed_food(actor, npc, p)
 	return (dialogs_zaton.zat_b103_actor_has_needed_food(actor, npc)) or (has_alife_info("zat_b103_merc_task_done"))
 end

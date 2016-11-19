@@ -901,20 +901,55 @@ function monolith_leader_dead_or_freedom(first_speaker, second_speaker)
 	return true
 end
 
--- Medic support
-function check_money_300(actor,npc)
-   return db.actor:money()<300
+-- Medic functions START
+function check_money_medic(actor,npc)
+	local price = dialogs.calculate_medic_price(actor, npc)
+	return db.actor:money()<price
 end
 
-function check_money_300_has(actor,npc)
-   return not check_money_300(actor,npc)
+function display_price(actor, npc)
+	local price = dialogs.calculate_medic_price(actor, npc)
+	news_manager.price_money(db.actor, price)
+end
+
+function check_money_medic_has(actor,npc)
+	return not check_money_medic(actor,npc)
+end
+
+function calculate_medic_price(actor, npc)
+	local medic_price = 50
+	--Health
+	if db.actor.health < 0.2 then medic_price = medic_price + 800
+	elseif db.actor.health >= 0.2 and db.actor.health < 0.4 then medic_price = medic_price + 600
+	elseif db.actor.health >= 0.4 and db.actor.health < 0.6 then medic_price = medic_price + 500
+	elseif db.actor.health >= 0.6 and db.actor.health < 0.8 then medic_price = medic_price + 400
+	elseif db.actor.health >= 0.8 and db.actor.health < 1 then medic_price = medic_price + 300
+	end
+	--Radiation
+	if db.actor.radiation >= 1 then medic_price = medic_price + 1200
+	elseif db.actor.radiation >= 0.8 and db.actor.radiation < 1 then medic_price = medic_price + 800
+	elseif db.actor.radiation >= 0.6 and db.actor.radiation < 0.8 then medic_price = medic_price + 600
+	elseif db.actor.radiation >= 0.4 and db.actor.radiation < 0.6 then medic_price = medic_price + 400
+	elseif db.actor.radiation >= 0.2 and db.actor.radiation < 0.4 then medic_price = medic_price + 300
+	elseif db.actor.radiation > 0 and db.actor.radiation < 0.2 then medic_price = medic_price + 150
+	end
+	--Bleeding
+	if db.actor.bleeding >= 1 then medic_price = medic_price + 400
+	elseif db.actor.bleeding >= 0.8 and db.actor.bleeding < 1 then medic_price = medic_price + 300
+	elseif db.actor.bleeding >= 0.6 and db.actor.bleeding < 0.8 then medic_price = medic_price + 200
+	elseif db.actor.bleeding >= 0.4 and db.actor.bleeding < 0.6 then medic_price = medic_price + 150
+	elseif db.actor.bleeding >= 0.2 and db.actor.bleeding < 0.4 then medic_price = medic_price + 100
+	elseif db.actor.bleeding > 0 and db.actor.bleeding < 0.2 then medic_price = medic_price + 50
+	end
+	return medic_price
 end
 
 function medic_magic_potion(first_speaker, second_speaker)
 	db.actor.health = 1
 	db.actor.radiation = -1
 	db.actor.bleeding = 1
-	dialogs.relocate_money(npc,300,"out")
+	local price = dialogs.calculate_medic_price(first_speaker, second_speaker)
+	dialogs.relocate_money(npc,price,"out")
 end
 
 function actor_needs_bless(first_speaker, second_speaker)
@@ -930,6 +965,8 @@ end
 function actor_is_damn_healthy(first_speaker, second_speaker)
 	return not actor_needs_bless(first_speaker, second_speaker)
 end
+
+-- Medic functions END
 
 function leave_zone_save(first_speaker, second_speaker)
 	xr_effects.scenario_autosave(db.actor,nil,{"st_save_uni_zone_to_reality"})

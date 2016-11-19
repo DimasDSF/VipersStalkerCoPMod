@@ -1239,8 +1239,7 @@
       wpn_mp5 \n
       wpn_hpsa \n
 
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -1332,8 +1331,7 @@
       wpn_hpsa \n
 
 
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -2658,8 +2656,7 @@
 	  wpn_beretta \n
       grenade_rgd5 = 2 \n
 
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -3139,8 +3136,7 @@
       wpn_mp5 \n
       wpn_hpsa \n
 
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs.xml"
@@ -3206,8 +3202,7 @@
       wpn_hpsa \n
       grenade_rgd5 = 1 \n
 
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -6377,8 +6372,7 @@
       		wpn_mp5 = 1 \n
       		wpn_hpsa \n
 
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_2_nl.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"

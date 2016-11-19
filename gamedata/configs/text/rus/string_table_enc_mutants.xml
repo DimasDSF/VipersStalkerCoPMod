@@ -36,6 +36,30 @@
 	<string id="mutant_snork_leg_description">
 		<text>Стопа снорка в отличие от человеческой содержит большее количество сухожилий, обладающих потрясающей эластичностью. Этим объясняется способность снорков совершать невероятные прыжки.</text>
 	</string>
+	<string id="mutant_burer_eye">
+		<text>Глаз Бюрера</text>
+	</string>
+	<string id="mutant_burer_eye_description">
+		<text>Хоть Бюреры и признаны полу-слепыми их глаза позволяют им отлично видеть в темноте.</text>
+	</string>
+	<string id="mutant_chimera_paw">
+		<text>Лапа Химеры</text>
+	</string>
+	<string id="mutant_chimera_paw_description">
+		<text>Лапы Химеры позволяют ей совершать резкие и высокие прыжки.</text>
+	</string>
+	<string id="mutant_giant_eye">
+		<text>Глаз Гиганта</text>
+	</string>
+	<string id="mutant_giant_eye_description">
+		<text>Доказано что большие глаза гиганта отлично защищены от повреждиний.</text>
+	</string>
+	<string id="mutant_controller_skalp">
+		<text>Скальп Контроллера</text>
+	</string>
+	<string id="mutant_controller_skalp_description">
+		<text>Скальп с Контроллера в большинстве случаев снимают лишь в знак победы над ним.</text>
+	</string>
 	
 	<string id="boar_character_use">
 		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать копыта кабана.</text>
@@ -54,6 +78,18 @@
 	</string>
 	<string id="snork_character_use">
 		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать стопы снорка.</text>
+	</string>
+	<string id="burer_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы вырезать глаза бюрера.</text>
+	</string>
+	<string id="chimera_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать лапы химеры.</text>
+	</string>
+	<string id="giant_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы вырезать глаза гиганта.</text>
+	</string>
+	<string id="controller_character_use">
+		<text>Нажмите ($$ACTION_USE$$) чтобы снять скальп контроллера.</text>
 	</string>
 	<string id="monstr_character_use">
 		<text>Нажмите ($$ACTION_USE$$) чтобы отрезать часть монстра.</text>

@@ -11,8 +11,13 @@ visual					= monsters\burer\burer
 corpse_visual			= monsters\burer\burer_dead
 MaxHealthValue		    = 100						; range [0..200]
 
-Spawn_Inventory_Item_Section = mutant_burer_hand
-Spawn_Inventory_Item_Probability = 0.0
+;------------------- use ---------------------------------------
+Spawn_Inventory_Item_Section      = mutant_burer_eye, 2     ;секция части монстра, плюс количество
+Spawn_Inventory_Item_Probability  = 0.0
+character_use                     = burer_character_use     ;айди текста описания юза
+impuls_abscission                 = 200                        ;сила импульса при отрезании
+bone_impuls_abscission            = bip01_head                 ;кость, по которой даётся импульс
+;---------------------------------------------------------------
 
 ;------------------------------------------------------------------------
 ; Influences

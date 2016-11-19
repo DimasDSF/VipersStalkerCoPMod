@@ -531,8 +531,7 @@
       wpn_mp5 \n
       grenade_rgd5 = 1 \n
 	  
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -564,8 +563,7 @@
       wpn_mp5 \n
       grenade_rgd5 = 1 \n
 	  
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -1133,8 +1131,7 @@
 		wpn_beretta \n
 		grenade_rgd5 = 2 \n
 		
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_drugs_3.xml"
     </supplies>
@@ -1219,8 +1216,7 @@
 		wpn_mp5 = 1, silencer \n
 		wpn_beretta \n
 		
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_drugs_3.xml"
     </supplies>
@@ -2129,8 +2125,7 @@
 		wpn_beretta = 1 \n
         af_fireball = 1 \n
 		
-#include "gameplay\ammo\character_ammo_9_19.xml"
-#include "gameplay\ammo\character_ammo_9_19.xml"
+#include "gameplay\ammo\character_ammo_9_19_double.xml"
 
     </supplies>
 		<start_dialog>zat_b53_artefact_hunter_1_gathering_artefacts</start_dialog>

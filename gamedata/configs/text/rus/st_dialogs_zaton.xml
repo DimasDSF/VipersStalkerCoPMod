@@ -1060,7 +1060,7 @@
 		<text>Мне нужна медицинская помощь.</text>
 	</string>
 	<string id="zat_b22_stalker_medic_need_health_care_1">
-		<text>Давай посмотрю... О ну это можно поправить(300 рублей)</text>
+		<text>Давай посмотрю... О ну это можно поправить</text>
 	</string>
 	<string id="zat_b22_stalker_medic_need_health_care_111">
 		<text>Так, вот и все... Можешь идти.</text>
@@ -3175,7 +3175,7 @@
 		<text>Глухарь мёртв. Похоже, его убил Тремор... только он тоже мёртв.</text>
 	</string>
 	<string id="zat_b22_stalker_medic_need_health_care_11">
-	    <text>На, держи, 300 рублей.</text>
+	    <text>На, держи.</text>
 	</string>
 	<string id="zat_b22_stalker_medic_need_health_care_111111">
 	    <text>Далее...</text>
@@ -3184,6 +3184,6 @@
 	    <text>У меня сейчас столько нет.</text>
 	</string>
 	<string id="zat_b22_stalker_medic_need_health_care_1111">
-	    <text>На, держи, 300 рублей.</text>
+	    <text>На, держи.</text>
 	</string>
 </string_table>

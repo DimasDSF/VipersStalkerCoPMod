@@ -3347,11 +3347,10 @@
             </phrase>
             <phrase id="111111">
                 <text>zat_b22_stalker_medic_need_health_care_11111</text>
-                <precondition>dialogs.check_money_300</precondition>
             </phrase>
             <phrase id="1111">
                 <text>zat_b22_stalker_medic_need_health_care_1111</text>
-                <precondition>dialogs.check_money_300_has</precondition>
+                <precondition>dialogs.check_money_medic_has</precondition>
                 <action>dialogs.medic_magic_potion</action>
             </phrase>
             <phrase id="11111">
@@ -3363,8 +3362,9 @@
             <phrase id="1">
                 <text>zat_b22_stalker_medic_need_health_care_1</text>
                 <precondition>dialogs.actor_needs_bless</precondition>
-                <next>111111</next>
+				<action>dialogs.display_price</action>
                 <next>1111</next>
+                <next>111111</next>
             </phrase>
             <phrase id="2">
                 <text>zat_b22_stalker_medic_need_health_care_2</text>
