@@ -80,7 +80,7 @@ angle_offset			 = 1.570790,1.570790,3.92699
 
 boost_time				= 5.0
 boost_health_restore	= 0.0
-eat_alcohol				= -0.1
+eat_alcohol				= -0.03
 eat_satiety				= 0.3
 
 hide_time_wpn           = 3 ; Tris mod
@@ -114,7 +114,7 @@ angle_offset			 = 1.570790,1.570790,3.92699
 
 boost_time				= 5.0
 boost_health_restore	= 0.0
-eat_alcohol				= -0.3
+eat_alcohol				= -0.06
 eat_satiety				= 0.5
 hide_time_wpn           = 3 ; Tris mod
 
@@ -137,7 +137,7 @@ cost				= 100
 
 boost_time				= 5.0
 boost_health_restore	= 0.0
-eat_alcohol				= -0.4
+eat_alcohol				= -0.2
 eat_satiety				= 0.6
 
 hide_time_wpn           = 3 ; Tris mod
@@ -182,8 +182,8 @@ angle_offset			 = 1.570790,1.570790,3.92699
 break_particles		= destroy_fx\destroy_bottle
 break_sound			= material\bottle\collide\bottle_break_1
 
-boost_time				= 90.0
-boost_radiation_restore	= 0.001
+boost_time				= 30.0
+boost_radiation_restore	= 0.003
 eat_alcohol				= 0.6
 eat_satiety				= -0.4
 hide_time_wpn           = 4 ; Tris mod
@@ -333,10 +333,10 @@ cost				= 450
 ;eatable item
 ;eat_radiation = -0.5
 
-boost_time			= 30.0
-boost_radiation_restore	= 0.005
+boost_time			= 20.0
+boost_radiation_restore	= 0.0075
 eat_alcohol				= 0.05
-boost_bleeding_restore	= -0.01
+eat_satiety				= -0.2
 
 hide_time_wpn           = 3 ; Tris mod
 
@@ -473,7 +473,7 @@ cost				= 200
 
 hide_time_wpn           = 3 ; Tris mod
 
-boost_time				= 60.0
+boost_time				= 30.0
 ;boost_wound_immunity	= 1
 boost_bleeding_restore	= 0.01
 
@@ -518,6 +518,28 @@ hide_time_wpn           = 3 ; Tris mod
 boost_time				= 300.0
 ;boost_chemburn_immunity	= 0.1
 boost_chemburn_protection 	= 0.06
+
+use_sound			= interface\inv_pills
+
+[drug_antialcohol]:booster
+$spawn 				= "food and drugs\drug_anti_alcohol"
+visual				= dynamics\equipments\medical\drug_psy_blockade.ogf
+inv_name			= st_drug_anti_alcohol
+inv_name_short		= st_drug_anti_alcohol
+description			= st_drug_anti_alcohol_descr
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 13
+inv_grid_y			= 28
+cost				= 250
+
+hide_time_wpn           = 3 ; Tris mod
+
+boost_time				= 30.0
+eat_alcohol				= -0.5
+eat_satiety				= -0.1
+
 
 use_sound			= interface\inv_pills
 

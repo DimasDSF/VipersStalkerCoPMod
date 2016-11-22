@@ -7,3 +7,4 @@ drug_antidot = 1, prob=0.06 \n
 drug_radioprotector = 1, prob=0.08 \n
 drug_psy_blockade = 1, prob=0.04 \n
 drug_anabiotic = 1, prob=0.005 \n
+drug_antialcohol = 1, prob=0.005 \n
