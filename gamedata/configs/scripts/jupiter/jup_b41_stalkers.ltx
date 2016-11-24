@@ -29,7 +29,7 @@ on_combat = combat
 path_walk = base_stay_st_1
 path_look = base_look_st_1
 on_info = {+jup_b1_go_on_task =squad_exist(jup_b1_stalker_squad)} patrol@go_to_tunnel
-on_info2 = {=actor_in_zone(jup_b1_st_1_greet) -jup_b1_greet_end +jup_b1_give_task !is_playing_sound} remark@callactor
+on_info2 = {=actor_in_zone(jup_b1_st_1_greet) -jup_b1_go_from_task -jup_b1_greet_end +jup_b1_give_task !is_playing_sound} remark@callactor
 on_info3 = {=surge_started !has_enemy} animpoint@jup_b41_stalker_1_reach_hide
 on_info4 = {!is_day} animpoint@jup_b41_stalker_1_reach_hide
 out_restr = jup_b41_sr_noweap

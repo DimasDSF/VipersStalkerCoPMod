@@ -229,9 +229,6 @@ function generic_object_binder:exist_use()
 	        self:set_use(ini)
 		end
 	end
---VSm
-	VScallback.OnMutantDeth(victim, who)
---VSm
 end
 
 function generic_object_binder:set_use(ini)
@@ -310,9 +307,6 @@ function generic_object_binder:net_spawn(sobject)
 	if alife():object(self.object:id()) == nil then
 		return false
 	end
---VSm
-	VScallback.OnMutantSpawn(self.object)
---VSm
 
 --	local pos = self.object:position()
 --	printf("net_spawn mpos[%s][%s][%s]", tostring(pos.x), tostring(pos.y), tostring(pos.z))

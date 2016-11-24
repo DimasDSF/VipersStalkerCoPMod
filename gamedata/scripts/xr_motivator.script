@@ -339,9 +339,6 @@ function motivator_binder:death_callback(victim, who)
 
 	end
 	release_body_manager.get_release_body_manager():moving_dead_body(self.object,true)
---VSm
-	VScallback.OnNpcDeth(victim, who)
---VSm
 end
 
 function motivator_binder:use_callback(obj, who)
