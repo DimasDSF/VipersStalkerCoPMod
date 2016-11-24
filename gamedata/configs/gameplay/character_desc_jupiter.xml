@@ -2102,9 +2102,9 @@
       grenade_f1 = 1 \n
       detector_elite \n
 
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
-#include "gameplay\ammo\character_ammo_7_62_infinite.xml"
-#include "gameplay\ammo\character_ammo_5_56_infinite.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
+#include "gameplay\ammo\character_ammo_7_62_big.xml"
+#include "gameplay\ammo\character_ammo_5_56_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -2138,9 +2138,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_5_56_infinite.xml"
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
+#include "gameplay\ammo\character_ammo_5_56_big.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2172,9 +2172,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_5_56_infinite.xml"
-#include "gameplay\ammo\character_ammo_7_62_infinite.xml"
-#include "gameplay\ammo\character_ammo_9_19_infinite.xml"
+#include "gameplay\ammo\character_ammo_5_56_big.xml"
+#include "gameplay\ammo\character_ammo_7_62_big.xml"
+#include "gameplay\ammo\character_ammo_9_19_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2206,9 +2206,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_5_56_infinite.xml"
-#include "gameplay\ammo\character_ammo_9_19_infinite.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_5_56_big.xml"
+#include "gameplay\ammo\character_ammo_9_19_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2239,9 +2239,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_5_56_infinite.xml"
-#include "gameplay\ammo\character_ammo_9_19_infinite.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_5_56_big.xml"
+#include "gameplay\ammo\character_ammo_9_19_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2271,8 +2271,8 @@
       grenade_f1 = 1 \n
       detector_elite \n
 
-#include "gameplay\ammo\character_ammo_9_39_infinite.xml"
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
+#include "gameplay\ammo\character_ammo_9_39_big.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_3.xml"
@@ -2305,9 +2305,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_pkm_infinite.xml"
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_pkm_big.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_drugs_2.xml"
 #include "gameplay\character_sell_weapons.xml"
@@ -2338,9 +2338,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_9_39_infinite.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_9_39_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_food.xml"
 #include "gameplay\character_drugs_2.xml"
@@ -2372,9 +2372,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_7_62_infinite.xml"
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
+#include "gameplay\ammo\character_ammo_7_62_big.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_drugs_2.xml"
 #include "gameplay\character_sell_weapons.xml"
@@ -2405,9 +2405,9 @@
       grenade_rgd5 = 1 \n
       detector_advanced \n
 
-#include "gameplay\ammo\character_ammo_9_39_infinite.xml"
-#include "gameplay\ammo\character_ammo_buckshot_infinite.xml"
-#include "gameplay\ammo\character_ammo_11_43_infinite.xml"
+#include "gameplay\ammo\character_ammo_9_39_big.xml"
+#include "gameplay\ammo\character_ammo_buckshot_big.xml"
+#include "gameplay\ammo\character_ammo_11_43_big.xml"
 #include "gameplay\character_items_nd.xml"
 #include "gameplay\character_drugs_2.xml"
 #include "gameplay\character_sell_weapons.xml"
