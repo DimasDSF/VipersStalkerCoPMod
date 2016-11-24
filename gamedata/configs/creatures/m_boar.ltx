@@ -288,8 +288,8 @@ species				= boar
 ;------------------------------------------------------------------------
 ; Vision
 ;------------------------------------------------------------------------
-eye_fov						= 110	;130
-eye_range					= 40	;60
+eye_fov						= 190	;130
+eye_range					= 100	;60
 
 vision_free_section			= boar_vision_free
 vision_danger_section		= boar_vision_danger
@@ -298,26 +298,26 @@ vision_danger_section		= boar_vision_danger
 ; иначе возникают артефакты с потерей видимости при переходе от денжера во фри.
 
 [boar_vision_free]
-min_view_distance   		= 0.51				; коэффициент, который множится на eye_range, в зависимости от угла
-max_view_distance	 		= 1.01				; коэффициент, который множится на eye_range, в зависимости от угла
-visibility_threshold	 	= 100.01			; значение, при достижении суммой которого объект считается видимым
-always_visible_distance 	= 0.31
-time_quant					= 0.0011
+min_view_distance   		= 1.2				; коэффициент, который множится на eye_range, в зависимости от угла
+max_view_distance	 		= 1.8				; коэффициент, который множится на eye_range, в зависимости от угла
+visibility_threshold	 	= 250			; значение, при достижении суммой которого объект считается видимым
+always_visible_distance 	= 0.1
+time_quant					= 0.005
 decrease_value				= 0.011				; значение, на которое уменьшается вес, если объект попал в фрустум, но отсёкся по каким-то причинам
 velocity_factor		     	= 0.51
-luminocity_factor			= 0.51 				; фактор освещения (только для Актёра)
-transparency_threshold		= 0.251
+luminocity_factor			= 0.80 				; фактор освещения (только для Актёра)
+transparency_threshold		= 0.80
 
 [boar_vision_danger]
-min_view_distance   		= 0.5				; коэффициент, который множится на eye_range, в зависимости от угла
-max_view_distance	 		= 1.0				; коэффициент, который множится на eye_range, в зависимости от угла
-visibility_threshold	 	= 100.0				; значение, при достижении суммой которого объект считается видимым
-always_visible_distance 	= 0.3
-time_quant					= 0.001
+min_view_distance   		= 1.2				; коэффициент, который множится на eye_range, в зависимости от угла
+max_view_distance	 		= 1.8				; коэффициент, который множится на eye_range, в зависимости от угла
+visibility_threshold	 	= 90				; значение, при достижении суммой которого объект считается видимым
+always_visible_distance 	= 0.1
+time_quant					= 0.002
 decrease_value				= 0.01				; значение, на которое уменьшается вес, если объект попал в фрустум, но отсёкся по каким-то причинам
 velocity_factor		     	= 0.5
-luminocity_factor			= 0.5 				; фактор освещения (только для Актёра)
-transparency_threshold		= 0.25
+luminocity_factor			= 0.6 				; фактор освещения (только для Актёра)
+transparency_threshold		= 0.50
 
 ;===========================================================================
 ; ATTACK PARAMS
