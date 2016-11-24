@@ -23,11 +23,11 @@ inv_weight				= 5.5
 
 ;---TTX---------------------------------------------------------------------------
 hit_power           		= 5.0, 5.0, 5.0, 5.0
-hit_impulse		 			= 1000000
+hit_impulse		 			= 10000
 hit_type 					= fire_wound
-fire_distance           = 10000
-bullet_speed		 	= 150000	;начальная скорость пули
-rpm                     = 100
+fire_distance           = 2000
+bullet_speed		 	= 100000	;начальная скорость пули
+rpm                     = 12
 rpm_empty_click         = 100
 
 use_aim_bullet			= false		;Поддерживается ли первая суппер пуля
@@ -39,21 +39,21 @@ misfire_probability        = 0.005 ;вероятность осечки при максимальном износе  
 ;изношенность, при которой появляется шанс осечки
 misfire_start_condition		= 0.6
 ;изношеность при которой шанс осечки становится константным
-misfire_end_condition		= 0.1
+misfire_end_condition		= 0.3
 ;шанс осечки при изношености больше чем misfireStartCondition
 misfire_start_prob	     	= 0.002
 ;шанс осечки при изношености больше чем misfireEndCondition
-misfire_end_prob	     	= 0.8
+misfire_end_prob	     	= 1
 ;увеличение изношености при одиночном выстреле
 condition_shot_dec      	= 0.0012
 ;увеличение изношености при выстреле очередью
 condition_queue_shot_dec	= 0.0012
 
 ammo_limit				= 60
-ammo_current			= 20
+ammo_current			= 5
 ammo_elapsed			= 0
 
-ammo_mag_size			= 20
+ammo_mag_size			= 5
 ammo_class				= ammo_gauss, ammo_gauss_cardan
 hand_dependence         = 1
 single_handed           = 0
@@ -171,20 +171,20 @@ zoom_enabled				= true
 zoom_rotate_time			= 0.25
 scope_zoom_factor			= 5		;ПСО-1 4X
 
-scope_texture				= wpn_crosshair_l85
+scope_texture				= wpn_crosshair_gauss
 scope_name 					= wpn_addon_scope
 scope_x 						= 60
 scope_y 						= -2
 
 ;звуки
-snd_draw			  			= weapons\svd_draw
-snd_holster					= weapons\generic_holster
-snd_shoot					= weapons\gauss_shoot
-snd_empty					= weapons\gen_empty, 0.5
-snd_reload					= weapons\gauss_reload
+snd_draw			  			= weapons\gauss\gauss_draw
+snd_holster					= weapons\gauss\gauss_holster
+snd_shoot					= weapons\gauss\gauss_shot
+snd_empty					= weapons\gauss\gauss_empty, 0.5
+snd_reload					= weapons\gauss\gauss_reload
 snd_close					= weapons\generic_close
 snd_bore					= weapons\draw_silent
-snd_bore1					= weapons\gauss_bore_2
+snd_bore1					= weapons\gauss\gauss_bore_2
 
 [wpn_gauss_hud]:hud_base
 zoom_hide_crosshair		= true
@@ -252,7 +252,7 @@ upgr_icon_height   	= 81
 
 ; ttc
 hit_power           		= 5.0, 5.0, 5.0, 5.0
-hit_impulse		 			= 1000000
+hit_impulse		 			= 10000
 hit_type 					= fire_wound
 
 hit_probability_gd_novice	= 1
@@ -264,11 +264,11 @@ fire_distance           = 2000
 bullet_speed		 	= 100000	;начальная скорость пули
 ;rpm                     = 20
 
-ammo_limit				= 10
-ammo_current			= 10
+ammo_limit				= 5
+ammo_current			= 5
 ammo_elapsed			= 0
 
-ammo_mag_size			= 10
+ammo_mag_size			= 5
 ammo_class				= ammo_gauss
 
 ;изношенность, при которой появляется шанс осечки

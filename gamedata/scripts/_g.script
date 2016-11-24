@@ -603,9 +603,6 @@ function start_game_callback()
 	xr_sound.start_game_callback()
 	dialog_manager.fill_phrase_table()
 	xr_s.init()
---'VSm'--
-	VScallback.init()
---'VSm'--
 --'Повелитель Зоны 2.0'--
 	god.init()
 --'Повелитель Зоны 2.0'--

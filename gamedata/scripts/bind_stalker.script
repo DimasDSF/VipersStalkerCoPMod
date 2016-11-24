@@ -49,9 +49,6 @@ function actor_binder:net_spawn(data)
 		level.enable_input()
 	end
 	xr_s.on_game_load()                                    --' Distemper 03.2008 --
---VSm
-	VScallback.OnGameLoad()
---VSm
 	self.weather_manager:reset()
 	--' Загружаем настройки дропа
 	death_manager.init_drop_settings()
@@ -361,9 +358,6 @@ function actor_binder:update(delta)
 	
 	xr_s.on_actor_update(delta)
 
---VSm
-	VScallback.OnActorUpdate(self,delta)
---VSm
 	if(self.surge_manager) then
 		if(self.f_surge_manager_loaded ~= true) then
 			self.surge_manager:initialize()
