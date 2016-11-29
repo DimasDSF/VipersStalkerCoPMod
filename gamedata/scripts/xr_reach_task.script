@@ -353,7 +353,7 @@ function action_reach_task_location:commander_execute()
 
 	local function update_movement (target, object)
 		if target ~= nil and not object:is_talking() then
-			if xr_conditions.surge_started() then
+			if xr_conditions.surge_started() and not (character_community(object) == "zombied") then
 				if not(db.storage[object:id()].surge_timer) then
 					db.storage[object:id()].surge_timer = time_global() + math.random(35000,45000)
 				end

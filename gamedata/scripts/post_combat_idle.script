@@ -2,7 +2,7 @@
 class "evaluator_combat_enemy" (property_evaluator)
 function evaluator_combat_enemy:__init(storage, name) super(nil, name)
 	self.st = storage
-
+	
 	--' Таймер ожидания выхода из боя
 	self.st.timer = time_global()
 end
@@ -89,20 +89,25 @@ function action_post_combat_wait:execute()
 		end
 	end 
 
+	local objid = self.object:id()
 	local squad = not get_object_story_id(self.object:id()) and get_object_squad(self.object)
 	if (squad) and self.group_id ~= 65535 then
-		if (squad:commander_id() == self.object:id()) then
+		if (squad:commander_id() == self.object:id() and not db.storage[objid].waitsoundsplayed) then
 			xr_sound.set_sound_play(self.object:id(), "post_combat_wait")
+			db.storage[objid].waitsoundsplayed = true
 		end
 	end
 	
 	--xr_sound.set_sound_play(self.object:id(), "post_combat_wait")
 end
 function action_post_combat_wait:finalize()
+	local squad = not get_object_story_id(self.object:id()) and get_object_squad(self.object)
+	local objid = self.object:id()
 	if not self.object:motivation_action_manager():evaluator(stalker_ids.property_enemy):evaluate() then
 		if (squad) and self.group_id ~= 65535 then
 			if (squad:commander_id() == self.object:id()) then
 				xr_sound.set_sound_play(self.object:id(), "post_combat_relax")
+				db.storage[objid].waitsoundsplayed = false
 			end
 		end
 --	xr_sound.set_sound_play(self.object:id(), "post_combat_relax")
@@ -111,7 +116,7 @@ function action_post_combat_wait:finalize()
 	if self.anim_started == true then
 		self.st.animation:set_state(nil, true)
 	end
-	
+
 	self.st.animation = nil
 	action_base.finalize(self)
 end

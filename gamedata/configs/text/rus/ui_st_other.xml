@@ -297,6 +297,9 @@
 	<string id="st_save_uni_surge_start">
 		<text>выброс</text>
 	</string>
+	<string id="st_save_uni_surge_end">
+		<text>¬ыброс закончилс€</text>
+	</string>
 	<string id="st_save_zat_a1_game_start">
 		<text>начало игры</text>
 	</string>

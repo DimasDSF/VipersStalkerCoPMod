@@ -9,7 +9,7 @@
 local mode 
 
 local s_table = {
-st_stalker_lx8_smart_terrain = "Лабаратория X8",
+st_stalker_lx8_smart_terrain = "Лаборатория X8",
 st_stalker_pas_b400_elevator = "Подземелья Юпитера: Элеватор",
 st_stalker_pas_b400_track =    "Подземелья Юпитера: Конец транспортного тунеля",
 st_stalker_pas_b400_downstairs = "Подземелья Юпитера: Спуск на нижний уровень",
@@ -842,17 +842,17 @@ end
 
 
 if mode == "squad" then
-if db.actor~=nil then
-for i=1, 65535 do
-	local obj = alife():object(i)
-          if obj~=nil then
-	      if obj:section_name()=="smart_terrain" and obj.position:distance_to(db.actor:position())<=20 then
-               xr_effects.create_squad(nil, nil, {sec, obj:name()})
-            end
-          end
-end
-end
-
+	if db.actor~=nil then
+		for i=1, 65535 do
+			local obj = alife():object(i)
+			if obj~=nil then
+				if obj:section_name()=="smart_terrain" and obj.position:distance_to(db.actor:position())<=20+(dis*10) then
+					xr_effects.create_squad(nil, nil, {sec, obj:name()})
+					break
+				end
+			end
+		end
+	end
 end
 
 
