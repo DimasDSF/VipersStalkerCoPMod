@@ -8,6 +8,7 @@ function evaluator_combat_enemy:__init(storage, name) super(nil, name)
 end
 function evaluator_combat_enemy:evaluate()
 	local best_enemy = self.object:best_enemy()
+	local squad = not get_object_story_id(self.object:id()) and get_object_squad(self.object)
 	if best_enemy ~= nil and not xr_combat_ignore.is_enemy(self.object, best_enemy, db.storage[self.object:id()].combat_ignore, true) then
 		return false
 	end
@@ -35,7 +36,16 @@ function evaluator_combat_enemy:evaluate()
 	end
 
 	if self.st.timer == nil then
-		return best_enemy ~= nil
+		if (squad and squad:npc_count() > 1) then
+			local squadcomm = level.object_by_id(squad:commander_id())
+			if (squadcomm.timer ~= nil) then
+				self.st.timer = squadcomm.timer
+			else
+				return best_enemy ~= nil
+			end
+		else
+			return best_enemy ~= nil
+		end
 	end
 	
 	if time_global() < self.st.timer then
@@ -92,7 +102,7 @@ function action_post_combat_wait:execute()
 	local objid = self.object:id()
 	local squad = not get_object_story_id(self.object:id()) and get_object_squad(self.object)
 	if (squad) and self.group_id ~= 65535 then
-		if (squad:commander_id() == self.object:id() and not db.storage[objid].waitsoundsplayed) then
+		if (squad:commander_id() == self.object:id() and squad:npc_count() > 1 and not db.storage[objid].waitsoundsplayed) then
 			xr_sound.set_sound_play(self.object:id(), "post_combat_wait")
 			db.storage[objid].waitsoundsplayed = true
 		end
@@ -105,7 +115,7 @@ function action_post_combat_wait:finalize()
 	local objid = self.object:id()
 	if not self.object:motivation_action_manager():evaluator(stalker_ids.property_enemy):evaluate() then
 		if (squad) and self.group_id ~= 65535 then
-			if (squad:commander_id() == self.object:id()) then
+			if (squad:commander_id() == self.object:id() and squad:npc_count() > 1) then
 				xr_sound.set_sound_play(self.object:id(), "post_combat_relax")
 				db.storage[objid].waitsoundsplayed = false
 			end

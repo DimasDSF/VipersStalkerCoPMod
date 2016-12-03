@@ -213,6 +213,7 @@ function CSurgeManager:update()
 			self:end_surge()
 		else
 			if(self.loaded) then
+				self.eqstage={}
 				if(self.blowout_sound)then
 					xr_sound.play_sound_looped(db.actor:id(), "blowout_rumble")
 				end
@@ -235,7 +236,7 @@ function CSurgeManager:update()
 			if(self.blowout_sound) then
 			local surge_rumble_volume
 				if (diff_sec<=200) then
-					if(diff_sec<=200)
+					if(diff_sec<=200) then
 						surge_rumble_volume = 1-(200-diff_sec)/(200-48)
 					end
 				elseif(diff_sec>200) then
@@ -284,7 +285,7 @@ function CSurgeManager:update()
 			if(diff_sec>=100 and diff_sec<200 and not(self.ui_disabled) and (cover==nil or not(db.storage[cover].object:inside(db.actor:position())))) then
 				local geigersoundpower = (1-(200-diff_sec)/(200-100))/2
 				self:geigerSound(geigersoundpower)
-				------RadHit
+				------RadHit1->2
 				local att = (1-(200-diff_sec)/(200-100))/2
 				att = att*att*att*0.3
 	            local h = hit()
@@ -294,10 +295,12 @@ function CSurgeManager:update()
 	            h.direction = vector():set(0,0,1)
 	            h.draftsman = db.actor
                 db.actor:hit(h)
+				------RadHit1->2END
 			end
 			if(diff_sec>200 and not(self.ui_disabled) and (cover==nil or not(db.storage[cover].object:inside(db.actor:position())))) then
 				local geigersoundpower = ((260-diff_sec)/(260-200))/2
 				self:geigerSound(geigersoundpower)
+				------RadHit2->1
 				local att = ((260-diff_sec)/(260-100))/2
 				att = att*att*att*0.3
 	            local h = hit()
@@ -307,7 +310,7 @@ function CSurgeManager:update()
 	            h.direction = vector():set(0,0,1)
 	            h.draftsman = db.actor
                 db.actor:hit(h)
-				------RadHitEND
+				------RadHit2->1END
 			end
 			------GradualEarthQuakes
 			if(diff_sec>=140) and (self.eqstage['eq20']==nil) then
