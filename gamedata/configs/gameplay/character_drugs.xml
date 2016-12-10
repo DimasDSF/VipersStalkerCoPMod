@@ -1,4 +1,4 @@
 medkit = 1, prob=0.04 \n
 bandage = 1, prob=0.4 \n
 antirad	= 1, prob=0.006 \n
-drug_antialcohol = 1, prob=0.01 \n
+drug_antialcohol = 1, prob=0.10 \n

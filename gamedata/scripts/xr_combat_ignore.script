@@ -34,6 +34,61 @@ function ignore_enemy_by_overrides(obj,enemy,st)
 	return false
 end
 
+function is_in_range(obj, enemy, st)
+	local se_obj			= alife():object(obj:id())
+	local se_enemy			= alife():object(enemy:id())
+	local comignr_range			= 90000
+	if (xr_conditions.surge_started()) then
+		local m = surge_manager.get_surge_manager()
+		local diff_sec = math.ceil(game.get_game_time():diffSec(m.inited_time)/level.get_time_factor())
+		if not (character_community(obj) == "monster" or character_community(obj) == "zombied") then
+			if (diff_sec >= 0 and diff_sec < 48) then
+				comignr_range = 22500
+			elseif (diff_sec >= 48 and diff_sec < 100) then
+				comignr_range = 10000
+			elseif (diff_sec >= 100 and diff_sec < 140) then
+				comignr_range =  900
+			elseif (diff_sec >= 140) then
+				comignr_range = 225
+			end
+		end
+	else
+		if (obj:mental_state() == anim.free) then
+			comignr_range = 22500
+		else
+			comignr_range = 50625
+		end
+	end
+	
+	--Day/Night section
+	--Clear weather
+	--5:00->9:00 increase range
+	--17:00->22:00 decrease range
+	if(level.get_time_hours() >= 5 and level.get_time_hours() <= 9) then
+		comignr_range = (comignr_range/4) + ((comignr_range/4) * 3 * (1-((9 - level.get_time_hours())/(9-5))))
+	elseif(level.get_time_hours() >= 17 and level.get_time_hours() <= 22) then
+		comignr_range = (comignr_range/4) + ((comignr_range/4) * 3 * ((22 - level.get_time_hours())/(22-17)))
+	elseif((level.get_time_hours() == 23) or (level.get_time_hours() >= 0 and level.get_time_hours() < 5)) then
+		comignr_range = comignr_range/4
+	end
+	--[[Rain section
+	if (level.rain_factor() > 0) then
+		comignr_range = ((comignr_range/5)*4 + ((comignr_range/5)*(1-level.rain_factor())))
+	end--]]
+	
+	if(comignr_range < 225) then
+		comignr_range = 225
+	end
+	
+	comignr_range = math.ceil(comignr_range)
+
+	if (se_obj ~= nil) and ((se_obj.position:distance_to_sqr(se_enemy.position)) > comignr_range) then
+		return false
+	else
+		return true
+	end
+end
+
 function is_enemy(obj, enemy, st, not_check_sim)
 	if not obj:alive() then
 		return false
@@ -96,6 +151,10 @@ function is_enemy(obj, enemy, st, not_check_sim)
 		end
 	end
 	
+	if not is_in_range(obj, enemy, st) then
+		return false
+	end
+	
 	if (xr_conditions.surge_started()) then
 		if (character_community(obj) == "monster" or character_community(obj) == "zombied") then
 			return true
@@ -125,10 +184,10 @@ function is_enemy(obj, enemy, st, not_check_sim)
 			end
 		end
 		
-		if not (npc_safe) then
-			--obj:enable_memory_object(enemy,false)
-			return false
-		end
+		--if not (npc_safe) then
+		--	--obj:enable_memory_object(enemy,false)
+		--	return false
+		--end
 	else
 		db.storage[obj_id].combat_ignore.surge_safe = nil
 	end
@@ -169,7 +228,6 @@ function action_process_enemy:enemy_callback( obj, enemy )
 			end
 		end
 	end
-
 	return is_obj_enemy
 end
 
