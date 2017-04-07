@@ -89,7 +89,7 @@ function is_in_range(obj, enemy, st)
 	
 	comignr_range = math.ceil(comignr_range)
 
-	if (se_obj ~= nil) and ((se_obj.position:distance_to_sqr(se_enemy.position)) > comignr_range) then
+	if (se_obj ~= nil and se_enemy ~= nil) and ((se_obj.position:distance_to_sqr(se_enemy.position)) > comignr_range) then
 		return false
 	else
 		return true

@@ -572,14 +572,15 @@ function weapon_manager:update_weapon_list(na,cut,max)
 		end
 		if item and not id then
 			id = item:id()
---		else
---			get_console():execute("Crash_Patch_used_for_rx_wmgr_line_573")
---			if self.npc:best_weapon() then			
---				idpatchitem = self.npc:best_weapon()
---				id = idpatchitem:id()
---			else
---				return
---			end
+		else
+			get_console():execute("Crash_Patch_used_for_rx_wmgr_line_573")
+			get_console():execute("Error caused by NPC:" tostring(self.npc.name))
+			if self.npc:best_weapon() then			
+				idpatchitem = self.npc:best_weapon()
+				id = idpatchitem:id()
+			else
+				return
+			end
 		end
 		if rx_utils.item_is_fa(item) then
 			local sec = item:section()

@@ -141,6 +141,7 @@ god_weapons_table = {
 						"wpn_fn2000",
 						"wpn_pkm",
 						"wpn_gauss",
+						"wpn_saiga",
 
 						"wpn_pm_actor",
 						"wpn_fort_snag",
