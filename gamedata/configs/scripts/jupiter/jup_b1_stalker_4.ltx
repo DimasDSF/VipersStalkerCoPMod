@@ -18,6 +18,8 @@ post_combat_time = 0, 0
 [walker@first]:walker@generic
 path_walk = st_4_first_stand
 path_look = st_4_first_look
+combat_ignore_cond = true
+combat_ignore_keep_when_attacked = true
 on_info = {=actor_has_item(jup_b1_half_artifact)} camper@zombie, {+jup_b1_start} walker@go_to_tunnel
 on_info2 = {+jup_b1_st_go_home} patrol@go_to_base
 
@@ -131,10 +133,15 @@ allow_break     = false
 
 [patrol@go_to_base]:walker@generic
 path_walk = patrol_to_the_home
+combat_ignore_cond = true
+combat_ignore_keep_when_attacked = true
+commander = {!is_alive(jup_b1_stalker_1) !is_alive(jup_b1_stalker_2) !is_alive(jup_b1_stalker_3)} true, false
 formation = line
 on_signal = at_pos | %-jup_b1_st_mission%
 meet = no_meet
-on_info = {=health_le(0.5) !actor_enemy} %=restore_health% 
+def_state_moving = run
+on_info = {=health_le(0.5) !actor_enemy} %=restore_health%
+on_info2 = {+jup_b1_go_on_task} %-jup_b1_go_on_task%
 
 ;---------------------------превращение в зомби
 [logic@jup_b1_zomb_stalker_4]

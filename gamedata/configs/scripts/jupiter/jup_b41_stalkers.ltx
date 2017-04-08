@@ -19,7 +19,7 @@ in_restr = jup_b41_sr_light
 on_info = {+jup_b1_go_on_task =squad_exist(jup_b1_stalker_squad)} patrol@go_to_tunnel
 
 [logic@jup_b1_stalker_1_home]
-suitable = {=check_npc_name(jup_b1_pro_stalker_1)} true, {=check_npc_name(jup_b1_stalker_1)} true, {=check_npc_name(jup_b6_freedom_stalker_1)} true, {=check_npc_name(jup_b6_duty_stalker_1)} true, {=check_npc_name(jup_b6_stalker_gonta)} true, {=check_npc_name(jup_b6_stalker_prisoner)} true
+suitable = {=check_npc_name(jup_b1_pro_stalker_1)} true, {=check_npc_name(jup_b1_stalker_1)} true, {=check_npc_name(jup_b1_stalker_2) -jup_b1_greet_end !is_alive(jup_b1_stalker_1)} true, {=check_npc_name(jup_b1_stalker_3) -jup_b1_greet_end !is_alive(jup_b1_stalker_2) !is_alive(jup_b1_stalker_1)} true, {=check_npc_name(jup_b1_stalker_4) -jup_b1_greet_end !is_alive(jup_b1_stalker_3) !is_alive(jup_b1_stalker_2) !is_alive(jup_b1_stalker_1)} true, {=check_npc_name(jup_b6_freedom_stalker_1)} true, {=check_npc_name(jup_b6_duty_stalker_1)} true, {=check_npc_name(jup_b6_stalker_gonta)} true, {=check_npc_name(jup_b6_stalker_prisoner)} true
 prior = 70
 active = walker@jup_b1_stalker_1_home
 on_death = death@stalker_1
@@ -60,10 +60,13 @@ corpse_detection_enabled = false
 
 [patrol@go_to_tunnel]
 path_walk = patrol_to_the_tunnel
+combat_ignore_cond = true
+combat_ignore_keep_when_attacked = true
 commander = true
 formation = line
 on_signal = at_pos | %+jup_b1_st_mission -jup_b1_go_on_task%
 meet = no_meet
+def_state_moving = run
 on_info = {=health_le(0.5) !actor_enemy} %=restore_health% 
 on_info2 = {=dist_to_actor_ge(140) =dist_to_story_obj_ge(jup_b1_half_artifact:260) -jup_b1_teleport_squad_only} %+jup_b1_teleport_squad_only%
 
@@ -92,7 +95,7 @@ invulnerable = true
 out_restr = jup_b41_sr_light
 on_info = {=surge_complete =is_day} walker@jup_b1_stalker_1_home
 on_info2 = {=is_day !surge_started} walker@jup_b1_stalker_1_home
-on_info3 = {!surge_started +jup_b1_go_on_task =squad_exist(jup_b1_stalker_squad)} patrol@go_to_tunnel
+on_info3 = {!surge_started -jup_b1_stalkers_should_return +jup_b1_go_on_task =squad_exist(jup_b1_stalker_squad)} patrol@go_to_tunnel
 
 [combat]
 on_info = {=actor_enemy} %+jup_b1_actor_atk_squad%
@@ -113,6 +116,7 @@ cover_name = jup_b41_animp_1
 avail_animations = animpoint_sit_normal_no_rnd
 on_info2 = {=surge_started !has_enemy} animpoint@jup_b41_stalker_2_reach_hide
 on_info3 = {!is_day} animpoint@jup_b41_stalker_2_reach_hide
+on_info4 = {-jup_b1_actor_has_half_artifact -jup_b1_stalkers_should_return -jup_b1_task_done !is_alive(jup_b1_stalker_1) +jup_b1_greet_end} %+jup_b1_go_on_task%
 
 [animpoint@jup_b41_stalker_2_reach_hide]:animpoint@jup_b41_stalker_1_reach_hide
 cover_name = jup_b41_animp_surge_2
@@ -141,6 +145,7 @@ cover_name = jup_b41_animp_2
 avail_animations = animpoint_sit_low_no_rnd
 on_info2 = {=surge_started !has_enemy} animpoint@jup_b41_stalker_3_reach_hide
 on_info3 = {!is_day !surge_started} animpoint@jup_b41_stalker_3_reach_hide
+on_info4 = {-jup_b1_actor_has_half_artifact -jup_b1_stalkers_should_return -jup_b1_task_done !is_alive(jup_b1_stalker_1) !is_alive(jup_b1_stalker_2) +jup_b1_greet_end} %+jup_b1_go_on_task%
 
 [animpoint@jup_b41_stalker_3_reach_hide]:animpoint@jup_b41_stalker_1_reach_hide
 cover_name = jup_b41_animp_surge_3
@@ -169,6 +174,7 @@ cover_name = jup_b41_animp_3
 avail_animations = animpoint_sit_low_no_rnd
 on_info2 = {=surge_started !has_enemy} animpoint@jup_b41_stalker_4_reach_hide
 on_info3 = {!is_day !surge_started} animpoint@jup_b41_stalker_4_reach_hide
+on_info4 = {-jup_b1_actor_has_half_artifact -jup_b1_stalkers_should_return -jup_b1_task_done !is_alive(jup_b1_stalker_1) !is_alive(jup_b1_stalker_2) !is_alive(jup_b1_stalker_3) +jup_b1_greet_end} %+jup_b1_go_on_task%
 
 [animpoint@jup_b41_stalker_4_reach_hide]:animpoint@jup_b41_stalker_1_reach_hide
 cover_name = jup_b41_animp_surge_4
