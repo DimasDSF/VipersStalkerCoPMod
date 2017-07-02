@@ -1,6 +1,11 @@
 local npc_role = {noone=0, listener=1, director=2}
 CAMP_SECTION = "camp"
-STORY_PROB = 30
+--Probabilities Config 30,20,40,40
+PROB_SPECISSTORY = 30
+PROB_IDLETOSTORY = 20
+PROB_IDLETOGUITAR = 40
+PROB_IDLETOHARMONICA = 40
+--Probabilities Config
 
 --------------------------------------------------------------------------------
 -- Precondition functions
@@ -87,6 +92,8 @@ class "CCampManager"
 function CCampManager:__init(object, ini)
 	self.object = object
 	self.ini = ini
+	self.prevstory1 = nil
+	self.prevstory2 = nil
 	local stories = utils.cfg_get_string(ini, CAMP_SECTION, "stories", nil, false, "", "test_story, s_story_1, s_story_2, s_story_3, s_story_4, s_story_5, s_story_6, s_story_7, s_story_8, s_story_9, s_story_10, s_story_11")
 		self.story_table = parse_names(stories)
 	local guitars = utils.cfg_get_string(ini, CAMP_SECTION, "guitar_themes", nil, false, "", "test_guitar")
@@ -110,7 +117,7 @@ function CCampManager:__init(object, ini)
 								min_time = 30000,
 								max_time = 40000,
 								timeout = 0,
-								transitions = {harmonica = 40, guitar = 40, story = 20},
+								transitions = {harmonica = PROB_IDLETOHARMONICA, guitar = PROB_IDLETOGUITAR, story = PROB_IDLETOSTORY},
 								precondition = sr_camp_idle_precondition
 							 },
 					harmonica = {
@@ -220,6 +227,7 @@ function CCampManager:set_next_state()
 	--printf("CAMP set_next_state")
 	local transitions = self.states[self.active_state].transitions
 	local rnd = math.random(100)
+	--local debugrnd = rnd
 	for k,v in pairs(transitions) do
 		--printf("check %s value %s rnd %s", k, v, rnd )
 		if(rnd<v) then
@@ -233,6 +241,14 @@ function CCampManager:set_next_state()
 		end
 	end
 	--printf("active state %s", self.active_state)
+	--[[if (self.active_state~="idle") then
+		get_console():execute("-----")
+		get_console():execute("active_state="..tostring(self.active_state).."|rnd="..tostring(debugrnd))
+		get_console():execute("PROB_IDLETOSTORY="..PROB_IDLETOSTORY)
+		get_console():execute("PROB_IDLETOGUITAR="..PROB_IDLETOGUITAR)
+		get_console():execute("PROB_IDLETOHARMONICA="..PROB_IDLETOHARMONICA)
+		get_console():execute("-----")
+	end--]]
 	for k,v in pairs(self.npc) do
 		v.state = self.active_state
 	end
@@ -274,14 +290,20 @@ end
 function CCampManager:set_story()
 	if(self.active_state=="story") then
 		local storyrnd = math.random(100)
-		if (storyrnd<STORY_PROB) then
+		if (storyrnd<PROB_SPECISSTORY) then
 			local storyrng = math.random(2,#self.story_table)
-			get_console():execute("Telling_a_story N "..tostring(storyrng))
+			while(storyrng == self.prevstory1 or storyrng == self.prevstory2) do
+				storyrng = math.random(2,#self.story_table)
+			end
+			self.prevstory2 = self.prevstory1
+			self.prevstory1 = storyrng
+			--get_console():execute("Telling_a_story_N"..tostring(storyrng))
+			--get_console():execute("Previous1="..tostring(self.prevstory1).."Previous2="..tostring(self.prevstory2))
 			self.sound_manager:set_storyteller(self.director)
 			self.sound_manager:set_story(self.story_table[storyrng])
 			self.sound_manager_started = true
 		else
-			get_console():execute("Telling_a_joke")
+			--get_console():execute("Telling_a_joke")
 			self.sound_manager:set_storyteller(self.director)
 			self.sound_manager:set_story(self.story_table[1])
 			self.sound_manager_started = true
