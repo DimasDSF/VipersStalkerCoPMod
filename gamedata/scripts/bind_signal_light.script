@@ -29,7 +29,7 @@ function signal_light_binder:update(delta)
     local obj = self.object
 	if self.start_time == nil then
         if self.need_turn_off then
-			--obj:get_hanging_lamp():turn_off()
+			obj:get_hanging_lamp():turn_off()
 			self.need_turn_off = false
 			self.loaded = false
 		end
