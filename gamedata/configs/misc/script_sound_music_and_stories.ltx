@@ -76,6 +76,11 @@ strange_story_11_6
 strange_story_11_7
 strange_story_11_8
 
+strange_dialogue_1_0
+strange_dialogue_1_1
+strange_dialogue_1_2
+strange_dialogue_1_3
+
 strange_story_agree
 strange_story_action
 strange_story_belief
@@ -83,6 +88,15 @@ strange_story_continue
 strange_story_cool
 strange_story_final_happy
 strange_story_final_tragic
+strange_story_cool_action
+strange_story_funny
+strange_story_good_outcome
+strange_story_heard
+strange_story_end_decidion
+strange_story_lucky_event
+strange_story_cough
+strange_story_thinking
+strange_story_oh
 
 ;***************************************************************
 ;**  —бор отр€да в атаку
@@ -720,11 +734,50 @@ shuffle = rnd
 group_snd = true
 
 ;***********************************
+;** Custom idle dialogues
+;***********************************
+[strange_dialogue_1_0]
+type = npc
+avail_communities = stalker
+npc_prefix = true
+path = states\s_storynew\dialogue1_0
+idle = 0,0,100
+shuffle = rnd
+group_snd = true
+
+[strange_dialogue_1_1]
+type = npc
+avail_communities = stalker
+npc_prefix = true
+path = states\s_storynew\dialogue1_1
+idle = 0,0,100
+shuffle = rnd
+group_snd = true
+
+[strange_dialogue_1_2]
+type = npc
+avail_communities = stalker
+npc_prefix = true
+path = states\s_storynew\dialogue1_2
+idle = 0,0,100
+shuffle = rnd
+group_snd = true
+
+[strange_dialogue_1_3]
+type = npc
+avail_communities = stalker
+npc_prefix = true
+path = states\s_storynew\dialogue1_3
+idle = 0,0,100
+shuffle = rnd
+group_snd = true
+
+;***********************************
 ;** Restored Stories React
 ;***********************************
 [strange_story_agree]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\agree_
 shuffle = rnd
@@ -733,7 +786,7 @@ group_snd = true
 
 [strange_story_action]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\action_
 shuffle = rnd
@@ -742,7 +795,7 @@ group_snd = true
 
 [strange_story_belief]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\belief_
 shuffle = rnd
@@ -751,7 +804,7 @@ group_snd = true
 
 [strange_story_continue]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\continue_
 shuffle = rnd
@@ -760,16 +813,97 @@ group_snd = true
 
 [strange_story_cool]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\cool_
 shuffle = rnd
 idle = 0,0,100
 group_snd = true
 
+[strange_story_cool_action]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_cool_action_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_funny]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_funny_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_good_outcome]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_good_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_heard]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_heard_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_end_decidion]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\end_decidion\story_decidion_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_lucky_event]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_lucky_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_cough]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_cough_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_thinking]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_thinking_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
+[strange_story_oh]
+type = npc
+avail_communities = stalker, dolg, freedom
+npc_prefix = true
+path = reactions\storyreactnew\story_oh_
+shuffle = rnd
+idle = 0,0,100
+group_snd = true
+
 [strange_story_final_happy]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\final_happy_
 shuffle = rnd
@@ -778,7 +912,7 @@ group_snd = true
 
 [strange_story_final_tragic]
 type = npc
-avail_communities = stalker
+avail_communities = stalker, dolg, freedom
 npc_prefix = true
 path = reactions\s_story\final_tragic_
 shuffle = rnd

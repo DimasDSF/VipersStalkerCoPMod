@@ -96,6 +96,8 @@ function CCampManager:__init(object, ini)
 	self.prevstory2 = nil
 	local stories = utils.cfg_get_string(ini, CAMP_SECTION, "stories", nil, false, "", "test_story, s_story_1, s_story_2, s_story_3, s_story_4, s_story_5, s_story_6, s_story_7, s_story_8, s_story_9, s_story_10, s_story_11")
 		self.story_table = parse_names(stories)
+	local availstorycomm = utils.cfg_get_string(ini, CAMP_SECTION, "avail_story_communities", nil, false, "", "stalker")
+		self.avail_story_comm = parse_names(availstorycomm)
 	local guitars = utils.cfg_get_string(ini, CAMP_SECTION, "guitar_themes", nil, false, "", "test_guitar")
 		self.guitar_table = parse_names(guitars)
 	local harmonicas = utils.cfg_get_string(ini, CAMP_SECTION, "harmonica_themes", nil, false, "", "test_harmonica")
@@ -203,7 +205,7 @@ function CCampManager:update()
 
 	-- Выбираем новую тему для саундменеджера (Для гитары и гармошки нужно будет юзать другой метод, чтобы не начали играть звук до того, как достанут инструмент)
 	if(self.timeout~=0) and (self.timeout<=time_global()) then
-		self:set_story()
+		self:set_story(self:check_director_community(self.director))
 		self.timeout = 0
 	end
 
@@ -215,7 +217,7 @@ function CCampManager:update()
 			npc_count = npc_count + 1
 			table.insert(talkers, k)
 		end
-		if(npc_count~=0) then
+		if(npc_count~=0 and surge_manager.is_started()==false) then
 			self.idle_talker = talkers[math.random(#talkers)]
 			xr_sound.set_sound_play(self.idle_talker, "state")
 		end
@@ -227,28 +229,23 @@ function CCampManager:set_next_state()
 	--printf("CAMP set_next_state")
 	local transitions = self.states[self.active_state].transitions
 	local rnd = math.random(100)
-	--local debugrnd = rnd
-	for k,v in pairs(transitions) do
-		--printf("check %s value %s rnd %s", k, v, rnd )
-		if(rnd<v) then
-			if self.states[k].precondition(self) == true then
-				self.active_state = k
-				--printf("FOUND")
-				break
+	if (surge_manager.is_started()==true) then
+		self.active_state = "idle"
+	else
+		for k,v in pairs(transitions) do
+			--printf("check %s value %s rnd %s", k, v, rnd )
+			if(rnd<v) then
+				if self.states[k].precondition(self) == true then
+					self.active_state = k
+					--printf("FOUND")
+					break
+				end
+			else
+				rnd = rnd - v
 			end
-		else
-			rnd = rnd - v
 		end
 	end
 	--printf("active state %s", self.active_state)
-	--[[if (self.active_state~="idle") then
-		get_console():execute("-----")
-		get_console():execute("active_state="..tostring(self.active_state).."|rnd="..tostring(debugrnd))
-		get_console():execute("PROB_IDLETOSTORY="..PROB_IDLETOSTORY)
-		get_console():execute("PROB_IDLETOGUITAR="..PROB_IDLETOGUITAR)
-		get_console():execute("PROB_IDLETOHARMONICA="..PROB_IDLETOHARMONICA)
-		get_console():execute("-----")
-	end--]]
 	for k,v in pairs(self.npc) do
 		v.state = self.active_state
 	end
@@ -277,6 +274,10 @@ function CCampManager:get_director()
 		self.director = nil
 		return
 	end
+	if (surge_manager.is_started()==true) then
+		self.director = nil
+		return false
+	end
 	if(#directors<1) then
 		return false
 		--abort("There is no director for state [%s]. Camp [%s]!!!", self.active_state, self.object:name())
@@ -287,18 +288,26 @@ function CCampManager:get_director()
 	end
 	--printf("camp director [%s]", self.director)
 end
-function CCampManager:set_story()
+function CCampManager:check_director_community(director)
+	if director~=nil then
+		for i = 1,#self.avail_story_comm do
+			if self.avail_story_comm[i]==character_community(level.object_by_id(director)) then
+				return true
+			end
+		end
+	end
+	return false
+end
+function CCampManager:set_story(b_CanBeStory)
 	if(self.active_state=="story") then
 		local storyrnd = math.random(100)
-		if (storyrnd<PROB_SPECISSTORY) then
+		if (storyrnd<PROB_SPECISSTORY and b_CanBeStory==true) then
 			local storyrng = math.random(2,#self.story_table)
 			while(storyrng == self.prevstory1 or storyrng == self.prevstory2) do
 				storyrng = math.random(2,#self.story_table)
 			end
 			self.prevstory2 = self.prevstory1
 			self.prevstory1 = storyrng
-			--get_console():execute("Telling_a_story_N"..tostring(storyrng))
-			--get_console():execute("Previous1="..tostring(self.prevstory1).."Previous2="..tostring(self.prevstory2))
 			self.sound_manager:set_storyteller(self.director)
 			self.sound_manager:set_story(self.story_table[storyrng])
 			self.sound_manager_started = true
